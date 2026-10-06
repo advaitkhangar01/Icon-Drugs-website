@@ -1,26 +1,93 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --icon-blue: #005EB1;
+    --dark-blue: #00477F;
+    --orange: #F87901;
+    --purple: #A285D5;
+    --charcoal: #424242;
+    --text-primary: #111111;
+    --text-secondary: #555555;
+    --surface: #F7F9FB;
+    --border: #E4E7EB;
+    --white: #FFFFFF;
   }
 }
 
+/* Custom Typography & Editorial styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-inter), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: var(--font-manrope), var(--font-inter), sans-serif;
+  letter-spacing: -0.025em;
+}
+
+/* Brand geometry utility classes */
+.brand-arc-bg {
+  position: relative;
+}
+.brand-arc-bg::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  border: 1px solid rgba(162, 133, 213, 0.15);
+  pointer-events: none;
+  transform: translate(25%, -25%);
+}
+
+.brand-pillar-left {
+  position: relative;
+}
+.brand-pillar-left::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background-color: #005EB1;
+}
+
+/* Lenis smooth scrolling base */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* Selection and focus styling */
+::selection {
+  background-color: #005EB1;
+  color: #FFFFFF;
+}
+
+:focus-visible {
+  outline: 2px solid #F87901;
+  outline-offset: 2px;
 }
