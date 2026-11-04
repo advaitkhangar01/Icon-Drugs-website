@@ -14,6 +14,9 @@ import {
   Building2,
   Mail,
   Sparkles,
+  Phone,
+  ChevronRight,
+  Pill,
 } from "lucide-react";
 import IconLogo from "@/components/ui/IconLogo";
 import SearchModal from "@/components/ui/SearchModal";
@@ -33,6 +36,23 @@ export default function Header() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+      const handleKeyDown = (e: KeyboardEvent) => {
+        if (e.key === "Escape") setIsMobileMenuOpen(false);
+      };
+      window.addEventListener("keydown", handleKeyDown);
+      return () => {
+        document.body.style.overflow = "";
+        window.removeEventListener("keydown", handleKeyDown);
+      };
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [isMobileMenuOpen]);
 
   const isHome = pathname === "/";
   const isTransparent = isHome && !isScrolled;
@@ -329,67 +349,155 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Navigation Drawer */}
+        {/* Mobile Navigation Off-Canvas Drawer & Backdrop */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden bg-white text-slate-900 border-b border-slate-200 px-6 py-6 shadow-2xl animate-in slide-in-from-top-4 duration-200">
-            <div className="flex flex-col space-y-3">
-              <Link
-                href="/#our-story"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-sm font-semibold py-2 border-b border-slate-100"
-              >
-                Our Company & Heritage
-              </Link>
-              <Link
-                href="/#quality"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-sm font-semibold py-2 border-b border-slate-100"
-              >
-                Quality & Safety
-              </Link>
-              <Link
-                href="/therapeutic-areas"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-sm font-semibold py-2 border-b border-slate-100 text-[#005EB1]"
-              >
-                Therapeutic Areas
-              </Link>
-              <Link
-                href="/products"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-sm font-semibold py-2 border-b border-slate-100"
-              >
-                Product Formulations
-              </Link>
-              <Link
-                href="/health"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-sm font-semibold py-2 border-b border-slate-100"
-              >
-                Health Information
-              </Link>
-              <Link
-                href="/healthcare-professionals"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-sm font-semibold py-2 border-b border-slate-100"
-              >
-                For Healthcare Professionals
-              </Link>
-              <Link
-                href="/insights"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="text-sm font-semibold py-2 border-b border-slate-100"
-              >
-                Latest Insights & News
-              </Link>
-              <div className="pt-3">
+          <div className="fixed inset-0 z-50 lg:hidden flex justify-end animate-in fade-in duration-200">
+            {/* Backdrop */}
+            <div
+              className="fixed inset-0 bg-slate-950/60 backdrop-blur-sm transition-opacity"
+              onClick={() => setIsMobileMenuOpen(false)}
+              aria-hidden="true"
+            />
+
+            {/* Slide-over Drawer Container */}
+            <div className="relative w-full max-w-[340px] bg-white text-slate-900 h-dvh flex flex-col shadow-2xl z-10 animate-in slide-in-from-right duration-300">
+              {/* Drawer Header */}
+              <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50/80 shrink-0">
+                <Link href="/" onClick={() => setIsMobileMenuOpen(false)} className="flex items-center gap-2">
+                  <IconLogo variant="color" size="sm" />
+                </Link>
+                <button
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-9 h-9 rounded-xl bg-slate-200/80 hover:bg-slate-300/80 text-slate-700 flex items-center justify-center transition-colors"
+                  aria-label="Close menu"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Scrollable Nav List */}
+              <div className="flex-1 overflow-y-auto px-4 py-3 divide-y divide-slate-100">
+                <div className="py-2 space-y-1">
+                  <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold">
+                    Formulary & Focus
+                  </div>
+                  <Link
+                    href="/products"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <Pill className="w-4 h-4 text-[#005EB1]" />
+                      <span>Product Formulations</span>
+                    </span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
+
+                  <Link
+                    href="/therapeutic-areas"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <Activity className="w-4 h-4 text-[#F87901]" />
+                      <span>Therapeutic Portfolios</span>
+                    </span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
+                </div>
+
+                <div className="py-2 space-y-1">
+                  <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold">
+                    Enterprise
+                  </div>
+                  <Link
+                    href="/#our-story"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <Building2 className="w-4 h-4 text-slate-600" />
+                      <span>Company Heritage & Story</span>
+                    </span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
+
+                  <Link
+                    href="/#quality"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                      <span>Quality & WHO-GMP Systems</span>
+                    </span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
+                </div>
+
+                <div className="py-2 space-y-1">
+                  <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold">
+                    Professional & Clinical
+                  </div>
+                  <Link
+                    href="/healthcare-professionals"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
+                  >
+                    <span>For Healthcare Professionals</span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
+
+                  <Link
+                    href="/health"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
+                  >
+                    <span>Health Knowledge Hub</span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
+
+                  <Link
+                    href="/insights"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
+                  >
+                    <span>Insights & Articles</span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
+                </div>
+              </div>
+
+              {/* Drawer Footer Actions */}
+              <div className="p-4 border-t border-slate-200 bg-slate-50 space-y-2.5 shrink-0 pb-safe">
                 <Link
                   href="/business-enquiry"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-full inline-flex items-center justify-center py-3.5 rounded-xl bg-[#F87901] text-white font-bold text-xs uppercase tracking-wider shadow-md"
+                  className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-[#F87901] text-white font-extrabold text-xs uppercase tracking-wider shadow-md hover:bg-[#e06c00] transition-colors min-h-[44px]"
                 >
-                  Submit Business Enquiry
+                  <span>Submit Business Enquiry</span>
+                  <ArrowRight className="w-4 h-4" />
                 </Link>
+
+                <div className="flex items-center justify-between gap-2 pt-1 text-[11px] text-slate-500 font-medium">
+                  <a
+                    href="mailto:business@icondrugs.com"
+                    className="flex items-center gap-1.5 hover:text-[#005EB1] py-1 px-2 rounded-lg"
+                  >
+                    <Mail className="w-3.5 h-3.5 text-[#F87901]" />
+                    <span>Email Desk</span>
+                  </a>
+                  <span>•</span>
+                  <a
+                    href="https://wa.me/919876543210"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1.5 hover:text-emerald-600 py-1 px-2 rounded-lg"
+                  >
+                    <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span>WhatsApp Inquiry</span>
+                  </a>
+                </div>
               </div>
             </div>
           </div>

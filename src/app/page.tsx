@@ -1,12 +1,17 @@
 import React from "react";
+import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import HeroSlider from "@/components/sections/HeroSlider";
 import QuickStatsPanel from "@/components/sections/QuickStatsPanel";
+import CertificationsRibbon from "@/components/sections/CertificationsRibbon";
+import TherapeuticFocusGrid from "@/components/sections/TherapeuticFocusGrid";
 import SplitTile from "@/components/ui/SplitTile";
 import MilestonesTimeline from "@/components/sections/MilestonesTimeline";
-import TherapeuticFocusGrid from "@/components/sections/TherapeuticFocusGrid";
 import QualitySection from "@/components/sections/QualitySection";
+import TestimonialsSection from "@/components/sections/TestimonialsSection";
+import CatalogDownloadHub from "@/components/sections/CatalogDownloadHub";
+import HomeFaqAccordion from "@/components/sections/HomeFaqAccordion";
 import InsightsTeaser from "@/components/sections/InsightsTeaser";
 import PartnershipCTA from "@/components/sections/PartnershipCTA";
 
@@ -21,11 +26,17 @@ export default function HomePage() {
         {/* Quick Facts Panel overlapping Hero bottom */}
         <QuickStatsPanel />
 
+        {/* Regulatory Accreditations Bar (WHO-GMP, ISO 9001, GLP, DCGI, FSSAI) */}
+        <CertificationsRibbon />
+
+        {/* Therapeutic Focus Grid */}
+        <TherapeuticFocusGrid />
+
         {/* SplitTile 1: Our Story (Heritage & Decades of Care) */}
         <div id="our-story" className="pt-12">
           <SplitTile
             side="left"
-            imageSrc="https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1200&q=80"
+            imageSrc="/backgrounds/split-story.jpg"
             imageAlt="Pharmaceutical researchers collaborating inside laboratory"
             categoryTag="Decades of Heritage"
             headline="Built over decades. Moving forward with scientific precision."
@@ -50,16 +61,13 @@ export default function HomePage() {
         {/* Milestones Horizontal Timeline */}
         <MilestonesTimeline />
 
-        {/* Therapeutic Focus Grid */}
-        <TherapeuticFocusGrid />
-
         {/* Full-width Quality & Safety Philosophy */}
         <QualitySection />
 
         {/* SplitTile 2: People / Human Impact */}
         <SplitTile
           side="right"
-          imageSrc="https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=1200&q=80"
+          imageSrc="/backgrounds/split-patient.jpg"
           imageAlt="Doctor communicating compassionately with patient during consultation"
           categoryTag="Human Impact & Care"
           headline="Healthcare is ultimately human."
@@ -79,8 +87,18 @@ export default function HomePage() {
           overlayGraphic="arc"
         />
 
-        {/* Editorial Trust Quote Block */}
-        <section className="py-20 bg-[#00477F] text-white relative overflow-hidden">
+        {/* Editorial Trust Quote Block with Background Image */}
+        <section className="py-24 text-white relative overflow-hidden bg-[#002B52]">
+          <Image
+            src="/backgrounds/quote-bg.jpg"
+            alt="Pharmaceutical laboratory research instrumentation"
+            fill
+            sizes="100vw"
+            className="object-cover object-center brightness-95 opacity-80"
+            priority={false}
+          />
+          <div className="absolute inset-0 bg-[#001D38]/65" />
+
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <span className="text-6xl font-serif text-[#F87901] block mb-4">“</span>
             <blockquote className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight font-heading leading-snug mb-8">
@@ -89,11 +107,20 @@ export default function HomePage() {
             <div className="flex flex-col items-center">
               <div className="font-bold text-lg text-white">Icon Drugs Scientific Advisory Board</div>
               <div className="text-sm text-blue-200 uppercase tracking-widest mt-1">
-                Quality & Pharmacopeia Adherence
+                Quality &amp; Pharmacopeia Adherence
               </div>
             </div>
           </div>
         </section>
+
+        {/* Real-World Social Proof: Franchise Partners & Clinicians Testimonials */}
+        <TestimonialsSection />
+
+        {/* Master Catalog & Visual Aids PDF Download Hub */}
+        <CatalogDownloadHub />
+
+        {/* Franchise & Commercial FAQ Accordion */}
+        <HomeFaqAccordion />
 
         {/* Insights / News Teaser */}
         <InsightsTeaser />

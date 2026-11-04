@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { Search, X, ArrowRight, Pill, Stethoscope, FileText } from "lucide-react";
 import { productsData, therapyAreasData, healthConditionsData } from "@/data/siteData";
@@ -61,38 +62,57 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-slate-900/80 backdrop-blur-md animate-in fade-in duration-200"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-2 sm:pt-20 px-2 sm:px-4 bg-slate-900/80 backdrop-blur-md animate-in fade-in duration-200"
     >
-      <div className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden">
+      <div className="relative w-full max-w-3xl bg-white rounded-2xl shadow-2xl border border-slate-200 overflow-hidden flex flex-col max-h-[94dvh] sm:max-h-[85vh]">
+        {/* Brand Bar */}
+        <div className="px-4 sm:px-6 py-2.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between text-xs text-slate-500 shrink-0">
+          <div className="flex items-center gap-2">
+            <div className="relative w-4 h-4 shrink-0">
+              <Image src="/icon-brand-mark.png" alt="Icon Drugs" fill className="object-contain" />
+            </div>
+            <span className="font-bold text-slate-700 truncate max-w-[220px] sm:max-w-none">
+              Icon Drugs Master Formulary Search
+            </span>
+          </div>
+          <button
+            onClick={onClose}
+            className="text-[11px] font-mono text-slate-500 hover:text-slate-900 sm:hidden px-2 py-0.5 rounded bg-slate-200"
+          >
+            Close
+          </button>
+          <span className="text-[11px] font-mono text-slate-400 hidden sm:inline">ESC to close</span>
+        </div>
+
         {/* Search Input Bar */}
-        <div className="flex items-center px-6 py-4 border-b border-slate-200 bg-slate-50/50">
-          <Search className="w-6 h-6 text-[#005EB1] mr-3 shrink-0" />
+        <div className="flex items-center px-4 sm:px-6 py-3 sm:py-4 border-b border-slate-200 bg-slate-50/50 shrink-0">
+          <Search className="w-5 h-5 sm:w-6 sm:h-6 text-[#005EB1] mr-2.5 sm:mr-3 shrink-0" />
           <input
             type="text"
             autoFocus
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search medications, therapy fields, or health conditions..."
-            className="w-full bg-transparent text-lg text-slate-900 placeholder-slate-400 focus:outline-none"
+            className="w-full bg-transparent text-base sm:text-lg text-slate-900 placeholder-slate-400 focus:outline-none"
           />
           <button
             onClick={onClose}
-            className="p-1 rounded-lg hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors"
+            className="p-2 min-h-[44px] min-w-[44px] flex items-center justify-center rounded-lg hover:bg-slate-200 text-slate-500 hover:text-slate-800 transition-colors"
             aria-label="Close search"
           >
-            <X className="w-6 h-6" />
+            <X className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
         </div>
 
         {/* Search Results Area */}
-        <div className="max-h-[65vh] overflow-y-auto p-6 space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 overscroll-contain pb-safe">
           {!trimmed && (
             <div>
               <p className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
                 Suggested Quick Inquiries
               </p>
               <div className="flex flex-wrap gap-2">
-                {["Cardiology", "Atorvastatin", "Hypertension", "GERD", "Respiratory", "Antibiotics"].map(
+                {["Neurology", "Pregabalin", "APAR", "GERD", "Allergy", "Anti-Infectives", "Cough", "Calcium"].map(
                   (term) => (
                     <button
                       key={term}

@@ -14,6 +14,15 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
     // Register GSAP ScrollTrigger
     gsap.registerPlugin(ScrollTrigger);
 
+    // On pure touch devices (mobile phones/tablets), preserve 120Hz native touch momentum scrolling
+    const isTouchOnly =
+      typeof window !== "undefined" &&
+      window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+
+    if (isTouchOnly) {
+      return;
+    }
+
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -23,6 +32,8 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
       wheelMultiplier: 1,
       touchMultiplier: 2,
     });
+
+    (window as any).__lenis = lenis;
 
     lenis.on("scroll", ScrollTrigger.update);
 
@@ -34,6 +45,7 @@ export default function SmoothScrollProvider({ children }: { children: ReactNode
     gsap.ticker.lagSmoothing(0);
 
     return () => {
+      delete (window as any).__lenis;
       gsap.ticker.remove(tickerCallback);
       lenis.destroy();
     };

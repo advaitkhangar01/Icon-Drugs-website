@@ -54,12 +54,12 @@ export default function MilestonesTimeline() {
           </h2>
         </div>
 
-        {/* Horizontal scrollable milestone cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
+        {/* Horizontal scrollable milestone cards on mobile; grid on desktop */}
+        <div className="overflow-x-auto snap-x snap-mandatory flex md:grid md:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6 pb-3 md:pb-0 scrollbar-none -mx-4 px-4 sm:mx-0 sm:px-0">
           {companyMilestones.map((m, idx) => (
             <div
               key={idx}
-              className="milestone-card relative bg-white p-5 rounded-xl border border-slate-200/90 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow group"
+              className="milestone-card relative bg-white p-5 rounded-xl border border-slate-200/90 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow group w-[80vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none"
             >
               {/* Top pillar accent line */}
               <div className="w-10 h-1 bg-[#005EB1] group-hover:w-full group-hover:bg-[#F87901] transition-all duration-300 mb-4" />

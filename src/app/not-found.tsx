@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import IconLogo from "@/components/ui/IconLogo";
 import { ArrowLeft, Search } from "lucide-react";
 
 export default function NotFound() {
@@ -10,6 +11,9 @@ export default function NotFound() {
       <Header />
       <main id="main-content" className="flex-1 flex items-center justify-center py-32 px-4">
         <div className="max-w-md w-full text-center">
+          <div className="flex justify-center mb-6">
+            <IconLogo size="md" />
+          </div>
           <div className="text-7xl font-extrabold text-[#005EB1] font-heading mb-4">
             404
           </div>

@@ -1,339 +1,515 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import Image from "next/image";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { therapyAreasData } from "@/data/siteData";
+import { therapyAreasData, TherapyArea } from "@/data/siteData";
+import TherapeuticAreaIllustration, {
+  THERAPEUTIC_AREA_ASSETS,
+} from "@/components/illustrations/TherapeuticAreaIllustration";
 import {
   ArrowRight,
-  HeartPulse,
-  Brain,
-  Activity,
-  ShieldAlert,
-  Stethoscope,
-  Sparkles,
   ChevronRight,
-  CheckCircle2,
+  ChevronLeft,
   SlidersHorizontal,
+  Sparkles,
 } from "lucide-react";
 
-// Icon mapper helper
-const getTherapyIcon = (id: string) => {
-  switch (id) {
-    case "cardio":
-      return <HeartPulse className="w-5 h-5" />;
-    case "neuro":
-      return <Brain className="w-5 h-5" />;
-    case "gastro":
-      return <Activity className="w-5 h-5" />;
-    case "resp":
-      return <Stethoscope className="w-5 h-5" />;
-    case "anti-infectives":
-      return <ShieldAlert className="w-5 h-5" />;
-    case "endocrinology":
-      return <Sparkles className="w-5 h-5" />;
-    default:
-      return <Activity className="w-5 h-5" />;
-  }
-};
-
 export default function TherapeuticFocusGrid() {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const previewImageRef = useRef<HTMLDivElement>(null);
-  const previewContentRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [isDesktop, setIsDesktop] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
 
-  const selectedTherapy = therapyAreasData[selectedIndex];
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const scrollTriggerInstance = useRef<ScrollTrigger | null>(null);
+  const mobileScrollRef = useRef<HTMLDivElement>(null);
 
-  // GSAP animation when selected index changes with immediate full visibility
+  const totalCards = therapyAreasData.length;
+  // Authoritative enterprise card geometry: wider horizontal span (420px) + gap (24px)
+  const cardWidth = 420;
+  const cardGap = 24;
+  const stepSize = cardWidth + cardGap;
+  const maxTranslate = (totalCards - 1) * stepSize;
+
+  // Viewport and accessibility detection
   useEffect(() => {
-    const prefersReducedMotion =
-      typeof window !== "undefined" &&
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    setIsMounted(true);
+    const checkViewport = () => {
+      setIsDesktop(window.innerWidth >= 768);
+    };
+    checkViewport();
 
-    if (prefersReducedMotion) return;
+    const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setPrefersReducedMotion(motionQuery.matches);
 
-    if (previewImageRef.current && previewContentRef.current) {
-      const tl = gsap.timeline();
-      tl.fromTo(
-        previewImageRef.current,
-        { scale: 1.04, opacity: 0.9 },
-        { scale: 1, opacity: 1, duration: 0.45, ease: "power2.out", clearProps: "opacity,scale" }
-      );
-      tl.fromTo(
-        previewContentRef.current,
-        { y: 8, opacity: 0.9 },
-        { y: 0, opacity: 1, duration: 0.35, ease: "power2.out", clearProps: "opacity,transform" },
-        "<"
-      );
-    }
-  }, [selectedIndex]);
+    const handleMotionChange = (e: MediaQueryListEvent) => {
+      setPrefersReducedMotion(e.matches);
+    };
 
-  // Section reveal trigger ensuring 100% full opacity on entry
+    window.addEventListener("resize", checkViewport, { passive: true });
+    motionQuery.addEventListener("change", handleMotionChange);
+
+    return () => {
+      window.removeEventListener("resize", checkViewport);
+      motionQuery.removeEventListener("change", handleMotionChange);
+    };
+  }, []);
+
+  // Programmatic smooth navigation to specific card index
+  const scrollToIndex = useCallback(
+    (index: number) => {
+      const targetIdx = Math.max(0, Math.min(totalCards - 1, index));
+      setActiveIndex(targetIdx);
+      const newProgress = (targetIdx / (totalCards - 1)) * 100;
+      setScrollProgress(newProgress);
+
+      if (isDesktop && trackRef.current) {
+        if (prefersReducedMotion) {
+          trackRef.current.style.transform = `translateX(-${targetIdx * stepSize}px)`;
+          return;
+        }
+
+        gsap.to(trackRef.current, {
+          x: -targetIdx * stepSize,
+          duration: 0.65,
+          ease: "power2.out",
+          overwrite: "auto",
+        });
+
+        if (scrollTriggerInstance.current) {
+          const st = scrollTriggerInstance.current;
+          const totalDistance = st.end - st.start;
+          const targetScroll = st.start + (targetIdx / (totalCards - 1)) * totalDistance;
+          const lenis = (window as any).__lenis;
+          if (lenis) {
+            lenis.scrollTo(targetScroll, {
+              duration: 0.75,
+              easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            });
+          } else {
+            window.scrollTo({
+              top: targetScroll,
+              behavior: "smooth",
+            });
+          }
+        }
+      } else if (mobileScrollRef.current) {
+        const container = mobileScrollRef.current;
+        const width = container.querySelector(".mobile-card")?.clientWidth || 300;
+        container.scrollTo({
+          left: targetIdx * (width + 16),
+          behavior: "smooth",
+        });
+      }
+    },
+    [isDesktop, prefersReducedMotion, totalCards, stepSize]
+  );
+
+  // Keyboard navigation when section is in viewport
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight && rect.bottom > 0;
+      if (!inView) return;
+
+      if (e.key === "ArrowRight") {
+        if (activeIndex < totalCards - 1) {
+          e.preventDefault();
+          scrollToIndex(activeIndex + 1);
+        }
+      } else if (e.key === "ArrowLeft") {
+        if (activeIndex > 0) {
+          e.preventDefault();
+          scrollToIndex(activeIndex - 1);
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [activeIndex, totalCards, scrollToIndex]);
+
+  // GSAP ScrollTrigger setup for calm, predictable horizontal progression
+  useEffect(() => {
+    if (!isMounted || !isDesktop || prefersReducedMotion) return;
+
     gsap.registerPlugin(ScrollTrigger);
 
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
+    const section = sectionRef.current;
+    const track = trackRef.current;
+    if (!section || !track) return;
+
+    // Measured vertical travel distance (~340px per card for refined, responsive pacing)
+    const pinScrollDistance = totalCards * 340;
 
     const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".console-header",
-        { y: 20, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "power2.out",
-          clearProps: "all",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-      gsap.fromTo(
-        ".console-panel",
-        { y: 25, opacity: 0 },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.7,
-          ease: "power2.out",
-          clearProps: "all",
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    }, containerRef);
+      const st = ScrollTrigger.create({
+        trigger: section,
+        pin: true,
+        start: "top top",
+        end: `+=${pinScrollDistance}`,
+        scrub: 0.65, // Calm physical inertia without jarring snaps
+        invalidateOnRefresh: true,
+        onUpdate: (self) => {
+          const progress = self.progress;
+          setScrollProgress(progress * 100);
 
-    return () => ctx.revert();
-  }, []);
+          // Calculate active card index smoothly
+          const calculatedIndex = Math.min(
+            totalCards - 1,
+            Math.max(0, Math.round(progress * (totalCards - 1)))
+          );
+          setActiveIndex(calculatedIndex);
+
+          // Translate horizontal track along X
+          if (track) {
+            const currentX = -progress * maxTranslate;
+            gsap.set(track, { x: currentX, force3D: true });
+          }
+        },
+      });
+
+      scrollTriggerInstance.current = st;
+    }, section);
+
+    return () => {
+      scrollTriggerInstance.current = null;
+      ctx.revert();
+    };
+  }, [isMounted, isDesktop, prefersReducedMotion, totalCards, maxTranslate]);
+
+  // Handle mobile touch horizontal scroll sync
+  const handleMobileScroll = () => {
+    if (!mobileScrollRef.current) return;
+    const container = mobileScrollRef.current;
+    const width = container.querySelector(".mobile-card")?.clientWidth || 300;
+    const scrollLeft = container.scrollLeft;
+    const newIndex = Math.min(
+      totalCards - 1,
+      Math.max(0, Math.round(scrollLeft / (width + 16)))
+    );
+    setActiveIndex(newIndex);
+    const maxScroll = container.scrollWidth - container.clientWidth;
+    if (maxScroll > 0) {
+      setScrollProgress((scrollLeft / maxScroll) * 100);
+    }
+  };
+
+  const currentArea = therapyAreasData[activeIndex] || therapyAreasData[0];
+
+  const getCleanDomainLabel = (id: string, name: string) => {
+    return THERAPEUTIC_AREA_ASSETS[id]?.cleanLabel || name.split("&")[0].trim();
+  };
 
   return (
     <section
-      ref={containerRef}
-      className="py-12 sm:py-16 bg-gradient-to-b from-white via-[#F7F9FB] to-white relative overflow-hidden"
+      ref={sectionRef}
+      id="therapeutic-areas"
+      className="relative w-full bg-gradient-to-b from-white via-[#F7F9FB] to-white overflow-hidden py-8 md:pt-28 md:pb-6 select-none"
     >
-      {/* Decorative brand geometry watermarks */}
+      {/* Background Brand Geometry Ambient Rings */}
       <div
-        className="absolute right-0 top-1/4 w-[500px] h-[500px] rounded-full border border-[#005EB1]/5 pointer-events-none translate-x-1/2"
+        className="absolute right-0 top-1/4 w-[450px] h-[450px] rounded-full border border-[#005EB1]/5 pointer-events-none translate-x-1/3"
         aria-hidden="true"
       />
       <div
-        className="absolute left-0 bottom-6 w-[400px] h-[400px] rounded-full border border-[#A285D5]/10 pointer-events-none -translate-x-1/3"
+        className="absolute left-0 bottom-6 w-[350px] h-[350px] rounded-full border border-[#A285D5]/10 pointer-events-none -translate-x-1/4"
         aria-hidden="true"
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header section with badge & all portfolios link */}
-        <div className="console-header flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
-          <div className="max-w-3xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#005EB1]/10 text-[#005EB1] text-xs font-bold uppercase tracking-wider mb-2.5">
-              <SlidersHorizontal className="w-3.5 h-3.5 text-[#F87901]" />
-              <span>Interactive Clinical Console</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 mb-2 md:mb-3">
+        {/* Compact, Sleek Header Row Fitting Cleanly in Any Viewport */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-2.5">
+          <div>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#005EB1]/10 text-[#005EB1] text-[11px] font-bold uppercase tracking-wider mb-1">
+              <SlidersHorizontal className="w-3 h-3 text-[#F87901]" />
+              <span>Specialized Therapeutic Portfolios</span>
             </div>
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl font-extrabold text-[#111111] tracking-tight font-heading leading-tight">
+            <h2 className="text-xl sm:text-2xl lg:text-3xl font-extrabold text-[#111111] tracking-tight font-heading leading-tight">
               Where scientific rigor meets pressing healthcare needs.
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 mt-2 max-w-2xl leading-relaxed">
-              Explore our core therapeutic portfolios. Select any domain below to review clinical indications, formulations count, and targeted pharmacopeial solutions.
-            </p>
           </div>
 
-          <Link
-            href="/therapeutic-areas"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#005EB1] hover:text-[#F87901] transition-colors shrink-0 group border-b border-[#005EB1]/20 pb-1"
-          >
-            <span>View All Therapeutic Portfolios</span>
-            <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </Link>
+          {/* Action Link & Direct Prev/Next Controls */}
+          <div className="flex items-center gap-3 shrink-0">
+            <Link
+              href="/therapeutic-areas"
+              className="inline-flex items-center gap-1.5 text-xs font-bold text-[#005EB1] hover:text-[#F87901] transition-colors group border-b border-[#005EB1]/20 pb-0.5"
+            >
+              <span>View All Portfolios</span>
+              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+
+            <div className="flex items-center gap-1.5">
+              <button
+                onClick={() => scrollToIndex(activeIndex - 1)}
+                disabled={activeIndex === 0}
+                aria-label="Previous therapeutic area"
+                className="w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-50 flex items-center justify-center text-slate-700 disabled:opacity-35 disabled:cursor-not-allowed transition-colors shadow-xs"
+              >
+                <ChevronLeft className="w-3.5 h-3.5" />
+              </button>
+              <button
+                onClick={() => scrollToIndex(activeIndex + 1)}
+                disabled={activeIndex === totalCards - 1}
+                aria-label="Next therapeutic area"
+                className="w-8 h-8 rounded-full border border-slate-200 bg-white hover:bg-slate-50 flex items-center justify-center text-slate-700 disabled:opacity-35 disabled:cursor-not-allowed transition-colors shadow-xs"
+              >
+                <ChevronRight className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
 
-        {/* The Clinical Console Master Container */}
-        <div className="console-panel grid grid-cols-1 lg:grid-cols-12 rounded-2xl overflow-hidden bg-white border border-slate-200/90 shadow-[0_12px_35px_rgba(0,94,177,0.06)]">
-          {/* Left Column: Interactive Domain Selector List (5 Cols) */}
-          <div className="lg:col-span-5 bg-slate-50 p-4 sm:p-5 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col justify-between">
-            <div>
-              <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200">
-                <span className="text-xs font-mono font-bold uppercase tracking-wider text-slate-500">
-                  Select Specialty
-                </span>
-                <span className="text-xs font-mono font-bold text-[#F87901]">
-                  0{selectedIndex + 1} / 0{therapyAreasData.length}
-                </span>
-              </div>
+      {/* ============================================================ */}
+      {/* DESKTOP & TABLET: CALM, UNIFORM HORIZONTAL TRACK             */}
+      {/* ============================================================ */}
+      <div
+        className={`hidden md:block w-full pt-8 pb-4 ${
+          prefersReducedMotion ? "overflow-x-auto scrollbar-thin" : "overflow-visible"
+        }`}
+      >
+        <div
+          ref={trackRef}
+          className="flex items-end gap-6 pl-6 sm:pl-12 lg:pl-16 will-change-transform"
+          style={{ width: "max-content" }}
+        >
+          {therapyAreasData.map((area: TherapyArea, index: number) => {
+            const isActive = activeIndex === index;
+            const indexStr = String(index + 1).padStart(2, "0");
+            const cleanLabel = getCleanDomainLabel(area.id, area.name);
 
-              <div className="space-y-1.5">
-                {therapyAreasData.map((area, index) => {
-                  const isActive = selectedIndex === index;
-                  return (
-                    <button
-                      key={area.id}
-                      onClick={() => setSelectedIndex(index)}
-                      className={`w-full text-left p-3.5 rounded-xl transition-all duration-200 flex items-center justify-between group relative ${
+            return (
+              <div
+                key={area.id}
+                data-card-index={index}
+                onClick={() => scrollToIndex(index)}
+                role="button"
+                tabIndex={0}
+                aria-label={`Select ${area.name}`}
+                aria-current={isActive ? "true" : undefined}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    scrollToIndex(index);
+                  }
+                }}
+                className={`therapeutic-card group relative w-[420px] h-[415px] rounded-[24px] cursor-pointer flex-shrink-0 select-none p-6 flex flex-col justify-between transition-all duration-500 ease-out ${
+                  isActive
+                    ? "bg-white border-2 border-[#005EB1] shadow-[0_16px_40px_rgba(0,94,177,0.14)] z-20"
+                    : "bg-white hover:bg-slate-50/90 border border-slate-200/90 shadow-[0_6px_20px_rgba(0,0,0,0.04)] hover:shadow-md z-10"
+                }`}
+              >
+                {/* Large Background Watermark Numerals */}
+                <span
+                  className={`absolute top-4 left-6 font-extrabold select-none transition-colors duration-300 font-heading pointer-events-none -z-0 ${
+                    isActive ? "text-6xl text-[#005EB1]/10" : "text-5xl text-slate-100"
+                  }`}
+                  aria-hidden="true"
+                >
+                  {indexStr}
+                </span>
+
+                {/* Clean Enterprise Top Row: Domain Tag (Left) & Formulation Badge (Right) */}
+                <div className="w-full flex items-center justify-between z-20 relative">
+                  <div className="flex items-center gap-1.5">
+                    <span
+                      className={`px-2 py-0.5 rounded-md font-mono text-[11px] font-extrabold tracking-wider transition-colors ${
                         isActive
-                          ? "bg-white shadow-sm border border-[#005EB1]/40 translate-x-1"
-                          : "bg-white/60 hover:bg-white border border-slate-200/70 hover:border-slate-300"
+                          ? "bg-[#005EB1] text-white"
+                          : "bg-slate-100 text-slate-600"
                       }`}
                     >
-                      {/* Active indicator bar */}
-                      {isActive && (
-                        <div className="absolute left-0 top-2.5 bottom-2.5 w-1.5 bg-[#005EB1] rounded-r-full" />
-                      )}
+                      {indexStr}
+                    </span>
+                    <span className="text-[10px] font-mono uppercase tracking-widest text-slate-400 font-bold">
+                      PORTFOLIO
+                    </span>
+                  </div>
 
-                      <div className="flex items-center gap-3.5 pl-1">
-                        <div
-                          className={`w-9 h-9 rounded-lg flex items-center justify-center transition-colors shrink-0 ${
-                            isActive
-                              ? "bg-[#005EB1] text-white shadow-sm shadow-[#005EB1]/30"
-                              : "bg-slate-100 text-slate-700 group-hover:bg-[#005EB1]/10 group-hover:text-[#005EB1]"
-                          }`}
-                        >
-                          {getTherapyIcon(area.id)}
-                        </div>
+                  <span
+                    className={`px-2.5 py-0.5 rounded-full text-[11px] font-mono font-bold tracking-tight transition-colors ${
+                      isActive
+                        ? "bg-[#005EB1]/10 text-[#005EB1] border border-[#005EB1]/20"
+                        : "bg-slate-100 text-slate-500 border border-slate-200/60"
+                    }`}
+                  >
+                    {area.stats}
+                  </span>
+                </div>
 
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span
-                              className={`text-xs font-mono font-bold ${
-                                isActive ? "text-[#F87901]" : "text-slate-500"
-                              }`}
-                            >
-                              0{index + 1}
-                            </span>
-                            <span
-                              className={`font-heading font-extrabold text-sm tracking-tight transition-colors ${
-                                isActive ? "text-slate-900" : "text-slate-800 group-hover:text-slate-900"
-                              }`}
-                            >
-                              {area.name}
-                            </span>
-                          </div>
-                          <div className="text-xs text-slate-500 font-medium line-clamp-1">
-                            {area.stats}
-                          </div>
-                        </div>
-                      </div>
+                {/* Illustration Stage: Consistent 150-190px Footprint with 2.5D Isometric Render */}
+                <div className="w-full h-[180px] relative flex items-center justify-center my-auto overflow-visible z-10">
+                  <div className="w-[175px] h-[175px] relative flex items-center justify-center">
+                    <TherapeuticAreaIllustration
+                      id={area.id}
+                      className="w-full h-full"
+                      isActive={isActive}
+                      priority={index < 3}
+                    />
+                  </div>
+                </div>
 
-                      <ChevronRight
-                        className={`w-4 h-4 transition-transform duration-200 shrink-0 ${
-                          isActive
-                            ? "text-[#F87901] translate-x-0.5"
-                            : "text-slate-400 group-hover:text-slate-600 group-hover:translate-x-0.5"
-                        }`}
-                      />
-                    </button>
-                  );
-                })}
+                {/* Content Block: Category Name & Short Clinical Description */}
+                <div className="z-10 mt-1">
+                  <h3
+                    className={`font-black font-heading leading-snug line-clamp-1 transition-colors ${
+                      isActive
+                        ? "text-lg text-slate-900"
+                        : "text-base text-slate-800 group-hover:text-slate-900"
+                    }`}
+                  >
+                    {area.name}
+                  </h3>
+                  <p className="text-[11px] text-slate-500 line-clamp-2 mt-1 leading-relaxed">
+                    {area.shortDesc}
+                  </p>
+                </div>
+
+                {/* Bottom Action Pill: Direct Navigation Link */}
+                <div className="w-full pt-3 z-10 border-t border-slate-100 mt-2">
+                  <Link
+                    href={`/therapeutic-areas/${area.slug}`}
+                    onClick={(e) => {
+                      if (!isActive) {
+                        e.preventDefault();
+                        scrollToIndex(index);
+                      }
+                    }}
+                    className={`w-full py-2.5 px-4 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-between transition-all duration-300 ${
+                      isActive
+                        ? "bg-[#005EB1] hover:bg-[#00477F] text-white shadow-xs"
+                        : "bg-slate-100 hover:bg-[#005EB1]/10 text-slate-700 hover:text-[#005EB1]"
+                    }`}
+                  >
+                    <span className="truncate pr-2 font-bold tracking-wide">
+                      {isActive ? `Explore ${cleanLabel}` : cleanLabel}
+                    </span>
+                    <div
+                      className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                        isActive
+                          ? "bg-white/20 text-white"
+                          : "bg-white text-slate-500 group-hover:text-[#005EB1] shadow-2xs"
+                      }`}
+                    >
+                      <ChevronRight className="w-3.5 h-3.5" />
+                    </div>
+                  </Link>
+                </div>
               </div>
-            </div>
+            );
+          })}
+        </div>
+      </div>
 
-            {/* Bottom micro note */}
-            <div className="pt-4 mt-4 border-t border-slate-200 flex items-center justify-between text-xs text-slate-500">
-              <span className="flex items-center gap-1.5 font-medium">
-                <span className="w-2 h-2 rounded-full bg-emerald-500" />
-                WHO-GMP validated pipelines
-              </span>
-              <span className="font-mono font-bold text-slate-600">150+ Formulations</span>
-            </div>
+      {/* ============================================================ */}
+      {/* MOBILE: TOUCH-FRIENDLY HORIZONTAL CAROUSEL                   */}
+      {/* ============================================================ */}
+      <div className="block md:hidden w-full">
+        <div
+          ref={mobileScrollRef}
+          onScroll={handleMobileScroll}
+          className="flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 pb-4 pt-2 scrollbar-none"
+        >
+          {therapyAreasData.map((area: TherapyArea, index: number) => {
+            const isActive = activeIndex === index;
+            const indexStr = String(index + 1).padStart(2, "0");
+            const cleanLabel = getCleanDomainLabel(area.id, area.name);
+
+            return (
+              <div
+                key={area.id}
+                data-mobile-index={index}
+                onClick={() => scrollToIndex(index)}
+                className={`mobile-card w-[84vw] max-w-[340px] shrink-0 snap-center rounded-2xl p-5 bg-white border transition-all duration-300 ${
+                  isActive
+                    ? "border-[#005EB1] shadow-[0_10px_25px_rgba(0,94,177,0.12)]"
+                    : "border-slate-200/90 shadow-xs"
+                }`}
+              >
+                {/* Card Top: Index and Formulation Badge */}
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-xs font-mono font-bold text-[#F87901]">
+                    {indexStr} / {String(totalCards).padStart(2, "0")}
+                  </span>
+                  <span className="px-2 py-0.5 rounded-full bg-[#005EB1]/10 text-[#005EB1] text-[10px] font-mono font-bold">
+                    {area.stats}
+                  </span>
+                </div>
+
+                {/* Mobile Illustration Container: Consistent 140px Footprint */}
+                <div className="w-36 h-36 mx-auto mb-2 relative flex items-center justify-center">
+                  <TherapeuticAreaIllustration
+                    id={area.id}
+                    className="w-full h-full"
+                    isActive={isActive}
+                    priority={index < 2}
+                  />
+                </div>
+
+                {/* Title & Short Description */}
+                <h3 className="text-base font-black text-slate-900 font-heading mb-1 leading-snug line-clamp-1">
+                  {area.name}
+                </h3>
+                <p className="text-[11px] text-slate-600 leading-relaxed mb-3 line-clamp-2">
+                  {area.shortDesc}
+                </p>
+
+                {/* Explore Button */}
+                <Link
+                  href={`/therapeutic-areas/${area.slug}`}
+                  className="w-full py-2 px-3.5 rounded-xl bg-[#005EB1] text-white text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-2 shadow-xs"
+                >
+                  <span>Explore {cleanLabel}</span>
+                  <ArrowRight className="w-3 h-3" />
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ============================================================ */}
+      {/* PROGRESS BAR & CONTROLS FOOTER ROW                           */}
+      {/* ============================================================ */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-2 md:mt-3">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-slate-200/80">
+          {/* Active Area Indicator Text */}
+          <div className="flex items-center gap-2.5 text-xs text-slate-600">
+            <span className="font-mono font-bold text-[#F87901]">
+              {String(activeIndex + 1).padStart(2, "0")} / {String(totalCards).padStart(2, "0")}
+            </span>
+            <span className="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-slate-300" />
+            <span className="font-bold text-slate-900 truncate max-w-[200px] sm:max-w-xs">
+              {currentArea.name}
+            </span>
           </div>
 
-          {/* Right Column: The Dynamic Reactive Stage (7 Cols) */}
-          <div className="lg:col-span-7 relative p-5 sm:p-8 flex flex-col justify-between bg-white overflow-hidden">
-            {/* Visual background window */}
-            <div
-              ref={previewImageRef}
-              className="relative h-56 sm:h-64 w-full rounded-xl overflow-hidden mb-6 shadow-sm"
-            >
-              <Image
-                src={selectedTherapy.heroImage}
-                alt={selectedTherapy.name}
-                fill
-                priority
-                sizes="(max-width: 1024px) 100vw, 60vw"
-                className="object-cover"
+          {/* Reference-Matched Sleek Horizontal Progress Bar */}
+          <div className="w-full sm:w-80 md:w-96 flex items-center gap-3">
+            <div className="flex-1 h-1.5 bg-slate-200/80 rounded-full overflow-hidden relative">
+              <div
+                className="h-full bg-gradient-to-r from-[#005EB1] to-[#F87901] rounded-full transition-all duration-200 ease-out"
+                style={{
+                  width: `${Math.max(10, scrollProgress)}%`,
+                }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent" />
-
-              {/* Floating Pill on image */}
-              <div className="absolute top-3.5 left-3.5 bg-white/95 backdrop-blur-md px-3 py-1 rounded-full border border-white/50 shadow flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-[#F87901]" />
-                <span className="text-[11px] font-extrabold text-slate-900 uppercase tracking-wider">
-                  {selectedTherapy.name}
-                </span>
-              </div>
-
-              {/* Formulation count badge on image */}
-              <div className="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-white">
-                <div>
-                  <div className="text-[11px] font-mono font-bold text-blue-200 uppercase tracking-wider">
-                    Therapeutic Capacity
-                  </div>
-                  <div className="text-lg sm:text-xl font-black font-heading">
-                    {selectedTherapy.stats}
-                  </div>
-                </div>
-                <div className="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded bg-black/40 backdrop-blur-md border border-white/20 text-xs font-semibold text-slate-200">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Pharmacopeial Compliance</span>
-                </div>
-              </div>
             </div>
+            <span className="text-[11px] font-mono font-bold text-slate-500 shrink-0">
+              {Math.round(Math.max(10, scrollProgress))}%
+            </span>
+          </div>
 
-            {/* Content panel */}
-            <div ref={previewContentRef} className="space-y-4">
-              <div>
-                <h3 className="text-xl sm:text-2xl font-black text-slate-900 font-heading mb-2">
-                  {selectedTherapy.name}
-                </h3>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  {selectedTherapy.fullDesc}
-                </p>
-              </div>
-
-              {/* Treated indications tags */}
-              <div>
-                <div className="text-[11px] font-extrabold uppercase tracking-wider text-slate-500 mb-2">
-                  Key Indications & Conditions Addressed
-                </div>
-                <div className="flex flex-wrap gap-1.5">
-                  {selectedTherapy.conditions.map((cond, i) => (
-                    <span
-                      key={i}
-                      className="px-2.5 py-1 rounded-md bg-slate-100 border border-slate-200 text-xs font-semibold text-slate-800"
-                    >
-                      {cond}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Action Buttons Bar */}
-              <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
-                <Link
-                  href={`/therapeutic-areas/${selectedTherapy.slug}`}
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#005EB1] hover:bg-[#00477F] text-white font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
-                >
-                  <span>Explore {selectedTherapy.name} Portfolio</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-
-                <Link
-                  href="/products"
-                  className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-lg border border-slate-200 hover:bg-slate-50 text-slate-700 font-bold text-xs uppercase tracking-wider transition-colors"
-                >
-                  <span>Browse All Formulations</span>
-                </Link>
-              </div>
-            </div>
+          {/* Compliance Tag */}
+          <div className="hidden lg:flex items-center gap-1.5 text-xs text-slate-500 font-medium">
+            <Sparkles className="w-3.5 h-3.5 text-[#F87901]" />
+            <span>Curated WHO-GMP Monographed Formulations</span>
           </div>
         </div>
       </div>

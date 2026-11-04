@@ -18,6 +18,22 @@ export default function HeroSlider() {
   const ctaRef = useRef<HTMLDivElement>(null);
   const imageContainerRef = useRef<HTMLDivElement>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const touchStartXRef = useRef<number | null>(null);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartXRef.current = e.touches[0].clientX;
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStartXRef.current === null) return;
+    const diff = touchStartXRef.current - e.changedTouches[0].clientX;
+    if (diff > 45) {
+      nextSlide();
+    } else if (diff < -45) {
+      prevSlide();
+    }
+    touchStartXRef.current = null;
+  };
 
   const animateIn = useCallback(() => {
     const prefersReducedMotion =
@@ -108,9 +124,11 @@ export default function HeroSlider() {
     <section
       aria-roledescription="carousel"
       aria-label="Icon Drugs Key Commitments"
-      className="relative w-full h-screen min-h-[640px] max-h-[1080px] overflow-hidden bg-[#00477F]"
+      className="relative w-full h-[90dvh] min-h-[580px] sm:min-h-[640px] max-h-[1080px] overflow-hidden bg-[#00477F]"
       onMouseEnter={() => setIsPlaying(false)}
       onMouseLeave={() => setIsPlaying(true)}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
     >
       {/* Background Image Layer with Zoom & Overlay */}
       <div ref={imageContainerRef} className="absolute inset-0 w-full h-full">
@@ -140,11 +158,11 @@ export default function HeroSlider() {
       {/* Slide Content Container */}
       <div
         ref={slideRef}
-        className="relative z-10 max-w-7xl mx-auto h-full px-6 sm:px-8 lg:px-12 flex flex-col justify-center pt-20"
+        className="relative z-10 max-w-7xl mx-auto h-full px-5 sm:px-8 lg:px-12 flex flex-col justify-center pt-20 pb-24 sm:pb-20"
       >
         <div className="max-w-3xl">
           {/* Accent Label */}
-          <div className="flex items-center gap-3 mb-6">
+          <div className="flex items-center gap-3 mb-4 sm:mb-6">
             <span className="inline-block px-3 py-1 rounded bg-[#F87901] text-white text-xs font-bold tracking-widest uppercase">
               {activeSlide.accentLabel}
             </span>
@@ -156,7 +174,7 @@ export default function HeroSlider() {
           {/* Large Editorial Headline */}
           <h1
             ref={headlineRef}
-            className="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.08] mb-6 font-heading"
+            className="text-3xl sm:text-5xl lg:text-7xl font-extrabold text-white tracking-tight leading-[1.12] sm:leading-[1.08] mb-4 sm:mb-6 font-heading"
           >
             {activeSlide.headline}
           </h1>
@@ -164,16 +182,16 @@ export default function HeroSlider() {
           {/* Subtext */}
           <p
             ref={subtextRef}
-            className="text-lg sm:text-xl text-slate-200 leading-relaxed font-normal mb-10 max-w-2xl"
+            className="text-sm sm:text-lg lg:text-xl text-slate-200 leading-relaxed font-normal mb-6 sm:mb-10 max-w-2xl line-clamp-3 sm:line-clamp-none"
           >
             {activeSlide.subtext}
           </p>
 
           {/* Action CTAs */}
-          <div ref={ctaRef} className="flex flex-wrap items-center gap-5">
+          <div ref={ctaRef} className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-5">
             <Link
               href={activeSlide.ctaLink}
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-lg bg-[#F87901] text-white font-bold text-base hover:bg-[#e06c00] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#F87901]/30 group"
+              className="inline-flex items-center justify-center gap-3 px-6 sm:px-8 py-3.5 sm:py-4 rounded-xl sm:rounded-lg bg-[#F87901] text-white font-bold text-sm sm:text-base hover:bg-[#e06c00] transition-all transform hover:-translate-y-0.5 shadow-xl shadow-[#F87901]/30 group min-h-[44px]"
             >
               <span>{activeSlide.ctaText}</span>
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1.5" />
@@ -181,7 +199,7 @@ export default function HeroSlider() {
 
             <Link
               href="/products"
-              className="inline-flex items-center gap-2 px-6 py-4 rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-base backdrop-blur-md border border-white/20 transition-all"
+              className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl sm:rounded-lg bg-white/10 hover:bg-white/20 text-white font-semibold text-sm sm:text-base backdrop-blur-md border border-white/20 transition-all min-h-[44px]"
             >
               Explore Formulations
             </Link>
@@ -190,7 +208,7 @@ export default function HeroSlider() {
       </div>
 
       {/* Bottom Slider Navigation and Controls Bar */}
-      <div className="absolute bottom-8 left-0 right-0 z-20 max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
+      <div className="absolute bottom-6 sm:bottom-14 left-0 right-0 z-20 max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 flex items-center justify-between pb-safe">
         {/* Slide Indicators / Tabs */}
         <div className="flex items-center gap-2 sm:gap-4">
           {heroSlides.map((slide, idx) => (

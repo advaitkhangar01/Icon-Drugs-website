@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Manrope, Inter } from "next/font/google";
 import "./globals.css";
 import SmoothScrollProvider from "@/components/providers/SmoothScrollProvider";
@@ -17,11 +17,32 @@ const inter = Inter({
   display: "swap",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#00477F",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  viewportFit: "cover",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://icondrugs.com"),
   title: "Icon Drugs | Healthcare, Built on Experience",
   description: "25+ years of trusted pharmaceutical manufacturing, stringent quality assurance, and therapeutic excellence across cardiology, gastroenterology, respiratory, and anti-infectives.",
   keywords: ["Icon Drugs", "Pharmaceuticals", "Pharma Manufacturer", "WHO-GMP", "Therapeutic Formulations", "Cardiovascular Care", "Generic Medicine"],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon-32x32.png", type: "image/png", sizes: "32x32" },
+      { url: "/favicon-16x16.png", type: "image/png", sizes: "16x16" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
+  manifest: "/site.webmanifest",
   openGraph: {
     title: "Icon Drugs — Healthcare, Built on Experience",
     description: "25+ years in pharmaceutical excellence, advanced manufacturing, and patient-centered therapies.",

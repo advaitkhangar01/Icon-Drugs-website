@@ -4,8 +4,23 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { productsData } from "@/data/siteData";
-import { ChevronRight, FileDown, AlertCircle, Info, Sparkles } from "lucide-react";
+import { productsData, getProductCommercialData, getComplementaryProducts } from "@/data/siteData";
+import {
+  ProductDetailProvider,
+  ProductDetailHeroActions,
+} from "@/components/products/ProductDetailClient";
+import ProductHeroShowcase from "@/components/products/ProductHeroShowcase";
+import {
+  ChevronRight,
+  AlertCircle,
+  Info,
+  Sparkles,
+  ShieldCheck,
+  CheckCircle2,
+  Stethoscope,
+  ExternalLink,
+  Atom,
+} from "lucide-react";
 
 import type { Metadata } from "next";
 
@@ -18,8 +33,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const product = productsData.find((p) => p.slug === slug);
   if (!product) return {};
   return {
-    title: `${product.name} (${product.genericName}) | Icon Drugs`,
-    description: `Clinical prescribing information, dosage, indications and pharmacology for ${product.name} (${product.genericName} ${product.strength}).`,
+    title: `${product.name} Clinical Monograph & Supply Terms | Icon Drugs`,
+    description: `Prescribing monograph, clinical pharmacology, active composition, 2D molecular structures, and commercial supply terms for ${product.name} (${product.genericName}).`,
   };
 }
 
@@ -37,166 +52,256 @@ export default async function ProductDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const commercialData = getProductCommercialData(product);
+  const complementaryProducts = getComplementaryProducts(product);
+
   return (
     <>
       <Header />
-      <main id="main-content" className="flex-1 pt-24 pb-20">
-        {/* Breadcrumb Bar */}
-        <section className="bg-slate-100 border-b border-slate-200 py-4">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-xs font-semibold text-slate-600">
-            <Link href="/" className="hover:text-[#005EB1]">Home</Link>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-            <Link href="/products" className="hover:text-[#005EB1]">Products</Link>
-            <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-            <span className="text-slate-900 font-bold">{product.name}</span>
-          </div>
-        </section>
+      <main id="main-content" className="flex-1 pt-24 pb-28 lg:pb-20 bg-slate-100/70">
+        <ProductDetailProvider
+          product={product}
+          commercialData={commercialData}
+          complementaryProducts={complementaryProducts}
+        >
+          {/* Breadcrumb Bar */}
+          <section className="bg-white border-b-2 border-slate-200 py-3.5">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center gap-2 text-xs font-black text-slate-900">
+              <Link href="/" className="hover:text-[#005EB1] text-slate-700">Home</Link>
+              <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+              <Link href="/products" className="hover:text-[#005EB1] text-slate-700">Products</Link>
+              <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
+              <span className="text-slate-950 font-black uppercase tracking-wider">{product.name}</span>
+            </div>
+          </section>
 
-        {/* Product Overview Top Section */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Product Image Container */}
-            <div className="lg:col-span-5 bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-              <div className="relative h-80 sm:h-96 w-full rounded-xl overflow-hidden bg-slate-50">
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  fill
-                  className="object-cover"
-                  priority
-                />
-                {product.isRx && (
-                  <span className="absolute top-4 left-4 px-3 py-1 rounded bg-[#F87901] text-white text-xs font-bold uppercase tracking-wider">
-                    Prescription Only (Rx)
-                  </span>
-                )}
+          {/* Product Identity Hero Section */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+              {/* Left Column: Dedicated Studio Showcase & Specs */}
+              <div className="lg:col-span-5">
+                <ProductHeroShowcase product={product} />
               </div>
-              <div className="mt-6 flex items-center justify-between text-xs text-slate-500 pt-4 border-t border-slate-100">
-                <span>WHO-GMP Validated Batch</span>
-                <span className="font-mono">ID: {product.id}</span>
+
+              {/* Right Column: Hero Clinical Positioning & Order CTAs */}
+              <div className="lg:col-span-7 space-y-6">
+                {/* Clinical Tagline Quote Banner */}
+                <div className="bg-white rounded-3xl p-7 border-l-8 border-[#F87901] shadow-xl border-2 border-slate-300">
+                  <div className="text-xs font-black uppercase tracking-widest text-[#F87901] mb-1.5 flex items-center justify-between">
+                    <span>Clinical Positioning & Rationale</span>
+                    <span className="text-slate-950 font-black">WHO-GMP Validated</span>
+                  </div>
+                  <div className="text-2xl sm:text-3xl font-black font-heading text-slate-950 italic leading-snug">
+                    &ldquo;{product.tagline}&rdquo;
+                  </div>
+                </div>
+
+                {/* Key Clinical Differentiators & Advantages */}
+                {product.clinicalHighlights && product.clinicalHighlights.length > 0 && (
+                  <div className="bg-white rounded-3xl p-6 sm:p-7 border-2 border-slate-300 shadow-xl space-y-3.5">
+                    <h3 className="text-xs font-black uppercase tracking-wider text-[#005EB1] flex items-center gap-2">
+                      <Sparkles className="w-4 h-4 text-[#F87901]" />
+                      <span>Clinical Differentiators & Advantages</span>
+                    </h3>
+                    <div className="space-y-2.5">
+                      {product.clinicalHighlights.map((hl, idx) => (
+                        <div key={idx} className="flex items-start gap-3 text-sm text-slate-950 font-bold">
+                          <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                          <span>{hl}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Doctor Specialties Target */}
+                {product.targetSpecialties && product.targetSpecialties.length > 0 && (
+                  <div className="bg-white rounded-3xl p-6 sm:p-7 border-2 border-slate-300 shadow-xl">
+                    <div className="text-xs font-black uppercase tracking-wider text-slate-950 mb-3 flex items-center gap-2">
+                      <Stethoscope className="w-4 h-4 text-[#005EB1]" />
+                      <span>Recommended Prescribing Medical Specialties</span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {product.targetSpecialties.map((spec, i) => (
+                        <span
+                          key={i}
+                          className="px-4 py-2 rounded-xl bg-blue-100 border-2 border-blue-200 text-xs font-black text-blue-950 shadow-xs"
+                        >
+                          {spec}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* High-Conversion B2B Commercial Actions & Monopoly Checker */}
+                <ProductDetailHeroActions product={product} />
               </div>
             </div>
+          </section>
 
-            {/* Product Details Header */}
-            <div className="lg:col-span-7 space-y-6">
-              <div>
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-[#005EB1]" />
-                  <span className="text-xs uppercase font-bold tracking-widest text-[#005EB1]">
-                    {product.category}
-                  </span>
+          {/* Clinical Monograph Deep-Dive Section */}
+          <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+            <div className="bg-white rounded-3xl border-2 border-slate-300 p-8 sm:p-12 shadow-xl space-y-10">
+              {/* Active Ingredients & Molecular Structures */}
+              {product.ingredientActions && product.ingredientActions.length > 0 && (
+                <div>
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b-2 border-slate-200">
+                    <div>
+                      <h2 className="text-2xl sm:text-3xl font-black text-slate-950 font-heading flex items-center gap-2.5">
+                        <Atom className="w-6 h-6 text-[#005EB1]" />
+                        <span>Active Chemical Compounds & Molecular Architecture</span>
+                      </h2>
+                      <p className="text-xs sm:text-sm font-bold text-slate-800 mt-1">
+                        Validated chemical entities, 2D skeletal bond diagrams, empirical molecular formulas, and receptor-level modes of action
+                      </p>
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#005EB1] text-white text-xs font-mono font-black shadow-xs shrink-0">
+                      <ShieldCheck className="w-4 h-4 text-emerald-400" />
+                      <span>NIH PubChem Indexed</span>
+                    </span>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {product.ingredientActions.map((ia, idx) => (
+                      <div
+                        key={idx}
+                        className="bg-white border-2 border-slate-300 rounded-3xl p-6 hover:border-[#005EB1] shadow-md hover:shadow-xl transition-all flex flex-col justify-between"
+                      >
+                        <div>
+                          {ia.chemicalData ? (
+                            <div className="flex flex-col sm:flex-row items-center sm:items-start gap-5 mb-4 pb-4 border-b-2 border-slate-100">
+                              <div className="w-32 h-32 shrink-0 bg-slate-50 border-2 border-slate-200 rounded-2xl p-2 flex items-center justify-center shadow-inner">
+                                <Image
+                                  src={ia.chemicalData.structureUrl}
+                                  alt={`${ia.chemicalData.name} 2D Molecular Structure`}
+                                  width={120}
+                                  height={120}
+                                  className="object-contain"
+                                />
+                              </div>
+                              <div className="flex-1 space-y-2 text-center sm:text-left">
+                                <div className="font-black text-slate-950 text-lg leading-tight font-heading">
+                                  {ia.ingredient}
+                                </div>
+                                <div className="text-xs font-mono font-bold text-slate-900 bg-slate-100 p-2 rounded-xl border border-slate-200 space-y-0.5">
+                                  <div>
+                                    <span className="font-black text-slate-700">Formula:</span> {ia.chemicalData.formula}
+                                  </div>
+                                  <div>
+                                    <span className="font-black text-slate-700">Molar Mass:</span> {ia.chemicalData.molecularWeight}
+                                  </div>
+                                </div>
+                                <a
+                                  href={`https://pubchem.ncbi.nlm.nih.gov/compound/${ia.chemicalData.pubchemCid}`}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center gap-1.5 text-xs font-black text-[#005EB1] hover:text-[#F87901] transition-colors pt-1"
+                                >
+                                  <span>PubChem CID: {ia.chemicalData.pubchemCid}</span>
+                                  <ExternalLink className="w-3.5 h-3.5" />
+                                </a>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="mb-4 pb-3 border-b border-slate-100">
+                              <div className="font-black text-slate-950 text-lg mb-1">
+                                {ia.ingredient}
+                              </div>
+                              <span className="inline-block px-3 py-1 rounded-md bg-slate-100 text-xs font-black text-slate-800 uppercase tracking-wider">
+                                Biochemical / Enzymatic Complex
+                              </span>
+                            </div>
+                          )}
+
+                          <div className="pt-1">
+                            <div className="text-[11px] font-black uppercase tracking-wider text-slate-950 mb-1">
+                              Pharmacological Mechanism of Action
+                            </div>
+                            <p className="text-xs font-bold text-slate-950 leading-relaxed">
+                              {ia.role}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 font-heading">
-                  {product.name}
-                </h1>
-                <p className="text-lg text-slate-600 italic mt-2">
-                  Generic: {product.genericName}
+              )}
+
+              {/* Indications Checklist */}
+              <div className="pt-8 border-t-2 border-slate-200">
+                <h2 className="text-2xl font-black text-slate-950 font-heading mb-4 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-[#005EB1]" />
+                  <span>Approved Clinical Indications & Disease Burden</span>
+                </h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                  {product.indications.map((ind, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-center gap-3 px-4 py-3 rounded-2xl bg-slate-100 border-2 border-slate-200 text-xs font-black text-slate-950 shadow-xs"
+                    >
+                      <span className="w-2.5 h-2.5 rounded-full bg-[#005EB1] shrink-0" />
+                      <span>{ind}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Clinical Mechanism of Action */}
+              <div className="pt-8 border-t-2 border-slate-200">
+                <h2 className="text-2xl font-black text-slate-950 font-heading mb-3 flex items-center gap-2">
+                  <Info className="w-5 h-5 text-[#005EB1]" />
+                  <span>Pharmacodynamic Mechanism of Action</span>
+                </h2>
+                <p className="text-base text-slate-950 font-bold leading-relaxed bg-blue-50/90 p-7 rounded-3xl border-2 border-blue-200">
+                  {product.mechanism}
                 </p>
               </div>
 
-              {/* Quick Specs Grid */}
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 bg-white p-6 rounded-2xl border border-slate-200">
-                <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Strength</div>
-                  <div className="text-base font-extrabold text-slate-900">{product.strength}</div>
-                </div>
-                <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Dosage Form</div>
-                  <div className="text-base font-extrabold text-slate-900">{product.dosageForm}</div>
-                </div>
-                <div>
-                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Packaging</div>
-                  <div className="text-base font-extrabold text-slate-900">{product.packSize}</div>
+              {/* Dosage & Administration */}
+              <div className="pt-8 border-t-2 border-slate-200">
+                <h2 className="text-2xl font-black text-slate-950 font-heading mb-3">
+                  Dosage & Administration Protocol
+                </h2>
+                <p className="text-base text-slate-950 font-bold leading-relaxed bg-slate-100 p-6 rounded-3xl border-2 border-slate-200">
+                  {product.dosage}
+                </p>
+              </div>
+
+              {/* Warnings & Precautions */}
+              <div className="pt-8 border-t-2 border-slate-200">
+                <h2 className="text-2xl font-black text-slate-950 font-heading mb-4 flex items-center gap-2 text-amber-800">
+                  <AlertCircle className="w-5 h-5" />
+                  <span>Precautions, Warnings & Contraindications</span>
+                </h2>
+                <div className="space-y-2.5">
+                  {product.warnings.map((warn, idx) => (
+                    <div
+                      key={idx}
+                      className="flex items-start gap-3 text-sm font-bold text-slate-950 bg-amber-50/90 border-2 border-amber-200 p-4 rounded-2xl"
+                    >
+                      <span className="text-amber-700 font-black text-base mt-0.5 shrink-0">!</span>
+                      <span>{warn}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
-                <Link
-                  href="/business-enquiry"
-                  className="inline-flex items-center gap-2 px-6 py-3.5 rounded-lg bg-[#F87901] hover:bg-[#e06c00] text-white font-bold text-sm transition-colors shadow-md shadow-[#F87901]/20"
-                >
-                  Request Bulk / Hospital Supply
-                </Link>
-                <button
-                  type="button"
-                  className="inline-flex items-center gap-2 px-5 py-3.5 rounded-lg border border-slate-300 hover:bg-slate-100 text-slate-800 font-semibold text-sm transition-colors"
-                >
-                  <FileDown className="w-4 h-4 text-[#005EB1]" />
-                  <span>Download Prescribing Leaflet</span>
-                </button>
+              {/* Storage & Shelf Life */}
+              <div className="pt-8 border-t-2 border-slate-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 text-xs font-black text-slate-950 bg-slate-100 p-6 rounded-3xl border-2 border-slate-300">
+                <div>
+                  <span className="text-slate-700 uppercase tracking-wider font-extrabold">Storage & Handling: </span>
+                  <span className="text-slate-950 font-black">{product.storage}</span>
+                </div>
+                <div className="shrink-0 flex items-center gap-2 text-emerald-800 font-black text-sm">
+                  <ShieldCheck className="w-5 h-5 text-emerald-600" />
+                  <span>WHO-GMP Controlled Release Batch</span>
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-
-        {/* Clinical Monograph Tabs / Content */}
-        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="bg-white rounded-2xl border border-slate-200 p-8 sm:p-12 shadow-sm space-y-10">
-            {/* Indications */}
-            <div>
-              <h2 className="text-xl font-extrabold text-slate-900 font-heading mb-4 flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-[#005EB1]" />
-                Therapeutic Indications
-              </h2>
-              <ul className="space-y-2">
-                {product.indications.map((ind, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-700">
-                    <span className="text-[#005EB1] font-bold mt-0.5">•</span>
-                    <span>{ind}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Mechanism of Action */}
-            <div className="pt-8 border-t border-slate-100">
-              <h2 className="text-xl font-extrabold text-slate-900 font-heading mb-3 flex items-center gap-2">
-                <Info className="w-5 h-5 text-[#005EB1]" />
-                Clinical Mechanism of Action
-              </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                {product.mechanism}
-              </p>
-            </div>
-
-            {/* Dosage & Administration */}
-            <div className="pt-8 border-t border-slate-100">
-              <h2 className="text-xl font-extrabold text-slate-900 font-heading mb-3">
-                Dosage & Administration Guidelines
-              </h2>
-              <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
-                {product.dosage}
-              </p>
-            </div>
-
-            {/* Warnings & Precautions */}
-            <div className="pt-8 border-t border-slate-100">
-              <h2 className="text-xl font-extrabold text-slate-900 font-heading mb-4 flex items-center gap-2 text-amber-700">
-                <AlertCircle className="w-5 h-5" />
-                Precautions & Contraindications
-              </h2>
-              <ul className="space-y-2">
-                {product.warnings.map((warn, idx) => (
-                  <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-700">
-                    <span className="text-amber-600 font-bold mt-0.5">!</span>
-                    <span>{warn}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Storage */}
-            <div className="pt-8 border-t border-slate-100">
-              <h2 className="text-base font-bold text-slate-900 mb-1">
-                Storage & Stability
-              </h2>
-              <p className="text-sm text-slate-600">
-                {product.storage}
-              </p>
-            </div>
-          </div>
-        </section>
+          </section>
+        </ProductDetailProvider>
       </main>
       <Footer />
     </>

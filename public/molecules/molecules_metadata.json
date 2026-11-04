@@ -1,0 +1,362 @@
+{
+  "pregabalin": {
+    "cid": 5486971,
+    "name": "Pregabalin",
+    "formula": "C8H17NO2",
+    "mw": "159.23 g/mol",
+    "file": "/molecules/pregabalin.png",
+    "bytes": 1897
+  },
+  "methylcobalamin": {
+    "cid": 44120302,
+    "name": "Methylcobalamin",
+    "formula": "C63H91CoN13O14P",
+    "mw": "1344.4 g/mol",
+    "file": "/molecules/methylcobalamin.png",
+    "bytes": 3860
+  },
+  "nortriptyline": {
+    "cid": 4543,
+    "name": "Nortriptyline",
+    "formula": "C19H21N",
+    "mw": "263.38 g/mol",
+    "file": "/molecules/nortriptyline.png",
+    "bytes": 3115
+  },
+  "benfotiamine": {
+    "cid": 3032771,
+    "name": "Benfotiamine",
+    "formula": "C19H23N4O6PS",
+    "mw": "466.4 g/mol",
+    "file": "/molecules/benfotiamine.png",
+    "bytes": 3703
+  },
+  "alpha-lipoic-acid": {
+    "cid": 864,
+    "name": "Alpha Lipoic Acid",
+    "formula": "C8H14O2S2",
+    "mw": "206.33 g/mol",
+    "file": "/molecules/alpha-lipoic-acid.png",
+    "bytes": 2401
+  },
+  "folic-acid": {
+    "cid": 135398658,
+    "name": "Folic Acid",
+    "formula": "C19H19N7O6",
+    "mw": "441.4 g/mol",
+    "file": "/molecules/folic-acid.png",
+    "bytes": 2900
+  },
+  "niacinamide": {
+    "cid": 936,
+    "name": "Niacinamide",
+    "formula": "C6H6N2O",
+    "mw": "122.12 g/mol",
+    "file": "/molecules/niacinamide.png",
+    "bytes": 1953
+  },
+  "inositol": {
+    "cid": 892,
+    "name": "Myo-Inositol",
+    "formula": "C6H12O6",
+    "mw": "180.16 g/mol",
+    "file": "/molecules/inositol.png",
+    "bytes": 1902
+  },
+  "choline": {
+    "cid": 305,
+    "name": "Choline",
+    "formula": "C5H14NO+",
+    "mw": "104.17 g/mol",
+    "file": "/molecules/choline.png",
+    "bytes": 1579
+  },
+  "pyridoxine": {
+    "cid": 1054,
+    "name": "Pyridoxine (Vit B6)",
+    "formula": "C8H11NO3",
+    "mw": "169.18 g/mol",
+    "file": "/molecules/pyridoxine.png",
+    "bytes": 2245
+  },
+  "l-arginine": {
+    "cid": 6322,
+    "name": "L-Arginine",
+    "formula": "C6H14N4O2",
+    "mw": "174.20 g/mol",
+    "file": "/molecules/l-arginine.png",
+    "bytes": 2378
+  },
+  "aceclofenac": {
+    "cid": 71771,
+    "name": "Aceclofenac",
+    "formula": "C16H13Cl2NO4",
+    "mw": "354.18 g/mol",
+    "file": "/molecules/aceclofenac.png",
+    "bytes": 2985
+  },
+  "paracetamol": {
+    "cid": 1983,
+    "name": "Paracetamol",
+    "formula": "C8H9NO2",
+    "mw": "151.16 g/mol",
+    "file": "/molecules/paracetamol.png",
+    "bytes": 2094
+  },
+  "thiocolchicoside": {
+    "cid": 9809493,
+    "name": "Thiocolchicoside",
+    "formula": "C27H33NO10S",
+    "mw": "563.6 g/mol",
+    "file": "/molecules/thiocolchicoside.png",
+    "bytes": 3251
+  },
+  "rutin": {
+    "cid": 5280805,
+    "name": "Rutoside Trihydrate",
+    "formula": "C27H30O16",
+    "mw": "610.5 g/mol",
+    "file": "/molecules/rutin.png",
+    "bytes": 3778
+  },
+  "diclofenac": {
+    "cid": 3033,
+    "name": "Diclofenac",
+    "formula": "C14H11Cl2NO2",
+    "mw": "295.14 g/mol",
+    "file": "/molecules/diclofenac.png",
+    "bytes": 3069
+  },
+  "nimesulide": {
+    "cid": 4495,
+    "name": "Nimesulide",
+    "formula": "C13H12N2O5S",
+    "mw": "308.31 g/mol",
+    "file": "/molecules/nimesulide.png",
+    "bytes": 3497
+  },
+  "menthol": {
+    "cid": 16666,
+    "name": "L-Menthol",
+    "formula": "C10H20O",
+    "mw": "156.27 g/mol",
+    "file": "/molecules/menthol.png",
+    "bytes": 1812
+  },
+  "methyl-salicylate": {
+    "cid": 4133,
+    "name": "Methyl Salicylate",
+    "formula": "C8H8O3",
+    "mw": "152.15 g/mol",
+    "file": "/molecules/methyl-salicylate.png",
+    "bytes": 1835
+  },
+  "calcitriol": {
+    "cid": 5280453,
+    "name": "Calcitriol (1,25-DHVD3)",
+    "formula": "C27H44O3",
+    "mw": "416.6 g/mol",
+    "file": "/molecules/calcitriol.png",
+    "bytes": 3167
+  },
+  "calcium-carbonate": {
+    "cid": 10112,
+    "name": "Calcium Carbonate",
+    "formula": "CCaO3",
+    "mw": "100.09 g/mol",
+    "file": "/molecules/calcium-carbonate.png",
+    "bytes": 1353
+  },
+  "vitamin-k2-7": {
+    "cid": 5360980,
+    "name": "Menaquinone-7 (Vit K2)",
+    "formula": "C46H64O2",
+    "mw": "649.0 g/mol",
+    "file": "/molecules/vitamin-k2-7.png",
+    "bytes": 2356
+  },
+  "pantoprazole": {
+    "cid": 4679,
+    "name": "Pantoprazole",
+    "formula": "C16H15F2N3O4S",
+    "mw": "383.37 g/mol",
+    "file": "/molecules/pantoprazole.png",
+    "bytes": 2590
+  },
+  "domperidone": {
+    "cid": 3151,
+    "name": "Domperidone",
+    "formula": "C22H24ClN5O2",
+    "mw": "425.9 g/mol",
+    "file": "/molecules/domperidone.png",
+    "bytes": 3912
+  },
+  "rabeprazole": {
+    "cid": 5029,
+    "name": "Rabeprazole",
+    "formula": "C18H21N3O3S",
+    "mw": "359.4 g/mol",
+    "file": "/molecules/rabeprazole.png",
+    "bytes": 2414
+  },
+  "levosulpiride": {
+    "cid": 65860,
+    "name": "Levosulpiride",
+    "formula": "C15H23N3O4S",
+    "mw": "341.4 g/mol",
+    "file": "/molecules/levosulpiride.png",
+    "bytes": 2556
+  },
+  "proanthocyanidin": {
+    "cid": 108065,
+    "name": "Proanthocyanidin B1",
+    "formula": "C30H26O12",
+    "mw": "578.5 g/mol",
+    "file": "/molecules/proanthocyanidin.png",
+    "bytes": 3928
+  },
+  "ferrous-ascorbate": {
+    "cid": 16212154,
+    "name": "Iron Ascorbate",
+    "formula": "C12H14FeO12",
+    "mw": "406.08 g/mol",
+    "file": "/molecules/ferrous-ascorbate.png",
+    "bytes": 2919
+  },
+  "ambroxol": {
+    "cid": 2132,
+    "name": "Ambroxol",
+    "formula": "C13H18Br2N2O",
+    "mw": "378.10 g/mol",
+    "file": "/molecules/ambroxol.png",
+    "bytes": 2556
+  },
+  "guaiphenesin": {
+    "cid": 3516,
+    "name": "Guaiphenesin",
+    "formula": "C10H14O4",
+    "mw": "198.22 g/mol",
+    "file": "/molecules/guaiphenesin.png",
+    "bytes": 2132
+  },
+  "terbutaline": {
+    "cid": 5403,
+    "name": "Terbutaline",
+    "formula": "C12H19NO3",
+    "mw": "225.28 g/mol",
+    "file": "/molecules/terbutaline.png",
+    "bytes": 2664
+  },
+  "dextromethorphan": {
+    "cid": 5360696,
+    "name": "Dextromethorphan",
+    "formula": "C18H25NO",
+    "mw": "271.4 g/mol",
+    "file": "/molecules/dextromethorphan.png",
+    "bytes": 3469
+  },
+  "phenylephrine": {
+    "cid": 6041,
+    "name": "Phenylephrine",
+    "formula": "C9H13NO2",
+    "mw": "167.21 g/mol",
+    "file": "/molecules/phenylephrine.png",
+    "bytes": 2302
+  },
+  "chlorpheniramine": {
+    "cid": 2725,
+    "name": "Chlorpheniramine",
+    "formula": "C16H19ClN2",
+    "mw": "274.79 g/mol",
+    "file": "/molecules/chlorpheniramine.png",
+    "bytes": 2515
+  },
+  "montelukast": {
+    "cid": 5281040,
+    "name": "Montelukast",
+    "formula": "C35H36ClNO3S",
+    "mw": "586.2 g/mol",
+    "file": "/molecules/montelukast.png",
+    "bytes": 3804
+  },
+  "levocetirizine": {
+    "cid": 154900,
+    "name": "Levocetirizine",
+    "formula": "C21H25ClN2O3",
+    "mw": "388.9 g/mol",
+    "file": "/molecules/levocetirizine.png",
+    "bytes": 1986
+  },
+  "nitrofurantoin": {
+    "cid": 6604200,
+    "name": "Nitrofurantoin",
+    "formula": "C8H6N4O5",
+    "mw": "238.16 g/mol",
+    "file": "/molecules/nitrofurantoin.png",
+    "bytes": 3498
+  },
+  "ofloxacin": {
+    "cid": 4583,
+    "name": "Ofloxacin",
+    "formula": "C18H20FN3O4",
+    "mw": "361.37 g/mol",
+    "file": "/molecules/ofloxacin.png",
+    "bytes": 3656
+  },
+  "ornidazole": {
+    "cid": 28061,
+    "name": "Ornidazole",
+    "formula": "C7H10ClN3O3",
+    "mw": "219.62 g/mol",
+    "file": "/molecules/ornidazole.png",
+    "bytes": 3070
+  },
+  "clotrimazole": {
+    "cid": 2812,
+    "name": "Clotrimazole",
+    "formula": "C22H17ClN2",
+    "mw": "344.8 g/mol",
+    "file": "/molecules/clotrimazole.png",
+    "bytes": 3671
+  },
+  "beclomethasone": {
+    "cid": 21700,
+    "name": "Beclomethasone",
+    "formula": "C22H29ClO5",
+    "mw": "408.9 g/mol",
+    "file": "/molecules/beclomethasone.png",
+    "bytes": 3755
+  },
+  "neomycin": {
+    "cid": 8378,
+    "name": "Neomycin B",
+    "formula": "C23H46N6O13",
+    "mw": "614.6 g/mol",
+    "file": "/molecules/neomycin.png",
+    "bytes": 4272
+  },
+  "deflazacort": {
+    "cid": 189821,
+    "name": "Deflazacort",
+    "formula": "C25H31NO6",
+    "mw": "441.5 g/mol",
+    "file": "/molecules/deflazacort.png",
+    "bytes": 4243
+  },
+  "lycopene": {
+    "cid": 446925,
+    "name": "Lycopene",
+    "formula": "C40H56",
+    "mw": "536.9 g/mol",
+    "file": "/molecules/lycopene.png",
+    "bytes": 1006
+  },
+  "ginkgolide": {
+    "cid": 9909166,
+    "name": "Ginkgolide B",
+    "formula": "C20H24O10",
+    "mw": "424.4 g/mol",
+    "file": "/molecules/ginkgolide.png",
+    "bytes": 4070
+  }
+}

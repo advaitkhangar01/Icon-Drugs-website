@@ -1,10 +1,25 @@
 import React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Handshake, Building2, Globe2 } from "lucide-react";
 
 export default function PartnershipCTA() {
   return (
-    <section className="relative py-24 bg-[#00477F] text-white overflow-hidden">
+    <section className="relative py-24 text-white overflow-hidden bg-[#002B52]">
+      {/* Background Image with Gentle Scrim */}
+      <Image
+        src="/backgrounds/partnership-bg.jpg"
+        alt="Modern pharmaceutical enterprise manufacturing and logistics facility"
+        fill
+        sizes="100vw"
+        className="object-cover object-center brightness-95 opacity-80 pointer-events-none"
+        priority={false}
+      />
+      <div
+        className="absolute inset-0 bg-[#001D38]/60"
+        aria-hidden="true"
+      />
+
       {/* Decorative brand geometry arcs */}
       <div
         className="absolute right-0 top-0 w-96 h-96 rounded-full border border-white/10 translate-x-1/3 -translate-y-1/3 pointer-events-none"

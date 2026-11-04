@@ -33,25 +33,25 @@ export default function QuickStatsPanel() {
   }, []);
 
   return (
-    <section ref={containerRef} className="relative z-20 -mt-10 sm:-mt-14 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="bg-white rounded-2xl shadow-[0_15px_40px_rgba(0,94,177,0.08)] border border-slate-200/90 p-8 sm:p-10 lg:p-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+    <section ref={containerRef} className="relative z-20 -mt-6 sm:-mt-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="bg-white rounded-2xl shadow-[0_12px_36px_rgba(0,94,177,0.08)] border border-slate-200/90 py-5 sm:py-6 px-4 sm:px-8 lg:px-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 divide-slate-100 sm:divide-x">
           {quickStats.map((stat, idx) => (
             <div
               key={idx}
               className={`stat-item flex flex-col justify-between ${
-                idx !== 0 ? "pt-6 sm:pt-0 sm:pl-6 lg:pl-8" : ""
-              }`}
+                idx % 2 !== 0 ? "border-l border-slate-100 pl-4 sm:border-l-0 sm:pl-0" : ""
+              } ${idx > 0 ? "sm:pl-6 lg:pl-8" : ""}`}
             >
               <div>
-                <div className="text-4xl sm:text-5xl font-extrabold text-[#005EB1] tracking-tight font-heading mb-2">
+                <div className="text-2xl sm:text-4xl font-extrabold text-[#005EB1] tracking-tight font-heading mb-1">
                   {stat.value}
                 </div>
-                <div className="text-sm font-bold uppercase tracking-wider text-[#111111] mb-1">
+                <div className="text-[11px] sm:text-sm font-bold uppercase tracking-wider text-[#111111] leading-tight">
                   {stat.label}
                 </div>
               </div>
-              <p className="text-xs sm:text-sm text-[#555555] leading-relaxed mt-2">
+              <p className="text-[11px] sm:text-xs text-[#555555] leading-relaxed mt-1 line-clamp-2 sm:line-clamp-none">
                 {stat.description}
               </p>
             </div>
