@@ -145,7 +145,7 @@ export default function Header() {
                 {activeMegaMenu === "company" && (
                   <div className="absolute top-full left-0 w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 p-3 text-slate-900 transition-all duration-200 animate-in fade-in slide-in-from-top-2">
                     <Link
-                      href="/#our-story"
+                      href="/about"
                       onClick={() => setActiveMegaMenu(null)}
                       className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group"
                     >
@@ -154,7 +154,7 @@ export default function Header() {
                       </div>
                       <div>
                         <div className="text-xs font-bold text-slate-900 group-hover:text-[#005EB1]">
-                          Heritage & Story
+                          About Us &amp; Heritage
                         </div>
                         <div className="text-[11px] text-slate-500">
                           25+ years of manufacturing pedigree
@@ -163,25 +163,7 @@ export default function Header() {
                     </Link>
 
                     <Link
-                      href="/#milestones"
-                      onClick={() => setActiveMegaMenu(null)}
-                      className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group"
-                    >
-                      <div className="w-8 h-8 rounded-lg bg-[#005EB1]/10 text-[#005EB1] flex items-center justify-center shrink-0 group-hover:bg-[#005EB1] group-hover:text-white transition-colors">
-                        <Sparkles className="w-4 h-4" />
-                      </div>
-                      <div>
-                        <div className="text-xs font-bold text-slate-900 group-hover:text-[#005EB1]">
-                          Milestones & Timeline
-                        </div>
-                        <div className="text-[11px] text-slate-500">
-                          From foundation in 2002 to present
-                        </div>
-                      </div>
-                    </Link>
-
-                    <Link
-                      href="/#quality"
+                      href="/quality"
                       onClick={() => setActiveMegaMenu(null)}
                       className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group"
                     >
@@ -190,10 +172,28 @@ export default function Header() {
                       </div>
                       <div>
                         <div className="text-xs font-bold text-slate-900 group-hover:text-[#005EB1]">
-                          Quality & Safety Systems
+                          Quality &amp; Safety Systems
                         </div>
                         <div className="text-[11px] text-slate-500">
-                          WHO-GMP, HPLC assay & sterile lines
+                          WHO-GMP, HPLC assay &amp; sterile lines
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/contact"
+                      onClick={() => setActiveMegaMenu(null)}
+                      className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-[#005EB1]/10 text-[#005EB1] flex items-center justify-center shrink-0 group-hover:bg-[#005EB1] group-hover:text-white transition-colors">
+                        <Phone className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-slate-900 group-hover:text-[#005EB1]">
+                          Contact &amp; Headquarters
+                        </div>
+                        <div className="text-[11px] text-slate-500">
+                          Nagpur corporate office &amp; hotlines
                         </div>
                       </div>
                     </Link>
@@ -411,25 +411,37 @@ export default function Header() {
                     Enterprise
                   </div>
                   <Link
-                    href="/#our-story"
+                    href="/about"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
                   >
                     <span className="flex items-center gap-2.5">
                       <Building2 className="w-4 h-4 text-slate-600" />
-                      <span>Company Heritage & Story</span>
+                      <span>About Us &amp; Heritage</span>
                     </span>
                     <ChevronRight className="w-4 h-4 text-slate-400" />
                   </Link>
 
                   <Link
-                    href="/#quality"
+                    href="/quality"
                     onClick={() => setIsMobileMenuOpen(false)}
                     className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
                   >
                     <span className="flex items-center gap-2.5">
                       <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                      <span>Quality & WHO-GMP Systems</span>
+                      <span>Quality &amp; WHO-GMP Systems</span>
+                    </span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
+
+                  <Link
+                    href="/contact"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
+                  >
+                    <span className="flex items-center gap-2.5">
+                      <Phone className="w-4 h-4 text-[#005EB1]" />
+                      <span>Contact &amp; Nagpur Office</span>
                     </span>
                     <ChevronRight className="w-4 h-4 text-slate-400" />
                   </Link>

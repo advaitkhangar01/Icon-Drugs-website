@@ -50,28 +50,28 @@ export default function Footer() {
             </h3>
             <ul className="space-y-2.5 text-sm text-slate-300">
               <li>
-                <Link href="/#our-story" className="hover:text-white transition-colors">
-                  Heritage & Story
+                <Link href="/about" className="hover:text-white transition-colors">
+                  Heritage &amp; Story (About Us)
                 </Link>
               </li>
               <li>
-                <Link href="/#milestones" className="hover:text-white transition-colors">
-                  Historical Milestones
-                </Link>
-              </li>
-              <li>
-                <Link href="/#quality" className="hover:text-white transition-colors">
-                  Quality Management
+                <Link href="/quality" className="hover:text-white transition-colors">
+                  Quality Management &amp; WHO-GMP
                 </Link>
               </li>
               <li>
                 <Link href="/healthcare-professionals" className="hover:text-white transition-colors">
-                  HCP Portal & Standards
+                  HCP Portal &amp; Standards
                 </Link>
               </li>
               <li>
                 <Link href="/insights" className="hover:text-white transition-colors">
-                  News & Insights
+                  News &amp; Scientific Insights
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-white transition-colors">
+                  Contact &amp; Nagpur Office
                 </Link>
               </li>
             </ul>
@@ -119,7 +119,7 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2">
                 <MapPin className="w-4 h-4 text-[#F87901] shrink-0" />
-                <span>Pharma Industrial Zone Complex</span>
+                <span>Nagpur, Maharashtra, India</span>
               </div>
             </div>
             <Link
@@ -133,7 +133,7 @@ export default function Footer() {
 
         {/* Bottom Disclaimers & Copyright */}
         <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-slate-400 gap-4">
-          <p>© {new Date().getFullYear()} Icon Drugs. All rights reserved. For informational purposes only.</p>
+          <p>© {new Date().getFullYear()} Icon Drugs Private Limited. All rights reserved. For informational purposes only.</p>
           <div className="flex flex-wrap gap-6">
             <Link href="/privacy" className="hover:text-white transition-colors">
               Privacy Policy
@@ -142,7 +142,10 @@ export default function Footer() {
               Terms of Use
             </Link>
             <Link href="/disclaimer" className="hover:text-white transition-colors">
-              Medical & Regulatory Disclaimer
+              Medical &amp; Regulatory Disclaimer
+            </Link>
+            <Link href="/sitemap" className="hover:text-white transition-colors">
+              HTML Sitemap
             </Link>
           </div>
         </div>

@@ -3,56 +3,60 @@ import { productsData, therapyAreasData, healthConditionsData, insightsData } fr
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://icondrugs.com";
+  const buildDate = new Date();
 
-  const staticRoutes = [
-    "",
-    "/therapeutic-areas",
-    "/products",
-    "/health",
-    "/healthcare-professionals",
-    "/insights",
-    "/business-enquiry",
-    "/search",
-    "/privacy",
-    "/terms",
-    "/disclaimer",
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: new Date(),
-    changeFrequency: "weekly" as const,
-    priority: route === "" ? 1.0 : 0.8,
+  const coreRoutes = [
+    { route: "", changeFrequency: "weekly" as const, priority: 1.0 },
+    { route: "/about", changeFrequency: "monthly" as const, priority: 0.8 },
+    { route: "/quality", changeFrequency: "monthly" as const, priority: 0.8 },
+    { route: "/contact", changeFrequency: "monthly" as const, priority: 0.8 },
+    { route: "/products", changeFrequency: "weekly" as const, priority: 0.9 },
+    { route: "/therapeutic-areas", changeFrequency: "monthly" as const, priority: 0.8 },
+    { route: "/healthcare-professionals", changeFrequency: "monthly" as const, priority: 0.8 },
+    { route: "/business-enquiry", changeFrequency: "weekly" as const, priority: 0.9 },
+    { route: "/health", changeFrequency: "monthly" as const, priority: 0.7 },
+    { route: "/insights", changeFrequency: "weekly" as const, priority: 0.7 },
+    { route: "/sitemap", changeFrequency: "monthly" as const, priority: 0.5 },
+    { route: "/disclaimer", changeFrequency: "yearly" as const, priority: 0.4 },
+    { route: "/privacy", changeFrequency: "yearly" as const, priority: 0.3 },
+    { route: "/terms", changeFrequency: "yearly" as const, priority: 0.3 },
+  ].map((item) => ({
+    url: `${baseUrl}${item.route}`,
+    lastModified: buildDate,
+    changeFrequency: item.changeFrequency,
+    priority: item.priority,
   }));
 
   const therapyRoutes = therapyAreasData.map((t) => ({
     url: `${baseUrl}/therapeutic-areas/${t.slug}`,
-    lastModified: new Date(),
+    lastModified: buildDate,
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: 0.75,
   }));
 
   const productRoutes = productsData.map((p) => ({
     url: `${baseUrl}/products/${p.slug}`,
-    lastModified: new Date(),
+    lastModified: buildDate,
     changeFrequency: "monthly" as const,
-    priority: 0.7,
+    priority: 0.75,
   }));
 
   const healthRoutes = healthConditionsData.map((c) => ({
     url: `${baseUrl}/health/${c.slug}`,
-    lastModified: new Date(),
+    lastModified: buildDate,
     changeFrequency: "monthly" as const,
-    priority: 0.6,
+    priority: 0.65,
   }));
 
   const insightRoutes = insightsData.map((i) => ({
     url: `${baseUrl}/insights/${i.slug}`,
-    lastModified: new Date(),
+    lastModified: buildDate,
     changeFrequency: "monthly" as const,
-    priority: 0.6,
+    priority: 0.65,
   }));
 
   return [
-    ...staticRoutes,
+    ...coreRoutes,
     ...therapyRoutes,
     ...productRoutes,
     ...healthRoutes,

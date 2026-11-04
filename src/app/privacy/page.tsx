@@ -1,6 +1,15 @@
 import React from "react";
+import type { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy & Data Protection",
+  description: "Privacy policy, data protection standards, and confidential inquiry handling policies of Icon Drugs Private Limited, Nagpur, India.",
+  alternates: {
+    canonical: "https://icondrugs.com/privacy",
+  },
+};
 
 export default function PrivacyPolicyPage() {
   return (

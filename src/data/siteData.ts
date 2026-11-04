@@ -5,6 +5,7 @@
 
 export interface CompanyInfo {
   name: string;
+  legalName: string;
   tagline: string;
   heritageYears: string;
   foundedYear: string;
@@ -13,6 +14,12 @@ export interface CompanyInfo {
   marketsCount: string;
   certifications: string[];
   headquarters: string;
+  city: string;
+  state: string;
+  country: string;
+  phone: string;
+  email: string;
+  address: string;
 }
 
 export interface HeroSlide {
@@ -146,6 +153,7 @@ export interface QualityPillar {
 
 export const companyData: CompanyInfo = {
   name: "Icon Drugs",
+  legalName: "ICON DRUGS PRIVATE LIMITED",
   tagline: "Healthcare, built on experience.",
   heritageYears: "25+",
   foundedYear: "2002",
@@ -153,7 +161,13 @@ export const companyData: CompanyInfo = {
   productsCount: "25 Formulations",
   marketsCount: "25+",
   certifications: ["WHO-GMP Compliant", "ISO 9001:2015", "GLP Certified Labs", "DCGI Approved Formulations"],
-  headquarters: "Industrial Pharma Belt, State-of-the-Art Complex",
+  headquarters: "Nagpur, Maharashtra, India",
+  city: "Nagpur",
+  state: "Maharashtra",
+  country: "India",
+  phone: "+91 712 294 0128",
+  email: "business@icondrugs.com",
+  address: "Pharma Industrial Complex, Nagpur, Maharashtra 440001, India",
 };
 
 export const heroSlides: HeroSlide[] = [

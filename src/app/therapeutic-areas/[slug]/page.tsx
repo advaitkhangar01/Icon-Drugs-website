@@ -27,9 +27,46 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const area = therapyAreasData.find((a) => a.slug === slug);
   if (!area) return {};
+
+  const title = `${area.name} Formulations & Clinical Care | Icon Drugs`;
+  const description = `${area.fullDesc} Manufactured by Icon Drugs Private Limited under WHO-GMP compliance in Nagpur, Maharashtra.`;
+  const pageUrl = `https://icondrugs.com/therapeutic-areas/${area.slug}`;
+
   return {
-    title: `${area.name} Formulations & Clinical Care | Icon Drugs`,
-    description: area.shortDesc,
+    title,
+    description,
+    keywords: [
+      area.name,
+      ...area.conditions,
+      "Icon Drugs therapy portfolio",
+      "pharmaceutical formulations Nagpur",
+      "PCD pharma franchise Maharashtra",
+    ],
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: pageUrl,
+      siteName: "Icon Drugs",
+      images: [
+        {
+          url: "/icon-brand-mark.png",
+          width: 1200,
+          height: 630,
+          alt: `${area.name} — Icon Drugs Therapeutic Division`,
+        },
+      ],
+      locale: "en_IN",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/icon-brand-mark.png"],
+    },
   };
 }
 
@@ -58,8 +95,56 @@ export default async function TherapeuticAreaDetailPage({ params }: PageProps) {
 
   const relatedProducts = productsData.filter((p) => p.therapySlug === area.slug);
 
+  const therapyJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MedicalWebPage",
+        "@id": `https://icondrugs.com/therapeutic-areas/${area.slug}#webpage`,
+        "url": `https://icondrugs.com/therapeutic-areas/${area.slug}`,
+        "name": `${area.name} Formulations | Icon Drugs`,
+        "description": area.fullDesc,
+        "publisher": {
+          "@id": "https://icondrugs.com/#organization",
+        },
+        "about": {
+          "@type": "MedicalSpecialty",
+          "name": area.name,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `https://icondrugs.com/therapeutic-areas/${area.slug}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://icondrugs.com",
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Therapeutic Areas",
+            "item": "https://icondrugs.com/therapeutic-areas",
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": area.name,
+            "item": `https://icondrugs.com/therapeutic-areas/${area.slug}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(therapyJsonLd) }}
+      />
       <Header />
       <main id="main-content" className="flex-1 pt-24 pb-20 bg-slate-50/50">
         {/* Detail Hero Banner */}

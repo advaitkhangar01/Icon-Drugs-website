@@ -27,9 +27,42 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://icondrugs.com"),
-  title: "Icon Drugs | Healthcare, Built on Experience",
-  description: "25+ years of trusted pharmaceutical manufacturing, stringent quality assurance, and therapeutic excellence across cardiology, gastroenterology, respiratory, and anti-infectives.",
-  keywords: ["Icon Drugs", "Pharmaceuticals", "Pharma Manufacturer", "WHO-GMP", "Therapeutic Formulations", "Cardiovascular Care", "Generic Medicine"],
+  title: {
+    default: "Icon Drugs | Healthcare, Built on Experience | Nagpur, Maharashtra",
+    template: "%s | Icon Drugs",
+  },
+  description:
+    "Icon Drugs Private Limited — 25+ years of trusted pharmaceutical manufacturing, certified WHO-GMP & ISO 9001:2015 standards, and advanced therapeutic formulations across neurology, orthopedics, gastroenterology, respiratory, and anti-infectives in Nagpur, Maharashtra, India.",
+  keywords: [
+    "Icon Drugs",
+    "Icon Drugs Private Limited",
+    "Icon Drugs Nagpur",
+    "Pharmaceutical company in Nagpur",
+    "Pharmaceutical companies in Maharashtra",
+    "WHO-GMP pharma manufacturer",
+    "PCD pharma franchise Maharashtra",
+    "Prenerve capsules",
+    "Prenerve-NT",
+    "Rabicon DSR",
+    "Healthcare built on experience",
+  ],
+  authors: [{ name: "ICON DRUGS PRIVATE LIMITED", url: "https://icondrugs.com" }],
+  creator: "ICON DRUGS PRIVATE LIMITED",
+  publisher: "ICON DRUGS PRIVATE LIMITED",
+  alternates: {
+    canonical: "https://icondrugs.com",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
@@ -45,20 +78,114 @@ export const metadata: Metadata = {
   manifest: "/site.webmanifest",
   openGraph: {
     title: "Icon Drugs — Healthcare, Built on Experience",
-    description: "25+ years in pharmaceutical excellence, advanced manufacturing, and patient-centered therapies.",
+    description:
+      "Icon Drugs Private Limited — 25+ years in pharmaceutical formulation excellence, certified WHO-GMP manufacturing, and patient-centered therapies headquartered in Nagpur, Maharashtra, India.",
     url: "https://icondrugs.com",
     siteName: "Icon Drugs",
     images: [
       {
-        url: "/logo.png",
+        url: "/icon-brand-mark.png",
         width: 1200,
         height: 630,
-        alt: "Icon Drugs — Healthcare, Built on Experience",
+        alt: "Icon Drugs Private Limited — Pharmaceutical Formulations",
       },
     ],
-    locale: "en_US",
+    locale: "en_IN",
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Icon Drugs — Healthcare, Built on Experience",
+    description:
+      "25+ years of pharmaceutical manufacturing precision, WHO-GMP accredited formulations, and patient care across India.",
+    images: ["/icon-brand-mark.png"],
+  },
+};
+
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://icondrugs.com/#organization",
+      "name": "Icon Drugs",
+      "legalName": "ICON DRUGS PRIVATE LIMITED",
+      "url": "https://icondrugs.com",
+      "logo": "https://icondrugs.com/icon-brand-mark.png",
+      "description":
+        "Icon Drugs Private Limited is an Indian pharmaceutical manufacturing enterprise established in 2002, producing WHO-GMP certified therapeutic formulations in Nagpur, Maharashtra.",
+      "foundingDate": "2002",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Pharma Industrial Complex",
+        "addressLocality": "Nagpur",
+        "addressRegion": "Maharashtra",
+        "postalCode": "440001",
+        "addressCountry": "IN",
+      },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+91-712-294-0128",
+          "contactType": "customer service",
+          "email": "business@icondrugs.com",
+          "areaServed": "IN",
+          "availableLanguage": ["English", "Hindi", "Marathi"],
+        },
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/icon-drugs",
+      ],
+      "knowsAbout": [
+        "Pharmaceutical Manufacturing",
+        "WHO-GMP Formulations",
+        "Neurology Formulations",
+        "Orthopedics Formulations",
+        "Gastroenterology Formulations",
+        "PCD Pharma Franchise",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://icondrugs.com/#website",
+      "url": "https://icondrugs.com",
+      "name": "Icon Drugs",
+      "publisher": {
+        "@id": "https://icondrugs.com/#organization",
+      },
+      "inLanguage": "en-US",
+    },
+    {
+      "@type": "MedicalBusiness",
+      "@id": "https://icondrugs.com/#localbusiness",
+      "name": "Icon Drugs Private Limited",
+      "image": "https://icondrugs.com/icon-brand-mark.png",
+      "url": "https://icondrugs.com",
+      "telephone": "+91-712-294-0128",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Pharma Industrial Complex",
+        "addressLocality": "Nagpur",
+        "addressRegion": "Maharashtra",
+        "postalCode": "440001",
+        "addressCountry": "IN",
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 21.1458,
+        "longitude": 79.0882,
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+          "opens": "09:00",
+          "closes": "18:00",
+        },
+      ],
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -68,6 +195,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${manrope.variable} ${inter.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+        />
+      </head>
       <body className="min-h-screen flex flex-col bg-[#F7F9FB] text-[#111111] antialiased">
         <a
           href="#main-content"

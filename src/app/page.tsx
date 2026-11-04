@@ -15,9 +15,47 @@ import HomeFaqAccordion from "@/components/sections/HomeFaqAccordion";
 import InsightsTeaser from "@/components/sections/InsightsTeaser";
 import PartnershipCTA from "@/components/sections/PartnershipCTA";
 
+import { homeFaqData } from "@/data/siteData";
+
 export default function HomePage() {
+  const homeJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebPage",
+        "@id": "https://icondrugs.com/#webpage",
+        "url": "https://icondrugs.com",
+        "name": "Icon Drugs — Healthcare, Built on Experience | Nagpur, Maharashtra",
+        "description":
+          "Official corporate portal of Icon Drugs Private Limited. 25+ years of pharmaceutical formulation excellence, WHO-GMP certified facilities, and therapeutic leadership in Nagpur, Maharashtra.",
+        "isPartOf": {
+          "@id": "https://icondrugs.com/#website",
+        },
+        "about": {
+          "@id": "https://icondrugs.com/#organization",
+        },
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://icondrugs.com/#faq",
+        "mainEntity": homeFaqData.map((faq) => ({
+          "@type": "Question",
+          "name": faq.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": faq.answer,
+          },
+        })),
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLd) }}
+      />
       <Header />
       <main id="main-content" className="flex-1">
         {/* Full Viewport 4-Slide Hero Slider with clip-path & text reveal */}

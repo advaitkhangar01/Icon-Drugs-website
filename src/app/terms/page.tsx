@@ -1,6 +1,15 @@
 import React from "react";
+import type { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+
+export const metadata: Metadata = {
+  title: "Terms of Use & Legal Conditions",
+  description: "Terms of use, intellectual property, and institutional supply terms for accessing icondrugs.com.",
+  alternates: {
+    canonical: "https://icondrugs.com/terms",
+  },
+};
 
 export default function TermsPage() {
   return (

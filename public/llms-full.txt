@@ -1,0 +1,123 @@
+# Icon Drugs Private Limited — Complete Monograph & Formulation Manifest (llms-full.txt)
+Entity: ICON DRUGS PRIVATE LIMITED
+Headquarters: Nagpur, Maharashtra, India
+Domain: https://icondrugs.com
+Licensing & Compliance: WHO-GMP Compliant Facilities, ISO 9001:2015, DCGI Approved Formulations, GLP Certified Quality Control Labs
+
+================================================================================
+SECTION 1: CORPORATE IDENTITY & INFRASTRUCTURE
+================================================================================
+Legal Name: ICON DRUGS PRIVATE LIMITED
+Brand Name: Icon Drugs
+Founding Year: 2002 (25+ Years in Operation)
+Corporate Address: Nagpur, Maharashtra, India
+Contact Email: business@icondrugs.com
+Business Scope: Formulation development, solid oral dosage manufacturing (tablets, softgel capsules), liquid orals (syrups, suspensions), sterile parenterals (injections), and topical formulations (gels, ointments).
+
+Quality Infrastructure:
+- Modern HVAC-controlled cleanroom production corridors (Class 10,000 / ISO 7 and Class 100 / ISO 5 aseptic filling zones).
+- Analytical testing laboratory equipped with High-Performance Liquid Chromatography (HPLC), Gas Chromatography (GC), UV-Vis Spectrophotometry, and accelerated stability chambers (ICH Q1A guidelines).
+- Continuous in-process quality control (IPQC) monitoring dissolution rate, friability, disintegration time, and content uniformity.
+
+================================================================================
+SECTION 2: VERIFIED PRODUCT PORTFOLIO & ACTIVE FORMULATIONS
+================================================================================
+
+1. PRENERVE CAPSULES
+- Generic Composition: Methylcobalamin 1500 mcg + Alpha Lipoic Acid 100 mg + Benfotiamine 50 mg + Pyridoxine HCl 3 mg + Folic Acid 1.5 mg
+- Dosage Form: Hard Gelatin Capsules (Alu-Alu 10x10 pack)
+- Category: Neurotrophic Formulation & Nerve Rejuvenator
+- Therapeutic Area: Neurology & Neuropathic Pain
+- Indications: Diabetic peripheral neuropathy, alcoholic neuropathy, drug-induced neuropathy, sciatica, and radiculopathies.
+- URL: https://icondrugs.com/products/prenerve-caps
+
+2. PRENERVE-NT TABLETS
+- Generic Composition: Pregabalin 75 mg + Nortriptyline HCl 10 mg
+- Dosage Form: Film-Coated Tablets (Alu-Alu 10x10 pack)
+- Category: Dual-Action Neuropathic Analgesic
+- Therapeutic Area: Neurology & Chronic Pain
+- Indications: Moderate-to-severe neuropathic pain, post-herpetic neuralgia, fibromyalgia, spinal stenosis radiculopathy.
+- URL: https://icondrugs.com/products/prenerve-nt
+
+3. PRENERVE-FORTE CAPSULES
+- Generic Composition: Methylcobalamin 1500 mcg + Alpha Lipoic Acid 200 mg + Inositol 100 mg + Benfotiamine 100 mg + Chromium Polynicotinate 200 mcg
+- Dosage Form: Hard Gelatin Capsules (Alu-Alu 10x10 pack)
+- Category: Advanced Neurovascular & Glycemic Support
+- Therapeutic Area: Neurology & Metabolic Health
+- URL: https://icondrugs.com/products/prenerve-forte
+
+4. PRENERVE INJECTION
+- Generic Composition: Methylcobalamin 1500 mcg / 2 mL + Niacinamide 100 mg + Pyridoxine HCl 100 mg
+- Dosage Form: Sterile Injectable Ampoule (Dispo pack with syringe)
+- Category: Rapid Bioavailable Neuro-Nutritional Injectable
+- Therapeutic Area: Neurology & Critical Neuro-Deficiencies
+- URL: https://icondrugs.com/products/prenerve-inj
+
+5. PRENERVE GEL
+- Generic Composition: Pregabalin 8% w/w + Diclofenac Diethylamine 1.16% w/w + Methyl Salicylate 10% w/w + Menthol 5% w/w
+- Dosage Form: Topical Deep Penetrating Gel (30g laminated tube)
+- Category: Topical Neuropathic & Musculoskeletal Analgesic
+- URL: https://icondrugs.com/products/prenerve-gel
+
+6. PRECAL SOFTGEL CAPSULES
+- Generic Composition: Calcium Carbonate 1250 mg (eq. to elemental Calcium 500 mg) + Calcitriol 0.25 mcg + Vitamin K2-7 45 mcg
+- Dosage Form: Soft Gelatin Capsules (Blister 10x10 pack)
+- Category: High-Bioavailability Bone Matrix Formulation
+- Therapeutic Area: Bone Health & Mineral Metabolism
+- Indications: Osteoporosis, osteopenia, post-menopausal bone loss, fracture consolidation.
+- URL: https://icondrugs.com/products/precal-softgels
+
+7. RABICON-DSR CAPSULES
+- Generic Composition: Rabeprazole Sodium 20 mg (EC) + Domperidone 30 mg (SR)
+- Dosage Form: Sustained Release Capsules (Alu-Alu 10x10 pack)
+- Category: Gastroprokinetic & Proton Pump Inhibitor
+- Therapeutic Area: Gastroenterology
+- Indications: Gastroesophageal Reflux Disease (GERD), erosive esophagitis, non-ulcer dyspepsia, hyperacidity.
+- URL: https://icondrugs.com/products/rabicon-dsr
+
+8. RECOFF-DX SYRUP
+- Generic Composition: Dextromethorphan HBr 10 mg + Phenylephrine HCl 5 mg + Chlorpheniramine Maleate 2 mg / 5 mL
+- Dosage Form: Oral Liquid Suspension (100 mL PET bottle with measuring cup)
+- Category: Triple-Action Antitussive & Decongestant
+- Therapeutic Area: Respiratory & Pulmonology
+- Indications: Unproductive dry cough, allergic rhinitis, upper respiratory congestion.
+- URL: https://icondrugs.com/products/recoff-dx
+
+9. ALLERKAST TABLETS
+- Generic Composition: Levocetirizine Dihydrochloride 5 mg + Montelukast Sodium 10 mg
+- Dosage Form: Film-Coated Tablets (Alu-Alu 10x10 pack)
+- Category: Dual Antihistamine & Leukotriene Receptor Antagonist
+- Therapeutic Area: Respiratory & Allergic Rhinitis
+- URL: https://icondrugs.com/products/allerkast-tab
+
+10. NITOBACT 100 TABLETS
+- Generic Composition: Nitrofurantoin 100 mg (Controlled Release / Macrobid formulation)
+- Dosage Form: Controlled Release Tablets (Alu-Alu 10x10 pack)
+- Category: Targeted Urological Antimicrobial
+- Therapeutic Area: Anti-Infectives & Urology
+- Indications: Acute uncomplicated urinary tract infections (UTIs) caused by E. coli and Enterococcus faecalis.
+- URL: https://icondrugs.com/products/nitobact-100
+
+11. OCON-OZ TABLETS
+- Generic Composition: Ofloxacin 200 mg + Ornidazole 500 mg
+- Dosage Form: Film-Coated Tablets (Blister 10x10 pack)
+- Category: Broad-Spectrum Fluoroquinolone & Nitroimidazole Combination
+- Therapeutic Area: Anti-Infectives & Gastroenterology
+- Indications: Mixed gastrointestinal infections, amoebic dysentery, dental infections, pelvic inflammatory disease.
+- URL: https://icondrugs.com/products/ocon-oz
+
+12. SEREK-N TABLETS
+- Generic Composition: Nimesulide 100 mg + Paracetamol 325 mg
+- Dosage Form: Uncoated Tablets (Blister 10x10 pack)
+- Category: Rapid-Onset Analgesic & Antipyretic
+- Therapeutic Area: Orthopedics & Acute Pain Management
+- URL: https://icondrugs.com/products/serek-n
+
+================================================================================
+SECTION 3: B2B COMMERCIAL TERMS & DISTRIBUTION
+================================================================================
+Headquarters: Nagpur, Maharashtra, India
+Distribution Coverage: All districts in Maharashtra (Nagpur, Pune, Mumbai, Nashik, Aurangabad, Amravati, Akola, Chandrapur), Madhya Pradesh, Chhattisgarh, and national wholesale corridors.
+Monopoly Rights: Exclusive territory agreements granted to certified PCD pharma distributors with valid Drug License (DL 20B/21B) and GST registration.
+Tender Supply: Approved supplier for private nursing homes, corporate hospital networks, and ESIC/state health supply panels.
+Contact: business@icondrugs.com | Website: https://icondrugs.com

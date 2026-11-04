@@ -17,13 +17,70 @@ import {
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Healthcare Professionals Portal | Icon Drugs",
-  description: "Dedicated portal for physicians, surgeons, hospital formularies, and clinical procurement leads.",
+  title: "Healthcare Professionals (HCP) Portal & Prescribing Formularies",
+  description:
+    "Clinical portal for doctors, surgeons, hospital procurement committees, and clinical pharmacologists. Access DCGI-approved product monographs, bioequivalence summaries, and institutional supply terms from Icon Drugs Private Limited, Nagpur.",
+  keywords: [
+    "healthcare professionals portal",
+    "doctor medical affairs",
+    "hospital formulary supply",
+    "clinical monographs pharma",
+    "Icon Drugs doctors",
+    "pharma company Nagpur Maharashtra",
+  ],
+  alternates: {
+    canonical: "https://icondrugs.com/healthcare-professionals",
+  },
+  openGraph: {
+    title: "Healthcare Professionals Portal | Icon Drugs",
+    description:
+      "Direct access to clinical formularies, specialty portfolios, and hospital procurement channels for medical practitioners.",
+    url: "https://icondrugs.com/healthcare-professionals",
+    siteName: "Icon Drugs",
+    images: [
+      {
+        url: "/icon-brand-mark.png",
+        width: 1200,
+        height: 630,
+        alt: "Icon Drugs HCP Portal",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Healthcare Professionals Portal | Icon Drugs",
+    description:
+      "Dedicated portal for registered medical practitioners and hospital purchase officers.",
+    images: ["/icon-brand-mark.png"],
+  },
 };
 
 export default function HCPPortalPage() {
+  const hcpJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "@id": "https://icondrugs.com/healthcare-professionals#webpage",
+    "url": "https://icondrugs.com/healthcare-professionals",
+    "name": "Healthcare Professionals Portal | Icon Drugs",
+    "description":
+      "Dedicated portal for physicians, surgeons, hospital formularies, and clinical procurement leads.",
+    "publisher": {
+      "@id": "https://icondrugs.com/#organization",
+    },
+    "audience": {
+      "@type": "MedicalAudience",
+      "audienceType": "Healthcare Professionals",
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(hcpJsonLd) }}
+      />
       <Header />
       <main id="main-content" className="flex-1 pt-24 pb-20 bg-slate-50/50">
         {/* Banner */}

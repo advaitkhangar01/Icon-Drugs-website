@@ -32,9 +32,49 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const product = productsData.find((p) => p.slug === slug);
   if (!product) return {};
+  
+  const title = `${product.name} (${product.strength}) Clinical Monograph & Supply Terms | Icon Drugs`;
+  const description = `Prescribing monograph, active salt composition (${product.genericName}), dosage guidelines, clinical pharmacology, and commercial B2B supply terms for ${product.name} manufactured by Icon Drugs Private Limited, Nagpur.`;
+  const pageUrl = `https://icondrugs.com/products/${product.slug}`;
+  const imageUrl = product.image ? `https://icondrugs.com${product.image}` : "https://icondrugs.com/icon-brand-mark.png";
+
   return {
-    title: `${product.name} Clinical Monograph & Supply Terms | Icon Drugs`,
-    description: `Prescribing monograph, clinical pharmacology, active composition, 2D molecular structures, and commercial supply terms for ${product.name} (${product.genericName}).`,
+    title,
+    description,
+    keywords: [
+      product.name,
+      product.genericName,
+      product.category,
+      product.dosageForm,
+      "Icon Drugs product monograph",
+      "pharma manufacturer Nagpur",
+      "PCD franchise medicine supply",
+    ],
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: pageUrl,
+      siteName: "Icon Drugs",
+      images: [
+        {
+          url: imageUrl,
+          width: 800,
+          height: 600,
+          alt: `${product.name} — ${product.genericName} packaging and monograph`,
+        },
+      ],
+      locale: "en_IN",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [imageUrl],
+    },
   };
 }
 
@@ -55,8 +95,72 @@ export default async function ProductDetailPage({ params }: PageProps) {
   const commercialData = getProductCommercialData(product);
   const complementaryProducts = getComplementaryProducts(product);
 
+  const productJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Product",
+        "@id": `https://icondrugs.com/products/${product.slug}#product`,
+        "name": product.name,
+        "description": `${product.tagline}. Active generic composition: ${product.genericName}. Indicated for: ${product.indications.join(", ")}.`,
+        "image": product.image ? `https://icondrugs.com${product.image}` : "https://icondrugs.com/icon-brand-mark.png",
+        "category": product.category,
+        "brand": {
+          "@type": "Brand",
+          "name": "Icon Drugs",
+        },
+        "manufacturer": {
+          "@id": "https://icondrugs.com/#organization",
+        },
+        "offers": {
+          "@type": "Offer",
+          "url": `https://icondrugs.com/products/${product.slug}`,
+          "priceCurrency": "INR",
+          "price": "0.00",
+          "priceSpecification": {
+            "@type": "UnitPriceSpecification",
+            "priceType": "https://schema.org/B2BPrice",
+            "priceCurrency": "INR",
+          },
+          "availability": "https://schema.org/InStock",
+          "seller": {
+            "@id": "https://icondrugs.com/#organization",
+          },
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `https://icondrugs.com/products/${product.slug}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://icondrugs.com",
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Products",
+            "item": "https://icondrugs.com/products",
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": product.name,
+            "item": `https://icondrugs.com/products/${product.slug}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
       <Header />
       <main id="main-content" className="flex-1 pt-24 pb-28 lg:pb-20 bg-slate-100/70">
         <ProductDetailProvider

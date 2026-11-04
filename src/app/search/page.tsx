@@ -41,6 +41,10 @@ export default function SearchPage() {
 
   return (
     <>
+      <head>
+        <title>Search Formulations &amp; Health Resources | Icon Drugs</title>
+        <meta name="robots" content="noindex, follow" />
+      </head>
       <Header />
       <main id="main-content" className="flex-1 pt-24 pb-20">
         <section className="bg-[#00477F] text-white py-16">

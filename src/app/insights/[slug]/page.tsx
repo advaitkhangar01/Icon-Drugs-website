@@ -17,9 +17,47 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const article = insightsData.find((a) => a.slug === slug);
   if (!article) return {};
+
+  const title = `${article.title} | Icon Drugs Insights`;
+  const description = `${article.excerpt} Published by Icon Drugs Private Limited, Nagpur, Maharashtra.`;
+  const pageUrl = `https://icondrugs.com/insights/${article.slug}`;
+
   return {
-    title: `${article.title} | Icon Drugs Insights`,
-    description: article.excerpt,
+    title,
+    description,
+    keywords: [
+      article.category,
+      "pharmaceutical research",
+      "clinical monograph",
+      "manufacturing standards",
+      "Icon Drugs article",
+      "Nagpur pharma insights",
+    ],
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: pageUrl,
+      siteName: "Icon Drugs",
+      images: [
+        {
+          url: article.image || "/icon-brand-mark.png",
+          width: 1200,
+          height: 630,
+          alt: article.title,
+        },
+      ],
+      locale: "en_IN",
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [article.image || "/icon-brand-mark.png"],
+    },
   };
 }
 
@@ -37,8 +75,62 @@ export default async function InsightDetailPage({ params }: PageProps) {
     notFound();
   }
 
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Article",
+        "@id": `https://icondrugs.com/insights/${article.slug}#article`,
+        "headline": article.title,
+        "description": article.excerpt,
+        "image": article.image ? `https://icondrugs.com${article.image}` : "https://icondrugs.com/icon-brand-mark.png",
+        "datePublished": "2024-01-15T08:00:00+05:30",
+        "dateModified": "2026-11-01T12:00:00+05:30",
+        "author": {
+          "@type": "Person",
+          "name": article.author,
+        },
+        "publisher": {
+          "@id": "https://icondrugs.com/#organization",
+        },
+        "mainEntityOfPage": {
+          "@type": "WebPage",
+          "@id": `https://icondrugs.com/insights/${article.slug}`,
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `https://icondrugs.com/insights/${article.slug}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://icondrugs.com",
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Insights",
+            "item": "https://icondrugs.com/insights",
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": article.title,
+            "item": `https://icondrugs.com/insights/${article.slug}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <Header />
       <main id="main-content" className="flex-1 pt-24 pb-20">
         <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">

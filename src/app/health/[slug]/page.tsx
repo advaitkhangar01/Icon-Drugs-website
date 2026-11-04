@@ -16,9 +16,47 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const condition = healthConditionsData.find((c) => c.slug === slug);
   if (!condition) return {};
+
+  const title = `${condition.title} Symptoms & Clinical Management | Icon Drugs`;
+  const description = `${condition.overview} Evidence-based guide reviewed by Icon Drugs Scientific Advisory Board, Nagpur, Maharashtra.`;
+  const pageUrl = `https://icondrugs.com/health/${condition.slug}`;
+
   return {
-    title: `${condition.title} | Health Information | Icon Drugs`,
-    description: condition.overview,
+    title,
+    description,
+    keywords: [
+      condition.title,
+      condition.category,
+      ...condition.symptoms.slice(0, 4),
+      "disease overview",
+      "pharmacologic therapy",
+      "Icon Drugs health guide",
+    ],
+    alternates: {
+      canonical: pageUrl,
+    },
+    openGraph: {
+      title,
+      description,
+      url: pageUrl,
+      siteName: "Icon Drugs",
+      images: [
+        {
+          url: "/icon-brand-mark.png",
+          width: 1200,
+          height: 630,
+          alt: `${condition.title} Clinical Health Guide`,
+        },
+      ],
+      locale: "en_IN",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: ["/icon-brand-mark.png"],
+    },
   };
 }
 
@@ -40,8 +78,75 @@ export default async function ConditionDetailPage({ params }: PageProps) {
     condition.relatedProductIds.includes(p.id)
   );
 
+  const conditionJsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "MedicalCondition",
+        "@id": `https://icondrugs.com/health/${condition.slug}#condition`,
+        "name": condition.title,
+        "description": condition.overview,
+        "possibleTreatment": condition.management.map((m) => ({
+          "@type": "MedicalTherapy",
+          "name": m,
+        })),
+        "signOrSymptom": condition.symptoms.map((s) => ({
+          "@type": "MedicalSignOrSymptom",
+          "name": s,
+        })),
+        "riskFactor": condition.riskFactors.map((r) => ({
+          "@type": "MedicalRiskFactor",
+          "name": r,
+        })),
+      },
+      {
+        "@type": "MedicalWebPage",
+        "@id": `https://icondrugs.com/health/${condition.slug}#webpage`,
+        "url": `https://icondrugs.com/health/${condition.slug}`,
+        "name": `${condition.title} | Icon Drugs Health Guide`,
+        "description": condition.overview,
+        "reviewedBy": {
+          "@type": "Organization",
+          "name": "Icon Drugs Scientific Advisory Board",
+          "url": "https://icondrugs.com/#organization",
+        },
+        "publisher": {
+          "@id": "https://icondrugs.com/#organization",
+        },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": `https://icondrugs.com/health/${condition.slug}#breadcrumb`,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://icondrugs.com",
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Health Information",
+            "item": "https://icondrugs.com/health",
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": condition.title,
+            "item": `https://icondrugs.com/health/${condition.slug}`,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(conditionJsonLd) }}
+      />
       <Header />
       <main id="main-content" className="flex-1 pt-24 pb-20">
         {/* Banner */}

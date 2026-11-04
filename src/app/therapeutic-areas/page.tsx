@@ -7,13 +7,78 @@ import { ArrowRight, Activity, ChevronRight } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Therapeutic Areas | Icon Drugs",
-  description: "Explore Icon Drugs' specialized therapeutic portfolios across cardiovascular, neurology, gastroenterology, respiratory, and anti-infectives.",
+  title: "Therapeutic Areas & Specialized Medical Portfolios",
+  description:
+    "Explore Icon Drugs' 10 core therapeutic focus areas spanning neurology, orthopedics, gastroenterology, pulmonology, bone health, and anti-infectives. Precision formulations manufactured under WHO-GMP compliance in Nagpur, India.",
+  keywords: [
+    "therapeutic areas",
+    "neurology formulations",
+    "orthopedic medicines",
+    "gastroenterology drugs",
+    "pulmonology cough formulations",
+    "anti infectives urology",
+    "Icon Drugs therapies",
+    "pharma company Nagpur",
+  ],
+  alternates: {
+    canonical: "https://icondrugs.com/therapeutic-areas",
+  },
+  openGraph: {
+    title: "Therapeutic Areas & Specialized Medical Portfolios | Icon Drugs",
+    description:
+      "Explore 10 specialized therapeutic categories manufactured by Icon Drugs Private Limited with stringent pharmacopeial validation in Nagpur, Maharashtra.",
+    url: "https://icondrugs.com/therapeutic-areas",
+    siteName: "Icon Drugs",
+    images: [
+      {
+        url: "/icon-brand-mark.png",
+        width: 1200,
+        height: 630,
+        alt: "Icon Drugs Therapeutic Portfolios",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Therapeutic Areas | Icon Drugs",
+    description:
+      "10 specialized medical segments formulated under WHO-GMP standards for patient health outcomes.",
+    images: ["/icon-brand-mark.png"],
+  },
 };
 
 export default function TherapeuticAreasPage() {
+  const therapyJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "@id": "https://icondrugs.com/therapeutic-areas#webpage",
+    "url": "https://icondrugs.com/therapeutic-areas",
+    "name": "Therapeutic Areas & Medical Portfolios | Icon Drugs",
+    "description":
+      "Overview of 10 therapeutic divisions developed and manufactured by Icon Drugs Private Limited, Nagpur, India.",
+    "publisher": {
+      "@id": "https://icondrugs.com/#organization",
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": therapyAreasData.map((area, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "name": area.name,
+        "url": `https://icondrugs.com/therapeutic-areas/${area.slug}`,
+        "description": area.shortDesc,
+      })),
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(therapyJsonLd) }}
+      />
       <Header />
       <main id="main-content" className="flex-1 pt-24 pb-20">
         {/* Banner */}

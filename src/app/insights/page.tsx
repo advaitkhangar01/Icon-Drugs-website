@@ -8,13 +8,76 @@ import { ChevronRight, ArrowRight, Calendar } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Insights & Press Releases | Icon Drugs",
-  description: "Pharmaceutical innovations, regulatory developments, and clinical formulation advancements from the Icon Drugs technical desk.",
+  title: "Pharmaceutical Insights, Clinical Science & Industry News",
+  description:
+    "Explore clinical formulation advancements, aseptic manufacturing standards, polymorphism bioavailability, and pharmaceutical supply chain insights from Icon Drugs Private Limited, Nagpur.",
+  keywords: [
+    "pharmaceutical insights",
+    "aseptic injectable standards",
+    "polymorphism bioavailability",
+    "pharma supply chain",
+    "Icon Drugs news",
+    "Nagpur pharmaceutical company",
+  ],
+  alternates: {
+    canonical: "https://icondrugs.com/insights",
+  },
+  openGraph: {
+    title: "Pharmaceutical Insights, Clinical Science & Industry News | Icon Drugs",
+    description:
+      "Technical perspectives on chemical purity, formulation science, and quality validations from the Icon Drugs scientific team in Nagpur, Maharashtra.",
+    url: "https://icondrugs.com/insights",
+    siteName: "Icon Drugs",
+    images: [
+      {
+        url: "/icon-brand-mark.png",
+        width: 1200,
+        height: 630,
+        alt: "Icon Drugs Scientific Insights",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Pharmaceutical Insights | Icon Drugs",
+    description:
+      "In-depth articles covering aseptic processing, bioavailability, and hospital supply chain integrity.",
+    images: ["/icon-brand-mark.png"],
+  },
 };
 
 export default function InsightsPage() {
+  const insightsJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://icondrugs.com/insights#webpage",
+    "url": "https://icondrugs.com/insights",
+    "name": "Insights & Technical Perspectives | Icon Drugs",
+    "description":
+      "Articles covering pharmaceutical chemical purity, quality system validations, and healthcare supply chain resilience.",
+    "publisher": {
+      "@id": "https://icondrugs.com/#organization",
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": insightsData.map((article, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "name": article.title,
+        "url": `https://icondrugs.com/insights/${article.slug}`,
+        "description": article.excerpt,
+      })),
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(insightsJsonLd) }}
+      />
       <Header />
       <main id="main-content" className="flex-1 pt-24 pb-20">
         {/* Banner */}

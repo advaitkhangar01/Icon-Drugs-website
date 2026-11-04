@@ -7,13 +7,77 @@ import { ChevronRight, FileText, ArrowRight, ShieldAlert } from "lucide-react";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Health Information & Clinical Disease Education | Icon Drugs",
-  description: "Evidence-based health condition overviews, symptom matrices, and management guidelines for patients and caregivers.",
+  title: "Evidence-Based Health Information & Disease Guides",
+  description:
+    "Explore clinical disease education, symptom matrices, etiology, and pharmacologic management guidelines across neuropathic pain, osteoarthritis, acid reflux, and urinary tract infections. Reviewed by Icon Drugs Scientific Advisory Board.",
+  keywords: [
+    "health conditions",
+    "disease guides",
+    "neuropathic pain management",
+    "osteoarthritis symptoms",
+    "GERD treatment",
+    "UTI clinical guide",
+    "patient education Icon Drugs",
+  ],
+  alternates: {
+    canonical: "https://icondrugs.com/health",
+  },
+  openGraph: {
+    title: "Evidence-Based Health Information & Disease Guides | Icon Drugs",
+    description:
+      "Clinical knowledge, early symptom identification, and patient lifestyle guidance written with pharmaceutical accuracy by Icon Drugs Private Limited, Nagpur.",
+    url: "https://icondrugs.com/health",
+    siteName: "Icon Drugs",
+    images: [
+      {
+        url: "/icon-brand-mark.png",
+        width: 1200,
+        height: 630,
+        alt: "Icon Drugs Clinical Health Education",
+      },
+    ],
+    locale: "en_IN",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Health Information & Disease Guides | Icon Drugs",
+    description:
+      "Evidence-based health guides and symptom checklists reviewed by medical professionals.",
+    images: ["/icon-brand-mark.png"],
+  },
 };
 
 export default function HealthPage() {
+  const healthJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "@id": "https://icondrugs.com/health#webpage",
+    "url": "https://icondrugs.com/health",
+    "name": "Health Information & Clinical Disease Education | Icon Drugs",
+    "description":
+      "Evidence-based health condition overviews, symptom matrices, and management guidelines for patients and caregivers.",
+    "publisher": {
+      "@id": "https://icondrugs.com/#organization",
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": healthConditionsData.map((cond, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "name": cond.title,
+        "url": `https://icondrugs.com/health/${cond.slug}`,
+        "description": cond.overview,
+      })),
+    },
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(healthJsonLd) }}
+      />
       <Header />
       <main id="main-content" className="flex-1 pt-24 pb-20">
         {/* Banner */}

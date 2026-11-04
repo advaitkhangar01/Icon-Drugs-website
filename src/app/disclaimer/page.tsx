@@ -1,7 +1,16 @@
 import React from "react";
+import type { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { ShieldAlert } from "lucide-react";
+
+export const metadata: Metadata = {
+  title: "Medical & Regulatory Disclaimer | Pharmacovigilance Notice",
+  description: "Official medical and regulatory disclaimer for Icon Drugs Private Limited. Information on prescription status, pharmacovigilance, and CDSCO compliance.",
+  alternates: {
+    canonical: "https://icondrugs.com/disclaimer",
+  },
+};
 
 export default function DisclaimerPage() {
   return (
