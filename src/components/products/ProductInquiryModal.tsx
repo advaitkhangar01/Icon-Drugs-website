@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   X,
   Send,
@@ -15,7 +16,9 @@ import {
   Lock,
   Clock,
   ShieldCheck,
+  ShieldAlert,
   User,
+  UserCheck,
   Mail,
   Loader2,
   Package,
@@ -23,6 +26,7 @@ import {
   Check,
 } from "lucide-react";
 import { Product } from "@/data/siteData";
+import { sendFormSubmitRequest } from "@/lib/formsubmit";
 
 interface ProductInquiryModalProps {
   isOpen: boolean;
@@ -42,8 +46,10 @@ export default function ProductInquiryModal({
   const [activeTab, setActiveTab] = useState<"franchise" | "tender" | "sample">(initialIntent);
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [inquiryId, setInquiryId] = useState("");
   const [copiedId, setCopiedId] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
 
   // Form Fields
   const [name, setName] = useState("");
@@ -53,7 +59,9 @@ export default function ProductInquiryModal({
   const [organization, setOrganization] = useState("");
   const [doctorRegNo, setDoctorRegNo] = useState("");
   const [volume, setVolume] = useState("");
+  const [referralName, setReferralName] = useState("");
   const [notes, setNotes] = useState("");
+  const [consentTerms, setConsentTerms] = useState(false);
 
   // Sync initial props when opened
   useEffect(() => {
@@ -64,6 +72,9 @@ export default function ProductInquiryModal({
       }
       setSubmitted(false);
       setIsSubmitting(false);
+      setSubmitError(null);
+      setReferralName("");
+      setConsentTerms(false);
     }
   }, [isOpen, initialIntent, initialTerritory]);
 
@@ -87,16 +98,75 @@ export default function ProductInquiryModal({
 
   if (!isOpen) return null;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!consentTerms) {
+      setSubmitError("Please confirm age affirmation and accept the Terms & Privacy Policy.");
+      return;
+    }
+
     setIsSubmitting(true);
+    setSubmitError(null);
     const newId = `ICON-${Math.floor(100000 + Math.random() * 900000)}`;
     setInquiryId(newId);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    const intentLabel =
+      activeTab === "franchise"
+        ? "PCD Monopoly Franchise"
+        : activeTab === "tender"
+        ? "Institutional Bulk Tender"
+        : "Doctor Sample Kit";
+
+    const dataPayload: Record<string, any> = {
+      "Inquiry Reference ID": newId,
+      "Product Name": product.name,
+      "Generic Composition": product.genericName,
+      "Strength & Dosage": `${product.strength} | ${product.dosageForm}`,
+      "Packaging Size": product.packSize,
+      "Therapeutic Category": product.category,
+      "Intent Category": intentLabel,
+      "Contact Person Name": name,
+      "Contact Mobile/Phone": phone,
+      "Email Address": email || "Not specified",
+      "Target Territory / City": territory || "Pan-India",
+      "Referral / Agent Guidance": referralName.trim() || "None / Direct",
+      "Specific Notes / Questions": notes || "None provided",
+      "DPDP Act Consent (Sec. 6)": "Granted (18+ Confirmed)",
+      "Terms & DPA Agreement": "Accepted (vNov2026)",
+      "Data Fiduciary": "ICON DRUGS PRIVATE LIMITED",
+      "Submission Time (IST)": new Date().toLocaleString("en-IN", {
+        timeZone: "Asia/Kolkata",
+      }),
+    };
+
+    if (activeTab === "tender") {
+      dataPayload["Procuring Institution"] = organization || "Hospital / Institution";
+      dataPayload["Estimated Batch Volume"] = volume || "Standard Tender";
+    }
+
+    if (activeTab === "sample") {
+      dataPayload["Hospital / Clinic Name"] = organization || "Private Practice";
+      dataPayload["Doctor Registration No"] = doctorRegNo || "Verified Clinician";
+    }
+
+    const result = await sendFormSubmitRequest({
+      subject: `[Product Inquiry] ${product.name} - ${intentLabel} (Ref: ${newId})`,
+      replyTo: email || undefined,
+      honeypot: honeypot,
+      data: dataPayload,
+    });
+
+    setIsSubmitting(false);
+
+    if (result.success) {
       setSubmitted(true);
-    }, 500);
+    } else {
+      setSubmitError(
+        result.message ||
+          "Could not send request right now. You can connect with our desk directly on WhatsApp."
+      );
+    }
   };
 
   const handleCopyId = () => {
@@ -472,6 +542,28 @@ export default function ProductInquiryModal({
                 </div>
               )}
 
+              {/* Referral / Agent Guidance Name (Non-compulsory) */}
+              <div>
+                <div className="flex items-center justify-between mb-0.5">
+                  <label className="text-[11px] font-bold text-slate-700 uppercase tracking-wider">
+                    Referral / Agent Guidance Name
+                  </label>
+                  <span className="text-[9px] font-bold text-emerald-700 bg-emerald-50 px-1.5 py-0.2 rounded uppercase">
+                    Non-Compulsory
+                  </span>
+                </div>
+                <div className="relative group">
+                  <UserCheck className="w-3.5 h-3.5 text-slate-400 group-focus-within:text-[#005EB1] transition-colors absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  <input
+                    type="text"
+                    value={referralName}
+                    onChange={(e) => setReferralName(e.target.value)}
+                    placeholder="e.g. Field Representative, Agent, or Referral Contact"
+                    className="w-full pl-8 pr-3 py-2 rounded-xl bg-white border border-slate-200 text-base sm:text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#005EB1] focus:ring-2 focus:ring-[#005EB1]/10 transition-all font-medium shadow-2xs"
+                  />
+                </div>
+              </div>
+
               {/* Commercial Notes / Questions */}
               <div>
                 <label className="block text-[11px] font-bold text-slate-700 uppercase tracking-wider mb-0.5">
@@ -486,12 +578,68 @@ export default function ProductInquiryModal({
                 />
               </div>
 
+              {/* Anti-spam honeypot */}
+              <div className="hidden" aria-hidden="true">
+                <label htmlFor="modal_inquiry_code">Do not fill this</label>
+                <input
+                  type="text"
+                  id="modal_inquiry_code"
+                  name="modal_inquiry_code"
+                  tabIndex={-1}
+                  autoComplete="off"
+                  value={honeypot}
+                  onChange={(e) => setHoneypot(e.target.value)}
+                />
+              </div>
+
+              {/* Fail-Safe Error Alert */}
+              {submitError && (
+                <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-[11px] flex items-center justify-between gap-2 shadow-xs">
+                  <div className="flex items-center gap-1.5">
+                    <ShieldAlert className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    <span className="font-medium">{submitError}</span>
+                  </div>
+                  <a
+                    href={getWhatsAppDirectLink()}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-2.5 py-1 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[10px] whitespace-nowrap"
+                  >
+                    Use WhatsApp
+                  </a>
+                </div>
+              )}
+
+              {/* DPDP Act (2023) Consent Architecture */}
+              <div className="pt-0.5 pb-0.5">
+                <label className="flex items-start gap-2 cursor-pointer select-none group">
+                  <input
+                    type="checkbox"
+                    required
+                    checked={consentTerms}
+                    onChange={(e) => setConsentTerms(e.target.checked)}
+                    className="mt-0.5 w-3.5 h-3.5 rounded border-slate-300 text-[#005EB1] focus:ring-[#005EB1] focus:ring-offset-0 cursor-pointer accent-[#005EB1] shrink-0"
+                  />
+                  <span className="text-[11px] text-slate-600 leading-snug">
+                    I confirm I am 18+ and consent to Icon Drugs processing my details to deliver quotation and product monographs per the{" "}
+                    <Link href="/terms" target="_blank" className="text-[#005EB1] underline font-semibold hover:text-blue-800">
+                      Terms &amp; DPA
+                    </Link>{" "}
+                    and{" "}
+                    <Link href="/privacy" target="_blank" className="text-[#005EB1] underline font-semibold hover:text-blue-800">
+                      Privacy Policy
+                    </Link>
+                    . <span className="text-rose-500">*</span>
+                  </span>
+                </label>
+              </div>
+
               {/* Action Buttons */}
               <div className="pt-1 flex flex-col sm:flex-row items-center gap-2">
                 <button
                   type="submit"
-                  disabled={isSubmitting}
-                  className="w-full sm:flex-1 py-3 sm:py-2.5 px-4 min-h-[44px] rounded-xl bg-gradient-to-r from-[#F87901] to-[#e06c00] hover:from-[#e06c00] hover:to-[#c75e00] active:scale-[0.99] text-white font-bold text-xs uppercase tracking-wider shadow-md shadow-[#F87901]/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-75"
+                  disabled={isSubmitting || !consentTerms}
+                  className="w-full sm:flex-1 py-3 sm:py-2.5 px-4 min-h-[44px] rounded-xl bg-gradient-to-r from-[#F87901] to-[#e06c00] hover:from-[#e06c00] hover:to-[#c75e00] active:scale-[0.99] text-white font-bold text-xs uppercase tracking-wider shadow-md shadow-[#F87901]/20 transition-all flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? (
                     <>

@@ -12,15 +12,43 @@ import {
   ShieldCheck,
   Send,
   MessageSquare,
+  Loader2,
 } from "lucide-react";
+import { sendFormSubmitRequest } from "@/lib/formsubmit";
 
 export default function CatalogDownloadHub() {
   const [emailOrPhone, setEmailOrPhone] = useState("");
+  const [referralName, setReferralName] = useState("");
+  const [consentTerms, setConsentTerms] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [downloadRequested, setDownloadRequested] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!emailOrPhone.trim()) return;
+    if (!emailOrPhone.trim() || !consentTerms) return;
+
+    setIsSubmitting(true);
+
+    const isEmail = emailOrPhone.includes("@");
+    await sendFormSubmitRequest({
+      subject: `[Catalog Request] Icon Drugs Master Compendium`,
+      replyTo: isEmail ? emailOrPhone.trim() : undefined,
+      honeypot: honeypot,
+      data: {
+        "Requester Contact (WhatsApp/Email)": emailOrPhone.trim(),
+        "Referral / Agent Guidance": referralName.trim() || "None / Direct",
+        "Requested Asset": "Icon Drugs Master Product Compendium & Net Price List (2026 Edition)",
+        "DPDP Act Consent (Sec. 6)": "Granted (18+ Confirmed)",
+        "Terms & DPA Agreement": "Accepted (vNov2026)",
+        "Data Fiduciary": "ICON DRUGS PRIVATE LIMITED",
+        "Request Timestamp": new Date().toLocaleString("en-IN", {
+          timeZone: "Asia/Kolkata",
+        }),
+      },
+    });
+
+    setIsSubmitting(false);
     setDownloadRequested(true);
   };
 
@@ -121,9 +149,23 @@ export default function CatalogDownloadHub() {
                   </div>
                 ) : (
                   <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* Anti-spam honeypot */}
+                    <div className="hidden" aria-hidden="true">
+                      <label htmlFor="catalog_code">Do not fill this</label>
+                      <input
+                        type="text"
+                        id="catalog_code"
+                        name="catalog_code"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
+                    </div>
+
                     <div>
                       <label className="block text-xs font-black uppercase tracking-wider text-slate-700 mb-1.5">
-                        WhatsApp Number or Business Email
+                        WhatsApp Number or Business Email <span className="text-rose-500">*</span>
                       </label>
                       <input
                         type="text"
@@ -135,12 +177,64 @@ export default function CatalogDownloadHub() {
                       />
                     </div>
 
+                    <div>
+                      <div className="flex items-center justify-between mb-1.5">
+                        <label className="block text-xs font-black uppercase tracking-wider text-slate-700">
+                          Referral / Agent Guidance Name
+                        </label>
+                        <span className="text-[10px] font-black text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded uppercase">
+                          Non-Compulsory
+                        </span>
+                      </div>
+                      <input
+                        type="text"
+                        value={referralName}
+                        onChange={(e) => setReferralName(e.target.value)}
+                        placeholder="e.g. Field Executive or Representative Name"
+                        className="w-full px-4 py-3 rounded-xl border-2 border-slate-300 font-medium text-slate-900 text-sm focus:outline-none focus:border-[#005EB1] placeholder:text-slate-400 bg-slate-50 focus:bg-white transition-all"
+                      />
+                    </div>
+
+                    {/* DPDP Act (2023) Consent Architecture */}
+                    <div className="pt-0.5">
+                      <label className="flex items-start gap-2 cursor-pointer select-none group">
+                        <input
+                          type="checkbox"
+                          required
+                          checked={consentTerms}
+                          onChange={(e) => setConsentTerms(e.target.checked)}
+                          className="mt-0.5 w-3.5 h-3.5 rounded border-slate-300 text-[#005EB1] focus:ring-[#005EB1] focus:ring-offset-0 cursor-pointer accent-[#005EB1] shrink-0"
+                        />
+                        <span className="text-[11px] text-slate-600 leading-snug">
+                          I confirm I am 18+ and consent to Icon Drugs processing my details to deliver the product compendium per the{" "}
+                          <Link href="/terms" target="_blank" className="text-[#005EB1] underline font-bold hover:text-blue-800">
+                            Terms &amp; DPA
+                          </Link>{" "}
+                          and{" "}
+                          <Link href="/privacy" target="_blank" className="text-[#005EB1] underline font-bold hover:text-blue-800">
+                            Privacy Policy
+                          </Link>
+                          . <span className="text-rose-500">*</span>
+                        </span>
+                      </label>
+                    </div>
+
                     <button
                       type="submit"
-                      className="w-full py-3.5 px-6 rounded-xl bg-[#005EB1] hover:bg-[#00477F] text-white font-black text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
+                      disabled={isSubmitting || !consentTerms}
+                      className="w-full py-3.5 px-6 rounded-xl bg-[#005EB1] hover:bg-[#00477F] text-white font-black text-sm shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      <Download className="w-4 h-4" />
-                      <span>Download Instant Price Dossier</span>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Generating Dossier Link...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Download className="w-4 h-4" />
+                          <span>Download Instant Price Dossier</span>
+                        </>
+                      )}
                     </button>
 
                     <div className="pt-2 text-center">

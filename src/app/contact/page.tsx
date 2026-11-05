@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import QuickContactForm from "@/components/contact/QuickContactForm";
 import { companyData } from "@/data/siteData";
 import {
   MapPin,
@@ -176,6 +177,66 @@ export default function ContactPage() {
               </p>
               <div className="pt-2 text-xs font-semibold text-emerald-600">
                 Guaranteed 24-Hour Business Response
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Quick Contact Form & Central Desk Section */}
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <div className="lg:col-span-7">
+              <QuickContactForm />
+            </div>
+
+            <div className="lg:col-span-5 space-y-6">
+              <div className="bg-slate-50 border border-slate-200/90 rounded-3xl p-8 space-y-6">
+                <div>
+                  <h3 className="text-xl font-bold text-slate-900 font-heading">
+                    Corporate Direct Desks
+                  </h3>
+                  <p className="text-xs text-slate-500 mt-1">
+                    Direct communications channels for clinicians, distributors & regulatory leads.
+                  </p>
+                </div>
+
+                <div className="space-y-4 text-xs sm:text-sm text-slate-600">
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200/80 space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#005EB1]">
+                      PCD Franchise & Monopoly Inquiries
+                    </span>
+                    <p className="font-bold text-slate-900">
+                      Email: <a href="mailto:contact@icondrugs.com" className="text-[#005EB1] hover:underline">contact@icondrugs.com</a>
+                    </p>
+                    <p className="text-slate-500 text-xs">
+                      Territory reservation for Maharashtra, MP, Chhattisgarh & Pan-India.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200/80 space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#F87901]">
+                      Instant WhatsApp Hotline
+                    </span>
+                    <p className="font-bold text-slate-900">
+                      Mobile: <a href="https://wa.me/919823044000" target="_blank" rel="noopener noreferrer" className="text-slate-900 hover:text-[#005EB1]">+91 98230 44000</a>
+                    </p>
+                    <p className="text-slate-500 text-xs">
+                      Direct escalation to Commercial General Manager.
+                    </p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200/80 space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-600">
+                      Hours of Operation
+                    </span>
+                    <p className="font-bold text-slate-900">
+                      Mon – Sat: 09:00 AM – 06:00 PM IST
+                    </p>
+                    <p className="text-slate-500 text-xs">
+                      Closed on Sundays & National Gazetted Holidays.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

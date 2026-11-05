@@ -1,9 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import IconLogo from "@/components/ui/IconLogo";
+import { sendFormSubmitRequest } from "@/lib/formsubmit";
 import gsap from "gsap";
 import {
   Mail,
@@ -78,9 +80,11 @@ const QUICK_TAGS = [
 export default function BusinessEnquiryClient() {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [copiedRef, setCopiedRef] = useState(false);
   const [currentTimeIST, setCurrentTimeIST] = useState<string>("");
   const [dossierRefId, setDossierRefId] = useState<string>("");
+  const [honeypot, setHoneypot] = useState<string>("");
 
   const [formData, setFormData] = useState({
     fullName: "",
@@ -90,7 +94,12 @@ export default function BusinessEnquiryClient() {
     country: "",
     inquiryType: "Hospital Procurement",
     message: "",
+    referralName: "",
   });
+
+  const [consentTerms, setConsentTerms] = useState(false);
+  const [licensedEntityAck, setLicensedEntityAck] = useState(false);
+  const [optInCommercial, setOptInCommercial] = useState(false);
 
   // Animated elements refs
   const heroRef = useRef<HTMLDivElement>(null);
@@ -165,22 +174,63 @@ export default function BusinessEnquiryClient() {
     Boolean(formData.country.trim()),
     Boolean(formData.inquiryType.trim()),
     Boolean(formData.message.trim().length >= 10),
+    licensedEntityAck,
+    consentTerms,
   ];
   const completedCount = requiredFields.filter(Boolean).length;
   const progressPercent = Math.round((completedCount / requiredFields.length) * 100);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!consentTerms || !licensedEntityAck) {
+      setSubmitError("Please confirm your regulatory distribution status and explicit consent to the Terms & Privacy Policy.");
+      return;
+    }
+
     setIsSubmitting(true);
+    setSubmitError(null);
 
     const generatedId = `ICN-${Math.floor(100000 + Math.random() * 900000)}`;
     setDossierRefId(generatedId);
 
-    setTimeout(() => {
-      setIsSubmitting(false);
+    const result = await sendFormSubmitRequest({
+      subject: `[B2B Dossier] ${formData.inquiryType} - ${formData.organization} (Ref: ${generatedId})`,
+      replyTo: formData.email,
+      honeypot: honeypot,
+      data: {
+        "Dossier Reference ID": generatedId,
+        "Full Name": formData.fullName,
+        "Email Address": formData.email,
+        "Phone / WhatsApp": formData.phone || "Not specified",
+        "Organization / Facility": formData.organization,
+        "Country / Region": formData.country,
+        "Inquiry Category": formData.inquiryType,
+        "Referral / Agent Guidance":
+          formData.referralName.trim() || "None / Direct",
+        "Requirements & Molecule Specs": formData.message,
+        "Licensed Entity Declaration": "Confirmed (B2B/Wholesale Licensee)",
+        "DPDP Act Consent (Sec. 6)": "Granted (18+ Verified)",
+        "Terms & DPA Agreement": "Accepted (vNov2026)",
+        "Commercial Updates Opt-In": optInCommercial ? "Granted (WhatsApp/Email)" : "Declined",
+        "Data Fiduciary": "ICON DRUGS PRIVATE LIMITED",
+        "Submission Time (IST)":
+          currentTimeIST ||
+          new Date().toLocaleString("en-IN", { timeZone: "Asia/Kolkata" }),
+      },
+    });
+
+    setIsSubmitting(false);
+
+    if (result.success) {
       setSubmitted(true);
       window.scrollTo({ top: 300, behavior: "smooth" });
-    }, 850);
+    } else {
+      setSubmitError(
+        result.message ||
+          "Could not transmit enquiry dossier. Please reach out via phone or direct WhatsApp."
+      );
+    }
   };
 
   const handleCopyRef = () => {
@@ -335,6 +385,9 @@ export default function BusinessEnquiryClient() {
                     <button
                       onClick={() => {
                         setSubmitted(false);
+                        setConsentTerms(false);
+                        setLicensedEntityAck(false);
+                        setOptInCommercial(false);
                         setFormData({
                           fullName: "",
                           email: "",
@@ -343,6 +396,7 @@ export default function BusinessEnquiryClient() {
                           country: "",
                           inquiryType: "Hospital Procurement",
                           message: "",
+                          referralName: "",
                         });
                       }}
                       className="w-full sm:w-auto px-7 py-3 rounded-xl bg-[#005EB1] hover:bg-[#00477F] text-white text-xs font-bold uppercase tracking-wider transition-all shadow-md shadow-blue-500/15 cursor-pointer"
@@ -493,25 +547,50 @@ export default function BusinessEnquiryClient() {
                       </div>
                     </div>
 
-                    {/* Phone */}
-                    <div>
-                      <div className="flex items-center justify-between mb-1.5">
-                        <label className="text-xs font-bold text-slate-800">
-                          Direct Phone / WhatsApp
-                        </label>
-                        <span className="text-[10px] font-medium text-slate-400">
-                          Optional for Priority Desk
-                        </span>
+                    {/* Phone & Referral Guidance Row */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                      {/* Phone */}
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-xs font-bold text-slate-800">
+                            Direct Phone / WhatsApp
+                          </label>
+                          <span className="text-[10px] font-medium text-slate-400">
+                            Optional
+                          </span>
+                        </div>
+                        <div className="relative group">
+                          <Phone className="w-4 h-4 text-slate-400 group-focus-within:text-[#005EB1] transition-colors absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                          <input
+                            type="tel"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            placeholder="+91 (0) 98765-43210 (with country code)"
+                            className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50/70 border border-slate-200/90 text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#005EB1] focus:bg-white focus:ring-4 focus:ring-[#005EB1]/10 transition-all min-h-[44px]"
+                          />
+                        </div>
                       </div>
-                      <div className="relative group">
-                        <Phone className="w-4 h-4 text-slate-400 group-focus-within:text-[#005EB1] transition-colors absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-                        <input
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          placeholder="+91 (0) 98765-43210 (with country code)"
-                          className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50/70 border border-slate-200/90 text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#005EB1] focus:bg-white focus:ring-4 focus:ring-[#005EB1]/10 transition-all min-h-[44px]"
-                        />
+
+                      {/* Referral / Agent Guidance Name */}
+                      <div>
+                        <div className="flex items-center justify-between mb-1.5">
+                          <label className="text-xs font-bold text-slate-800">
+                            Referral / Agent Guidance Name
+                          </label>
+                          <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded uppercase">
+                            Non-Compulsory
+                          </span>
+                        </div>
+                        <div className="relative group">
+                          <UserCheck className="w-4 h-4 text-slate-400 group-focus-within:text-[#005EB1] transition-colors absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                          <input
+                            type="text"
+                            value={formData.referralName}
+                            onChange={(e) => setFormData({ ...formData, referralName: e.target.value })}
+                            placeholder="e.g. MR Name, Agency, or Field Representative"
+                            className="w-full pl-10 pr-4 py-3 rounded-xl bg-slate-50/70 border border-slate-200/90 text-base sm:text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-[#005EB1] focus:bg-white focus:ring-4 focus:ring-[#005EB1]/10 transition-all min-h-[44px]"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -625,10 +704,105 @@ export default function BusinessEnquiryClient() {
 
                   {/* Submission Row & Enterprise Assurances */}
                   <div className="pt-4 border-t border-slate-100 space-y-4">
+                    {/* Anti-bot Honeypot Field */}
+                    <div className="hidden" aria-hidden="true">
+                      <label htmlFor="company_lead_code">Leave this field blank</label>
+                      <input
+                        type="text"
+                        id="company_lead_code"
+                        name="company_lead_code"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
+                    </div>
+
+                    {/* DPDP ACT (2023) & DPA STATUTORY NOTICE & CHECKBOXES */}
+                    <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200/90 space-y-3.5">
+                      <div className="flex items-start gap-2.5 text-xs text-slate-700 leading-relaxed">
+                        <ShieldCheck className="w-4 h-4 text-teal-600 shrink-0 mt-0.5" />
+                        <div>
+                          <strong className="text-slate-900">DPDP Act (2023) &amp; Enterprise DPA Notice:</strong> Personal and institutional data submitted in this dossier is processed by <strong>ICON DRUGS PRIVATE LIMITED</strong> (Data Fiduciary) solely for evaluating commercial suitability, verifying distribution licenses, and executing requested supply terms. No retail sales are executed. Grievance redressal: <a href="mailto:grievance@icondrugs.com" className="text-[#005EB1] underline font-semibold">grievance@icondrugs.com</a>.
+                        </div>
+                      </div>
+
+                      <div className="pt-2 border-t border-slate-200/80 space-y-2.5">
+                        {/* Checkbox 1: B2B License & Non-Retail Declaration (Required) */}
+                        <label className="flex items-start gap-2.5 cursor-pointer select-none group">
+                          <input
+                            type="checkbox"
+                            required
+                            checked={licensedEntityAck}
+                            onChange={(e) => setLicensedEntityAck(e.target.checked)}
+                            className="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#005EB1] focus:ring-[#005EB1] focus:ring-offset-0 cursor-pointer accent-[#005EB1] shrink-0"
+                          />
+                          <span className="text-xs text-slate-700 leading-snug">
+                            <strong>Institutional Declaration:</strong> I confirm this inquiry is submitted on behalf of a licensed pharmaceutical distributor, hospital procurement desk, or healthcare facility holding or applying for valid wholesale drug licenses (Forms 20B/21B or GSTIN), and acknowledge Icon Drugs does not operate as a retail pharmacy or dispense to consumers. <span className="text-rose-500">*</span>
+                          </span>
+                        </label>
+
+                        {/* Checkbox 2: DPDP Consent & Age Affirmation (Required) */}
+                        <label className="flex items-start gap-2.5 cursor-pointer select-none group">
+                          <input
+                            type="checkbox"
+                            required
+                            checked={consentTerms}
+                            onChange={(e) => setConsentTerms(e.target.checked)}
+                            className="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#005EB1] focus:ring-[#005EB1] focus:ring-offset-0 cursor-pointer accent-[#005EB1] shrink-0"
+                          />
+                          <span className="text-xs text-slate-700 leading-snug">
+                            I confirm that I am at least 18 years of age and explicitly consent to the collection and processing of my business data by Icon Drugs Private Limited pursuant to the{" "}
+                            <Link href="/terms" target="_blank" className="text-[#005EB1] underline font-semibold hover:text-blue-800">
+                              Terms of Use &amp; DPA
+                            </Link>{" "}
+                            and{" "}
+                            <Link href="/privacy" target="_blank" className="text-[#005EB1] underline font-semibold hover:text-blue-800">
+                              Privacy Policy
+                            </Link>
+                            . <span className="text-rose-500">*</span>
+                          </span>
+                        </label>
+
+                        {/* Checkbox 3: Optional Commercial Updates */}
+                        <label className="flex items-start gap-2.5 cursor-pointer select-none group">
+                          <input
+                            type="checkbox"
+                            checked={optInCommercial}
+                            onChange={(e) => setOptInCommercial(e.target.checked)}
+                            className="mt-0.5 w-4 h-4 rounded border-slate-300 text-[#005EB1] focus:ring-[#005EB1] focus:ring-offset-0 cursor-pointer accent-[#005EB1] shrink-0"
+                          />
+                          <span className="text-xs text-slate-500 leading-snug">
+                            I agree to receive price list revisions, WHO-GMP formulation dossiers, and institutional tender updates via WhatsApp / Email. (Optional)
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Fail-Safe Error Banner */}
+                    {submitError && (
+                      <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-amber-950 text-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-xs">
+                        <div className="flex items-center gap-2.5">
+                          <ShieldAlert className="w-4 h-4 text-amber-600 shrink-0" />
+                          <span className="font-medium">{submitError}</span>
+                        </div>
+                        <a
+                          href={`https://wa.me/919823044000?text=${encodeURIComponent(
+                            `Hello Icon Drugs Desk, I tried submitting an enquiry on your portal (${formData.inquiryType} for ${formData.organization}). Reference: ${dossierRefId || "Web-Lead"}`
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-3.5 py-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-[11px] whitespace-nowrap cursor-pointer transition-colors shadow-xs"
+                        >
+                          Send via WhatsApp
+                        </a>
+                      </div>
+                    )}
+
                     <button
                       type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#F87901] to-[#e06c00] hover:from-[#e06c00] hover:to-[#c75e00] active:scale-[0.99] text-white font-bold text-sm uppercase tracking-wider transition-all shadow-lg shadow-[#F87901]/25 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-75 disabled:cursor-not-allowed group"
+                      disabled={isSubmitting || !consentTerms || !licensedEntityAck}
+                      className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#F87901] to-[#e06c00] hover:from-[#e06c00] hover:to-[#c75e00] active:scale-[0.99] text-white font-bold text-sm uppercase tracking-wider transition-all shadow-lg shadow-[#F87901]/25 flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed group"
                     >
                       {isSubmitting ? (
                         <>
