@@ -900,7 +900,7 @@ export const productsData: Product[] = [
     id: "icon-serek-dp",
     slug: "serek-dp",
     name: "Serek-DP",
-    image: "/products/Diclofenac Tablets Product Packaging.png",
+    image: "/products/Serek-DP Pharmaceutical Packaging Display.png",
     tagline: "The Analgesic with Extra Strength — Clinically Effective NSAID",
     genericName: "Diclofenac Potassium 50 mg + Serratiopeptidase 15 mg + Paracetamol 325 mg",
     category: "Orthopedics & Musculoskeletal Pain",

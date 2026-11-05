@@ -132,17 +132,27 @@ export default function HeroSlider() {
     >
       {/* Background Image Layer with Zoom & Overlay */}
       <div ref={imageContainerRef} className="absolute inset-0 w-full h-full">
-        <Image
-          src={activeSlide.bgImage}
-          alt={activeSlide.alt}
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
+        {heroSlides.map((slide, idx) => (
+          <div
+            key={slide.id}
+            className={`absolute inset-0 w-full h-full transition-opacity duration-700 ease-in-out ${
+              current === idx ? "opacity-100 z-0" : "opacity-0 pointer-events-none"
+            }`}
+          >
+            <Image
+              src={slide.bgImage}
+              alt={slide.alt}
+              fill
+              priority={idx === 0}
+              quality={90}
+              sizes="100vw"
+              className="object-cover object-center"
+            />
+          </div>
+        ))}
         {/* Editorial Brand Gradient Tint Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#00477F]/95 via-[#00477F]/80 to-transparent lg:w-3/4" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#00477F] via-transparent to-black/30" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-r from-[#00477F]/95 via-[#00477F]/80 to-transparent lg:w-3/4 pointer-events-none" />
+        <div className="absolute inset-0 z-[1] bg-gradient-to-t from-[#00477F] via-transparent to-black/30 pointer-events-none" />
       </div>
 
       {/* Decorative Brand SVG Geometry (Logo Arc & Vertical Pillar) */}
