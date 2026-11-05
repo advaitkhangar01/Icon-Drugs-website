@@ -71,29 +71,29 @@ export default function TherapeuticCrossSell({
             className="group bg-white hover:bg-slate-50 border-2 border-slate-200 hover:border-[#005EB1] rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
           >
             <div>
-              {/* Product Mini Image Stage */}
-              <div className="relative h-44 bg-gradient-to-b from-slate-100 to-white p-3 flex items-center justify-center border-b-2 border-slate-100">
+              {/* Product Mini Image Stage - 3:2 full box fit with pure white background */}
+              <div className="relative w-full aspect-[3/2] bg-white flex items-center justify-center border-b-2 border-slate-100 overflow-hidden">
                 {comp.image ? (
                   <Image
                     src={comp.image}
                     alt={`${comp.name} pack shot`}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
-                    className="object-contain p-2 group-hover:scale-105 transition-transform duration-500 drop-shadow-sm"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 ) : (
                   <Pill className="w-10 h-10 text-[#005EB1]" />
                 )}
 
-                <div className="absolute top-2.5 left-2.5">
+                <div className="absolute top-2.5 left-2.5 z-10">
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#005EB1] text-white text-[10px] font-black uppercase tracking-wider shadow">
                     {getDosageIcon(comp.dosageForm)}
-                    <span>{comp.dosageForm}</span>
+                    <span>{comp.dosageForm.replace("&", "/")}</span>
                   </span>
                 </div>
 
-                <div className="absolute top-2.5 right-2.5">
-                  <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-100 border border-blue-300 text-blue-950">
+                <div className="absolute top-2.5 right-2.5 z-10">
+                  <span className="text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-blue-200 text-[#005EB1] shadow-sm">
                     Synergistic
                   </span>
                 </div>

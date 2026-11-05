@@ -86,9 +86,9 @@ export default function ProductHeroShowcase({ product }: ProductHeroShowcaseProp
         )}
       </div>
 
-      {/* Main Image Stage */}
-      <div className="relative h-80 sm:h-96 bg-gradient-to-b from-slate-100 via-slate-50 to-white flex items-center justify-center p-6 overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-blue-100/60 via-transparent to-transparent pointer-events-none" />
+      {/* Main Image Stage - Pure white background to match pack artwork seamlessly */}
+      <div className="relative h-80 sm:h-96 bg-white flex items-center justify-center p-4 sm:p-6 overflow-hidden">
+        <div className="absolute inset-0 bg-radial from-blue-50/40 via-transparent to-transparent pointer-events-none" />
 
         {activeView === "pack" ? (
           product.image ? (

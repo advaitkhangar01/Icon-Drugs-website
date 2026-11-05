@@ -158,7 +158,7 @@ export default function ProductsCatalogClient() {
         {/* Products Grid */}
         <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           {filteredProducts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
               {filteredProducts.map((product) => {
                 const therapy = therapyAreasData.find((t) => t.slug === product.therapySlug);
 
@@ -166,66 +166,73 @@ export default function ProductsCatalogClient() {
                   <Link
                     key={product.id}
                     href={`/products/${product.slug}`}
-                    className="group bg-white rounded-3xl border-2 border-slate-200 hover:border-[#005EB1] p-6 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between"
+                    className="group bg-white rounded-3xl border-2 border-slate-200 hover:border-[#005EB1] p-5 sm:p-6 shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between h-full overflow-hidden"
                   >
                     <div>
-                      {/* Product Packaging Image Showcase */}
-                      <div className="relative w-full h-52 mb-6 rounded-2xl bg-gradient-to-br from-slate-50 via-slate-100 to-blue-50/50 p-4 flex items-center justify-center overflow-hidden border border-slate-200/80 group-hover:border-blue-200 transition-colors">
+                      {/* Product Packaging Image Showcase - 3:2 full container fit with zero grey background */}
+                      <div className="relative w-full aspect-[3/2] mb-5 rounded-2xl bg-white overflow-hidden border border-slate-200/90 group-hover:border-blue-300 transition-colors">
                         {product.image ? (
-                          <div className="relative w-full h-full">
-                            <Image
-                              src={product.image}
-                              alt={`${product.name} packaging shot — ${product.genericName}`}
-                              fill
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                              className="object-contain p-2 group-hover:scale-105 transition-transform duration-300 drop-shadow-md"
-                            />
-                          </div>
+                          <Image
+                            src={product.image}
+                            alt={`${product.name} packaging shot — ${product.genericName}`}
+                            fill
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
                         ) : (
-                          <div className="w-16 h-16 rounded-2xl bg-blue-100/70 text-[#005EB1] flex items-center justify-center">
-                            {getDosageIcon(product.dosageForm)}
+                          <div className="w-full h-full flex items-center justify-center bg-blue-50/50">
+                            <div className="w-16 h-16 rounded-2xl bg-blue-100/70 text-[#005EB1] flex items-center justify-center">
+                              {getDosageIcon(product.dosageForm)}
+                            </div>
                           </div>
                         )}
 
-                        {/* Top Badges */}
-                        <div className="absolute top-3 left-3 right-3 flex items-center justify-between pointer-events-none">
-                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-sm border border-slate-200 text-[11px] font-black uppercase tracking-wider text-slate-800 shadow-sm">
+                        {/* Top Badges: Single-line dosage and truncated therapy to prevent collisions */}
+                        <div className="absolute top-3 inset-x-3 flex items-center justify-between gap-2 pointer-events-none z-10">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-md border border-slate-200/90 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-slate-800 shadow-sm shrink-0 whitespace-nowrap">
                             {getDosageIcon(product.dosageForm)}
-                            <span>{product.dosageForm}</span>
+                            <span>{product.dosageForm.replace("&", "/")}</span>
                           </span>
 
-                          <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-sm border border-slate-200 text-[11px] font-black uppercase tracking-wider text-[#005EB1] shadow-sm">
-                            {therapy ? therapy.name.split("&")[0].trim() : product.category}
+                          <span className="inline-flex items-center px-2.5 py-1 rounded-lg bg-white/95 backdrop-blur-md border border-slate-200/90 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-[#005EB1] shadow-sm truncate max-w-[50%]">
+                            <span className="truncate">{therapy ? therapy.name.split("&")[0].trim() : product.category.split("&")[0].trim()}</span>
                           </span>
                         </div>
                       </div>
 
                       {/* Header Info */}
-                      <div className="mb-4">
-                        <div className="flex items-baseline justify-between gap-2 mb-1">
-                          <h2 className="text-2xl font-black text-slate-950 group-hover:text-[#005EB1] transition-colors font-heading tracking-tight">
-                            {product.name}
-                          </h2>
-                          <span className="text-xs font-black text-slate-600 bg-slate-100 px-2 py-0.5 rounded border border-slate-200 shrink-0">
+                      <div className="mb-4 space-y-1.5">
+                        <h2 className="text-xl sm:text-2xl font-black text-slate-950 group-hover:text-[#005EB1] transition-colors font-heading tracking-tight line-clamp-1">
+                          {product.name}
+                        </h2>
+
+                        {/* Strength Formulation Pill - Safe max width and truncation to eliminate overflow */}
+                        <div className="flex items-center min-h-[26px]">
+                          <span
+                            className="text-[11px] font-bold text-slate-700 bg-slate-100 px-2.5 py-0.5 rounded-md border border-slate-200/80 truncate max-w-full inline-block"
+                            title={product.strength}
+                          >
                             {product.strength}
                           </span>
                         </div>
 
-                        <p className="text-xs font-bold text-slate-800 leading-snug">
+                        {/* Generic Molecule Formula - Fixed 2-line height for uniform alignment across tiles */}
+                        <p className="text-xs font-semibold text-slate-600 line-clamp-2 leading-relaxed min-h-[36px]">
                           {product.genericName}
                         </p>
                       </div>
 
-                      {/* Indications */}
-                      <div className="space-y-2 mb-6">
+                      {/* Primary Indications - Uniform 2-row bounded height */}
+                      <div className="space-y-2 mb-5">
                         <div className="text-[10px] font-black uppercase tracking-wider text-slate-500">
                           Primary Indications:
                         </div>
-                        <div className="flex flex-wrap gap-1.5">
+                        <div className="flex flex-wrap gap-1.5 h-14 overflow-hidden content-start">
                           {product.indications.slice(0, 3).map((ind, i) => (
                             <span
                               key={i}
-                              className="px-2 py-0.5 rounded bg-slate-100 text-slate-800 text-[11px] font-semibold"
+                              className="px-2 py-0.5 rounded-md bg-slate-100 text-slate-800 text-[11px] font-semibold truncate max-w-[240px]"
+                              title={ind}
                             >
                               {ind}
                             </span>
