@@ -17,10 +17,13 @@ npm ci --legacy-peer-deps || npm install
 echo ">>> Building Next.js application..."
 npm run build
 
-echo ">>> Reloading PM2 process..."
-pm2 reload ecosystem.config.cjs --update-env || pm2 start ecosystem.config.cjs
+echo ">>> Restarting PM2 process..."
+pm2 restart ecosystem.config.cjs --update-env || pm2 start ecosystem.config.cjs
 
 echo ">>> Saving PM2 process list..."
 pm2 save
+
+echo ">>> Checking status..."
+pm2 status
 
 echo ">>> Deployment successfully completed!"
