@@ -124,7 +124,7 @@ export default function HeroSlider() {
     <section
       aria-roledescription="carousel"
       aria-label="Icon Drugs Key Commitments"
-      className="relative w-full h-[90dvh] min-h-[580px] sm:min-h-[640px] max-h-[1080px] overflow-hidden bg-[#00477F]"
+      className="relative w-full h-[92dvh] min-h-[640px] sm:min-h-[700px] lg:min-h-[780px] max-h-[1100px] overflow-hidden bg-[#00477F]"
       onMouseEnter={() => setIsPlaying(false)}
       onMouseLeave={() => setIsPlaying(true)}
       onTouchStart={handleTouchStart}
@@ -151,14 +151,14 @@ export default function HeroSlider() {
         aria-hidden="true"
       />
       <div
-        className="absolute left-10 bottom-24 top-24 w-1 bg-gradient-to-b from-[#005EB1] via-[#F87901] to-transparent opacity-40 hidden xl:block"
+        className="absolute left-10 bottom-24 top-36 w-1 bg-gradient-to-b from-[#005EB1] via-[#F87901] to-transparent opacity-40 hidden xl:block"
         aria-hidden="true"
       />
 
       {/* Slide Content Container */}
       <div
         ref={slideRef}
-        className="relative z-10 max-w-7xl mx-auto h-full px-5 sm:px-8 lg:px-12 flex flex-col justify-center pt-20 pb-24 sm:pb-20"
+        className="relative z-10 max-w-7xl mx-auto h-full px-5 sm:px-8 lg:px-12 flex flex-col justify-center pt-28 sm:pt-36 lg:pt-44 xl:pt-48 pb-28 sm:pb-32 lg:pb-36"
       >
         <div className="max-w-3xl">
           {/* Accent Label */}
