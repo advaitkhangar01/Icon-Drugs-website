@@ -3,7 +3,7 @@
 - **Domain:** `icondrugs.com` / `www.icondrugs.com`
 - **VPS Server IP:** `46.202.162.79`
 - **GitHub Repository:** [https://github.com/advaitkhangar01/Icon-Drugs-website.git](https://github.com/advaitkhangar01/Icon-Drugs-website.git)
-- **Application Port:** `3000` (Reverse proxied through Nginx on Port 80/443)
+- **Application Port:** `3005` (Reverse proxied through Nginx on Port 80/443)
 
 ---
 
