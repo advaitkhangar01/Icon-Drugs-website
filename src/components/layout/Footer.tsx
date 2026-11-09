@@ -3,6 +3,13 @@ import Link from "next/link";
 import IconLogo from "@/components/ui/IconLogo";
 import { companyData, therapyAreasData } from "@/data/siteData";
 import { ShieldCheck, Mail, MapPin, ArrowUpRight } from "lucide-react";
+import {
+  InstagramIcon,
+  FacebookIcon,
+  LinkedInIcon,
+  TwitterIcon,
+  WhatsAppIcon,
+} from "@/components/ui/SocialIcons";
 
 export default function Footer() {
   return (
@@ -26,20 +33,78 @@ export default function Footer() {
               <IconLogo variant="white" className="h-11 w-auto" />
             </Link>
             <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-sm">
-              Established pharmaceutical manufacturing enterprise committed to scientific rigor, certified WHO-GMP standards, and therapeutic accessibility across 25+ global markets.
+              Established pharmaceutical manufacturing enterprise headquartered in Nagpur, Maharashtra (Incorporated 2002, CIN: U24231MH2002PTC134479). Formulating high-bioavailability therapeutic medicines across India.
             </p>
 
-            {/* Quality Accreditations Badge row */}
+            {/* Accreditations Badge row */}
             <div className="flex flex-wrap items-center gap-2 pt-2">
-              {companyData.certifications.map((cert, index) => (
-                <span
-                  key={index}
-                  className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-white/10 border border-white/15 text-xs font-semibold text-blue-100"
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-white/10 border border-white/15 text-xs font-semibold text-blue-100">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#F87901]" />
+                DCGI Approved Formulations
+              </span>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded bg-white/10 border border-white/15 text-xs font-semibold text-blue-100">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#F87901]" />
+                Nagpur, Maharashtra
+              </span>
+            </div>
+
+            {/* Social Media Channels */}
+            <div className="pt-3 space-y-2.5">
+              <span className="block text-xs font-bold uppercase tracking-wider text-[#F87901]">
+                Follow &amp; Connect With Us
+              </span>
+              <div className="flex flex-wrap items-center gap-2.5">
+                <a
+                  href="https://www.linkedin.com/company/icon-drugs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Follow Icon Drugs on LinkedIn"
+                  title="LinkedIn"
+                  className="w-9 h-9 rounded-xl bg-white/10 hover:bg-[#0077B5] text-white flex items-center justify-center transition-all duration-200 border border-white/15 hover:border-[#0077B5] hover:scale-105 shadow-xs"
                 >
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#F87901]" />
-                  {cert}
-                </span>
-              ))}
+                  <LinkedInIcon size={18} />
+                </a>
+                <a
+                  href="https://www.facebook.com/profile.php?id=61596072134328"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Follow Icon Drugs on Facebook"
+                  title="Facebook"
+                  className="w-9 h-9 rounded-xl bg-white/10 hover:bg-[#1877F2] text-white flex items-center justify-center transition-all duration-200 border border-white/15 hover:border-[#1877F2] hover:scale-105 shadow-xs"
+                >
+                  <FacebookIcon size={18} />
+                </a>
+                <a
+                  href="https://www.instagram.com/icondrugs/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Follow Icon Drugs on Instagram"
+                  title="Instagram"
+                  className="w-9 h-9 rounded-xl bg-white/10 hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] text-white flex items-center justify-center transition-all duration-200 border border-white/15 hover:border-transparent hover:scale-105 shadow-xs"
+                >
+                  <InstagramIcon size={18} />
+                </a>
+                <a
+                  href="https://x.com/icondrugs"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Follow Icon Drugs on X (Twitter)"
+                  title="X (Twitter)"
+                  className="w-9 h-9 rounded-xl bg-white/10 hover:bg-black text-white flex items-center justify-center transition-all duration-200 border border-white/15 hover:border-black hover:scale-105 shadow-xs"
+                >
+                  <TwitterIcon size={16} />
+                </a>
+                <a
+                  href="https://wa.me/919823044000"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Chat with Icon Drugs on WhatsApp"
+                  title="WhatsApp"
+                  className="w-9 h-9 rounded-xl bg-white/10 hover:bg-[#25D366] text-white flex items-center justify-center transition-all duration-200 border border-white/15 hover:border-[#25D366] hover:scale-105 shadow-xs"
+                >
+                  <WhatsAppIcon size={18} />
+                </a>
+              </div>
             </div>
           </div>
 
@@ -51,27 +116,32 @@ export default function Footer() {
             <ul className="space-y-2.5 text-sm text-slate-300">
               <li>
                 <Link href="/about" className="hover:text-white transition-colors">
-                  Heritage &amp; Story (About Us)
+                  Heritage &amp; Leadership
+                </Link>
+              </li>
+              <li>
+                <Link href="/corporate-information" className="hover:text-white transition-colors">
+                  Corporate Information &amp; Facts
+                </Link>
+              </li>
+              <li>
+                <Link href="/pharmaceutical-company-in-nagpur" className="hover:text-white transition-colors">
+                  Pharma Company in Nagpur
+                </Link>
+              </li>
+              <li>
+                <Link href="/pharmaceutical-manufacturing-maharashtra" className="hover:text-white transition-colors">
+                  Manufacturing in Maharashtra
                 </Link>
               </li>
               <li>
                 <Link href="/quality" className="hover:text-white transition-colors">
-                  Quality Management &amp; WHO-GMP
-                </Link>
-              </li>
-              <li>
-                <Link href="/healthcare-professionals" className="hover:text-white transition-colors">
-                  HCP Portal &amp; Standards
-                </Link>
-              </li>
-              <li>
-                <Link href="/insights" className="hover:text-white transition-colors">
-                  News &amp; Scientific Insights
+                  Quality Management &amp; Standards
                 </Link>
               </li>
               <li>
                 <Link href="/contact" className="hover:text-white transition-colors">
-                  Contact &amp; Nagpur Office
+                  Contact &amp; Dharampeth Office
                 </Link>
               </li>
             </ul>
@@ -80,25 +150,35 @@ export default function Footer() {
           {/* Column: Therapies & Products */}
           <div className="space-y-4">
             <h3 className="text-xs uppercase font-extrabold tracking-widest text-[#F87901]">
-              Therapies & Formulations
+              Formulations &amp; Supply
             </h3>
             <ul className="space-y-2.5 text-sm text-slate-300">
-              {therapyAreasData.slice(0, 4).map((area) => (
-                <li key={area.id}>
-                  <Link
-                    href={`/therapeutic-areas/${area.slug}`}
-                    className="hover:text-white transition-colors"
-                  >
-                    {area.name}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link href="/pharmaceutical-products-formulations" className="hover:text-white transition-colors">
+                  Formulations Portfolio
+                </Link>
+              </li>
+              <li>
+                <Link href="/pharmaceutical-distribution-supply" className="hover:text-white transition-colors">
+                  PCD Franchise &amp; Supply
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/prenerve-caps" className="hover:text-white transition-colors">
+                  Prenerve&reg; Range (Neurology)
+                </Link>
+              </li>
+              <li>
+                <Link href="/products/apar-range" className="hover:text-white transition-colors">
+                  APAR&reg; Series (Orthopedics)
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/products"
                   className="inline-flex items-center gap-1 font-bold text-white hover:text-[#F87901] transition-colors"
                 >
-                  Product Catalog <ArrowUpRight className="w-3.5 h-3.5" />
+                  Master Product Catalog <ArrowUpRight className="w-3.5 h-3.5" />
                 </Link>
               </li>
             </ul>

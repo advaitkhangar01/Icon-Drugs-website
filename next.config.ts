@@ -80,6 +80,66 @@ const nextConfig: NextConfig = {
         destination: "/quality",
         permanent: true,
       },
+      {
+        source: "/contact-us",
+        destination: "/contact",
+        permanent: true,
+      },
+      {
+        source: "/about-us",
+        destination: "/about",
+        permanent: true,
+      },
+      {
+        source: "/nagpur",
+        destination: "/pharmaceutical-company-in-nagpur",
+        permanent: true,
+      },
+      {
+        source: "/maharashtra",
+        destination: "/pharmaceutical-manufacturing-maharashtra",
+        permanent: true,
+      },
+      {
+        source: "/products/precal-softgels",
+        destination: "/products/precal-softgel",
+        permanent: true,
+      },
+      {
+        source: "/products/allerkast-tab",
+        destination: "/products/allerkast",
+        permanent: true,
+      },
+      {
+        source: "/products/nitobact-100",
+        destination: "/products/nitobact-sr",
+        permanent: true,
+      },
+      {
+        source: "/products/recoff-dx",
+        destination: "/products/recoff-dx-syrup",
+        permanent: true,
+      },
+      {
+        source: "/products/rabicon-dsr",
+        destination: "/products/rabicon-range",
+        permanent: true,
+      },
+      {
+        source: "/products/apar",
+        destination: "/products/apar-range",
+        permanent: true,
+      },
+      {
+        source: "/products/apar-s",
+        destination: "/products/apar-range",
+        permanent: true,
+      },
+      {
+        source: "/products/apar-mr",
+        destination: "/products/apar-range",
+        permanent: true,
+      },
     ];
   },
 };

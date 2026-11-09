@@ -135,35 +135,35 @@ export default function AboutPage() {
                 <span className="text-xs font-extrabold uppercase tracking-widest text-slate-400">
                   Incorporated
                 </span>
-                <div className="text-3xl font-black text-slate-900 font-heading">2002</div>
-                <p className="text-xs text-slate-600">Established in Nagpur, Maharashtra with a mission of affordable clinical excellence.</p>
+                <div className="text-2xl sm:text-3xl font-black text-slate-900 font-heading">8 Jan 2002</div>
+                <p className="text-xs text-slate-600">CIN: U24231MH2002PTC134479. Incorporated in Nagpur, Maharashtra.</p>
               </div>
 
               <div className="space-y-2">
                 <span className="text-xs font-extrabold uppercase tracking-widest text-slate-400">
-                  Accreditation
+                  Regulatory Integrity
                 </span>
-                <div className="text-3xl font-black text-[#005EB1] font-heading">WHO-GMP</div>
-                <p className="text-xs text-slate-600">ISO 9001:2015 certified production lines and GLP-calibrated analytical labs.</p>
+                <div className="text-2xl sm:text-3xl font-black text-[#005EB1] font-heading">DCGI Formulations</div>
+                <p className="text-xs text-slate-600">Formulated in licensed facilities under national pharmacopeial standards.</p>
               </div>
 
               <div className="space-y-2">
                 <span className="text-xs font-extrabold uppercase tracking-widest text-slate-400">
                   Formulation Reach
                 </span>
-                <div className="text-3xl font-black text-[#F87901] font-heading">25+ Portfolios</div>
+                <div className="text-2xl sm:text-3xl font-black text-[#F87901] font-heading">25+ Portfolios</div>
                 <p className="text-xs text-slate-600">Covering neurology, orthopedics, gastroenterology, and acute respiratory care.</p>
               </div>
 
               <div className="space-y-2">
                 <span className="text-xs font-extrabold uppercase tracking-widest text-slate-400">
-                  Headquarters
+                  Corporate Location
                 </span>
                 <div className="text-xl font-black text-slate-900 font-heading flex items-center gap-1.5 mt-2">
                   <MapPin className="w-5 h-5 text-[#005EB1] shrink-0" />
                   <span>Nagpur, MH</span>
                 </div>
-                <p className="text-xs text-slate-600">Strategic Central India logistics corridor connecting distributors nationwide.</p>
+                <p className="text-xs text-slate-600">Dharampeth (440010) &amp; Vivekanand Nagar (440015), Nagpur.</p>
               </div>
             </div>
           </div>
@@ -274,6 +274,72 @@ export default function AboutPage() {
                 <p className="text-sm text-slate-600 leading-relaxed">
                   Healthcare is ultimately human. From patient-friendly blister packaging to clear dosage labeling, our medications are calibrated so clinicians can prescribe with confidence.
                 </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Corporate Governance & Verified Identity */}
+        <section className="bg-slate-50 py-16 border-t border-slate-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm space-y-8">
+              <div className="space-y-2">
+                <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-blue-50 text-[#005EB1] text-xs font-bold uppercase tracking-wider">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>Corporate Governance &amp; Registry</span>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 font-heading">
+                  Leadership &amp; Verified Business Credentials
+                </h2>
+                <p className="text-sm text-slate-600">
+                  Transparency and regulatory integrity are foundational to every pharmaceutical operation at Icon Drugs Private Limited.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-4 border-t border-slate-100">
+                <div className="space-y-2 p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                  <div className="text-xs font-bold text-[#005EB1] uppercase tracking-wider">Director</div>
+                  <div className="text-lg font-bold text-slate-900">Umesh Dange</div>
+                  <p className="text-xs text-slate-600">Founding Director of Icon Drugs Private Limited since incorporation on 8 January 2002.</p>
+                </div>
+
+                <div className="space-y-2 p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                  <div className="text-xs font-bold text-[#F87901] uppercase tracking-wider">Business Owner / Representative</div>
+                  <div className="text-lg font-bold text-slate-900">Sushrut Dange</div>
+                  <p className="text-xs text-slate-600">Leading business operations, distributor partnerships, and commercial strategic development.</p>
+                </div>
+
+                <div className="space-y-2 p-5 rounded-2xl bg-slate-50 border border-slate-200/80">
+                  <div className="text-xs font-bold text-emerald-700 uppercase tracking-wider">Corporate Identity</div>
+                  <div className="text-xs space-y-1 text-slate-800 font-mono">
+                    <p><strong>CIN:</strong> U24231MH2002PTC134479</p>
+                    <p><strong>RoC:</strong> RoC Mumbai / Nagpur</p>
+                    <p><strong>Class:</strong> Private Limited Company</p>
+                  </div>
+                  <p className="text-[11px] text-slate-500 pt-1">Active Indian Non-Government Company incorporated on 8 January 2002.</p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                <div className="p-5 rounded-2xl bg-blue-50/60 border border-blue-100 text-xs text-slate-700 space-y-1">
+                  <div className="font-bold text-slate-900 flex items-center gap-1.5">
+                    <MapPin className="w-4 h-4 text-[#005EB1]" />
+                    <span>Business &amp; Operations Office (Commercial Address)</span>
+                  </div>
+                  <p className="pl-5 text-slate-600">
+                    M2, Ved Solitaire, 5th Cross B St., Cement Road, Dharampeth, Nagpur, Maharashtra – 440010
+                  </p>
+                </div>
+
+                <div className="p-5 rounded-2xl bg-slate-100/60 border border-slate-200 text-xs text-slate-700 space-y-1">
+                  <div className="font-bold text-slate-900 flex items-center gap-1.5">
+                    <Building2 className="w-4 h-4 text-slate-600" />
+                    <span>Registered Corporate Office (Per MCA Records)</span>
+                  </div>
+                  <p className="pl-5 text-slate-600">
+                    Plot No. 1, Flat No. 201, Sai Darshan Complex, Vivekanand Nagar, Wardha Road, Nagpur, Maharashtra – 440015
+                  </p>
+                </div>
               </div>
             </div>
           </div>

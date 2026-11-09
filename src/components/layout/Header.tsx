@@ -17,6 +17,9 @@ import {
   Phone,
   ChevronRight,
   Pill,
+  FileText,
+  MapPin,
+  Factory,
 } from "lucide-react";
 import IconLogo from "@/components/ui/IconLogo";
 import SearchModal from "@/components/ui/SearchModal";
@@ -78,7 +81,7 @@ export default function Header() {
             <div className="flex items-center gap-6">
               <span className="flex items-center gap-1.5">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                WHO-GMP Certified & Export Compliant
+                DCGI Approved Formulations | Nagpur, Maharashtra
               </span>
               <span>•</span>
               <span>25+ Years of Formulation Excellence</span>
@@ -143,21 +146,75 @@ export default function Header() {
                 </button>
 
                 {activeMegaMenu === "company" && (
-                  <div className="absolute top-full left-0 w-80 bg-white rounded-2xl shadow-2xl border border-slate-200 p-3 text-slate-900 transition-all duration-200 animate-in fade-in slide-in-from-top-2">
+                  <div className="absolute top-full left-0 w-88 bg-white rounded-2xl shadow-2xl border border-slate-200 p-3 text-slate-900 transition-all duration-200 animate-in fade-in slide-in-from-top-2">
                     <Link
                       href="/about"
                       onClick={() => setActiveMegaMenu(null)}
-                      className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group"
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
                     >
                       <div className="w-8 h-8 rounded-lg bg-[#005EB1]/10 text-[#005EB1] flex items-center justify-center shrink-0 group-hover:bg-[#005EB1] group-hover:text-white transition-colors">
                         <Building2 className="w-4 h-4" />
                       </div>
                       <div>
                         <div className="text-xs font-bold text-slate-900 group-hover:text-[#005EB1]">
-                          About Us &amp; Heritage
+                          About Us &amp; Leadership
                         </div>
                         <div className="text-[11px] text-slate-500">
-                          25+ years of manufacturing pedigree
+                          Established 2002 | Corporate heritage
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/corporate-information"
+                      onClick={() => setActiveMegaMenu(null)}
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-blue-50 text-[#005EB1] flex items-center justify-center shrink-0 group-hover:bg-[#005EB1] group-hover:text-white transition-colors">
+                        <FileText className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-slate-900 group-hover:text-[#005EB1]">
+                          Corporate Information
+                        </div>
+                        <div className="text-[11px] text-slate-500">
+                          CIN, directors &amp; verified factsheet
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/pharmaceutical-company-in-nagpur"
+                      onClick={() => setActiveMegaMenu(null)}
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-orange-50 text-[#F87901] flex items-center justify-center shrink-0 group-hover:bg-[#F87901] group-hover:text-white transition-colors">
+                        <MapPin className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-slate-900 group-hover:text-[#F87901]">
+                          Pharma Company in Nagpur
+                        </div>
+                        <div className="text-[11px] text-slate-500">
+                          Central India hub &amp; Dharampeth office
+                        </div>
+                      </div>
+                    </Link>
+
+                    <Link
+                      href="/pharmaceutical-manufacturing-maharashtra"
+                      onClick={() => setActiveMegaMenu(null)}
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
+                    >
+                      <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-700 flex items-center justify-center shrink-0 group-hover:bg-emerald-700 group-hover:text-white transition-colors">
+                        <Factory className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <div className="text-xs font-bold text-slate-900 group-hover:text-emerald-700">
+                          Manufacturing in Maharashtra
+                        </div>
+                        <div className="text-[11px] text-slate-500">
+                          Oral solids, liquids &amp; injectables
                         </div>
                       </div>
                     </Link>
@@ -165,7 +222,7 @@ export default function Header() {
                     <Link
                       href="/quality"
                       onClick={() => setActiveMegaMenu(null)}
-                      className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group"
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
                     >
                       <div className="w-8 h-8 rounded-lg bg-[#005EB1]/10 text-[#005EB1] flex items-center justify-center shrink-0 group-hover:bg-[#005EB1] group-hover:text-white transition-colors">
                         <ShieldCheck className="w-4 h-4" />
@@ -175,7 +232,7 @@ export default function Header() {
                           Quality &amp; Safety Systems
                         </div>
                         <div className="text-[11px] text-slate-500">
-                          WHO-GMP, HPLC assay &amp; sterile lines
+                          Analytical validation &amp; batch testing
                         </div>
                       </div>
                     </Link>
@@ -183,7 +240,7 @@ export default function Header() {
                     <Link
                       href="/contact"
                       onClick={() => setActiveMegaMenu(null)}
-                      className="flex items-start gap-3 p-3 rounded-xl hover:bg-slate-50 transition-colors group"
+                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-50 transition-colors group"
                     >
                       <div className="w-8 h-8 rounded-lg bg-[#005EB1]/10 text-[#005EB1] flex items-center justify-center shrink-0 group-hover:bg-[#005EB1] group-hover:text-white transition-colors">
                         <Phone className="w-4 h-4" />
@@ -193,7 +250,7 @@ export default function Header() {
                           Contact &amp; Headquarters
                         </div>
                         <div className="text-[11px] text-slate-500">
-                          Nagpur corporate office &amp; hotlines
+                          Dharampeth, Nagpur office &amp; hotlines
                         </div>
                       </div>
                     </Link>

@@ -6,6 +6,8 @@
 export interface CompanyInfo {
   name: string;
   legalName: string;
+  cin: string;
+  incorporationDate: string;
   tagline: string;
   heritageYears: string;
   foundedYear: string;
@@ -17,9 +19,14 @@ export interface CompanyInfo {
   city: string;
   state: string;
   country: string;
+  postalCode: string;
   phone: string;
   email: string;
   address: string;
+  businessAddress: string;
+  registeredAddress: string;
+  director: string;
+  businessRepresentative: string;
 }
 
 export interface HeroSlide {
@@ -154,21 +161,74 @@ export interface QualityPillar {
 export const companyData: CompanyInfo = {
   name: "Icon Drugs",
   legalName: "ICON DRUGS PRIVATE LIMITED",
+  cin: "U24231MH2002PTC134479",
+  incorporationDate: "8 January 2002",
   tagline: "Healthcare, built on experience.",
   heritageYears: "25+",
   foundedYear: "2002",
   facilitiesCount: "04+",
   productsCount: "25 Formulations",
   marketsCount: "25+",
-  certifications: ["WHO-GMP Compliant", "ISO 9001:2015", "GLP Certified Labs", "DCGI Approved Formulations"],
+  certifications: ["DCGI Approved Formulations", "Quality Compliant Facilities"],
   headquarters: "Nagpur, Maharashtra, India",
   city: "Nagpur",
   state: "Maharashtra",
   country: "India",
-  phone: "+91 712 294 0128",
+  postalCode: "440010",
+  phone: "+91 98230 44000",
   email: "business@icondrugs.com",
-  address: "Pharma Industrial Complex, Nagpur, Maharashtra 440001, India",
+  address: "M2, Ved Solitaire, 5th Cross B St., Cement Road, Dharampeth, Nagpur, Maharashtra – 440010",
+  businessAddress: "M2, Ved Solitaire, 5th Cross B St., Cement Road, Dharampeth, Nagpur, Maharashtra – 440010",
+  registeredAddress: "Plot No. 1, Flat No. 201, Sai Darshan Complex, Vivekanand Nagar, Wardha Road, Nagpur, Maharashtra – 440015",
+  director: "Umesh Dange",
+  businessRepresentative: "Sushrut Dange",
 };
+
+export interface SocialLinkItem {
+  id: string;
+  name: string;
+  url: string;
+  ariaLabel: string;
+  icon: "instagram" | "facebook" | "linkedin" | "twitter" | "whatsapp";
+}
+
+export const socialLinksData: SocialLinkItem[] = [
+  {
+    id: "linkedin",
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/company/icon-drugs",
+    ariaLabel: "Connect with Icon Drugs on LinkedIn",
+    icon: "linkedin",
+  },
+  {
+    id: "facebook",
+    name: "Facebook",
+    url: "https://www.facebook.com/profile.php?id=61596072134328",
+    ariaLabel: "Follow Icon Drugs on Facebook",
+    icon: "facebook",
+  },
+  {
+    id: "instagram",
+    name: "Instagram",
+    url: "https://www.instagram.com/icondrugs/",
+    ariaLabel: "Follow Icon Drugs on Instagram",
+    icon: "instagram",
+  },
+  {
+    id: "twitter",
+    name: "X (Twitter)",
+    url: "https://x.com/icondrugs",
+    ariaLabel: "Follow Icon Drugs on X (Twitter)",
+    icon: "twitter",
+  },
+  {
+    id: "whatsapp",
+    name: "WhatsApp",
+    url: "https://wa.me/919823044000",
+    ariaLabel: "Chat with Icon Drugs on WhatsApp",
+    icon: "whatsapp",
+  },
+];
 
 export const heroSlides: HeroSlide[] = [
   {

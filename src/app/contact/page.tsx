@@ -17,6 +17,13 @@ import {
   MessageSquare,
   ArrowRight,
 } from "lucide-react";
+import {
+  InstagramIcon,
+  FacebookIcon,
+  LinkedInIcon,
+  TwitterIcon,
+  WhatsAppIcon,
+} from "@/components/ui/SocialIcons";
 
 export const metadata: Metadata = {
   title: "Contact Icon Drugs Private Limited | Corporate Office & Procurement Desk | Nagpur",
@@ -69,12 +76,12 @@ export default function ContactPage() {
         "url": "https://icondrugs.com/contact",
         "name": "Contact Icon Drugs Private Limited",
         "description":
-          "Official contact information and location coordinates for Icon Drugs Private Limited headquarters in Nagpur, Maharashtra.",
+          "Official contact information, business office in Dharampeth, Nagpur, and corporate communication desks for Icon Drugs Private Limited.",
         "publisher": {
           "@id": "https://icondrugs.com/#organization",
         },
         "mainEntity": {
-          "@id": "https://icondrugs.com/#localbusiness",
+          "@id": "https://icondrugs.com/#organization",
         },
       },
       {
@@ -120,7 +127,7 @@ export default function ContactPage() {
               Connect with Icon Drugs
             </h1>
             <p className="text-lg sm:text-xl text-slate-200 max-w-3xl leading-relaxed">
-              Whether you are an authorized healthcare distributor, hospital procurement lead, or clinician seeking formulation monographs, our Central India desk is at your disposal.
+              Whether you are an authorized healthcare distributor, hospital procurement lead, or clinician seeking formulation monographs, our Nagpur, Maharashtra desk is at your disposal.
             </p>
           </div>
         </section>
@@ -134,15 +141,16 @@ export default function ContactPage() {
                 <MapPin className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 font-heading">
-                Corporate Headquarters
+                Business &amp; Operations Office
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                ICON DRUGS PRIVATE LIMITED<br />
-                Pharma Industrial Complex<br />
-                Nagpur, Maharashtra 440001, India
+                <strong className="text-slate-900 font-semibold">ICON DRUGS PRIVATE LIMITED</strong><br />
+                M2, Ved Solitaire, 5th Cross B St.,<br />
+                Cement Road, Dharampeth,<br />
+                Nagpur, Maharashtra – 440010, India
               </p>
               <div className="pt-2 text-xs font-semibold text-[#005EB1]">
-                Central India Logistics Corridor
+                Dharampeth Commercial Corridor, Nagpur
               </div>
             </div>
 
@@ -152,31 +160,33 @@ export default function ContactPage() {
                 <Phone className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 font-heading">
-                Direct Procurement Hotlines
+                Direct Procurement &amp; WhatsApp
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">
-                Direct Desk: <a href="tel:+917122940128" className="font-bold text-slate-900 hover:text-[#005EB1]">+91 712 294 0128</a><br />
-                Priority WhatsApp: <a href="tel:+919823044000" className="font-bold text-slate-900 hover:text-[#005EB1]">+91 98230 44000</a>
+                Direct / WhatsApp: <a href="tel:+919823044000" className="font-bold text-slate-900 hover:text-[#005EB1]">+91 98230 44000</a><br />
+                Institutional Enquiries: <span className="font-bold text-slate-900">business@icondrugs.com</span>
               </p>
               <div className="pt-2 text-xs font-semibold text-slate-500">
-                Mon – Sat: 09:00 AM – 06:00 PM IST
+                Mon – Sat: 09:30 AM – 06:30 PM IST
               </div>
             </div>
 
-            {/* Email Card */}
+            {/* Corporate Registry Card */}
             <div className="bg-white rounded-3xl p-8 shadow-xl border border-slate-200 space-y-4">
               <div className="w-12 h-12 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center">
-                <Mail className="w-6 h-6" />
+                <Building2 className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-slate-900 font-heading">
-                Electronic Correspondence
+                Corporate Identity
               </h3>
-              <p className="text-sm text-slate-600 leading-relaxed">
-                Institutional: <a href="mailto:business@icondrugs.com" className="font-bold text-[#005EB1] hover:underline">business@icondrugs.com</a><br />
-                Corporate: <a href="mailto:info@icondrugs.com" className="font-bold text-[#005EB1] hover:underline">info@icondrugs.com</a>
-              </p>
-              <div className="pt-2 text-xs font-semibold text-emerald-600">
-                Guaranteed 24-Hour Business Response
+              <div className="text-xs text-slate-600 space-y-1.5 leading-relaxed">
+                <p><strong className="text-slate-900 font-semibold">CIN:</strong> U24231MH2002PTC134479</p>
+                <p><strong className="text-slate-900 font-semibold">Incorporated:</strong> 8 January 2002</p>
+                <p><strong className="text-slate-900 font-semibold">Director:</strong> Umesh Dange</p>
+                <p><strong className="text-slate-900 font-semibold">Business Representative:</strong> Sushrut Dange</p>
+              </div>
+              <div className="pt-1 text-xs text-slate-500 border-t border-slate-100">
+                Regd. Office: Plot No. 1, Flat 201, Sai Darshan Complex, Vivekanand Nagar, Wardha Road, Nagpur – 440015
               </div>
             </div>
           </div>
@@ -235,6 +245,64 @@ export default function ContactPage() {
                     <p className="text-slate-500 text-xs">
                       Closed on Sundays & National Gazetted Holidays.
                     </p>
+                  </div>
+
+                  <div className="p-4 rounded-2xl bg-white border border-slate-200/80 space-y-2">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                      Official Social Channels
+                    </span>
+                    <div className="flex items-center gap-2 pt-1">
+                      <a
+                        href="https://www.linkedin.com/company/icon-drugs"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="LinkedIn"
+                        title="LinkedIn"
+                        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-[#0077B5] hover:text-white text-slate-600 flex items-center justify-center transition-colors"
+                      >
+                        <LinkedInIcon size={16} />
+                      </a>
+                      <a
+                        href="https://www.facebook.com/profile.php?id=61596072134328"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Facebook"
+                        title="Facebook"
+                        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-[#1877F2] hover:text-white text-slate-600 flex items-center justify-center transition-colors"
+                      >
+                        <FacebookIcon size={16} />
+                      </a>
+                      <a
+                        href="https://www.instagram.com/icondrugs/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="Instagram"
+                        title="Instagram"
+                        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-[#dc2743] hover:text-white text-slate-600 flex items-center justify-center transition-colors"
+                      >
+                        <InstagramIcon size={16} />
+                      </a>
+                      <a
+                        href="https://x.com/icondrugs"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="X (Twitter)"
+                        title="X (Twitter)"
+                        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-black hover:text-white text-slate-600 flex items-center justify-center transition-colors"
+                      >
+                        <TwitterIcon size={14} />
+                      </a>
+                      <a
+                        href="https://wa.me/919823044000"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label="WhatsApp"
+                        title="WhatsApp"
+                        className="w-8 h-8 rounded-lg bg-slate-100 hover:bg-[#25D366] hover:text-white text-slate-600 flex items-center justify-center transition-colors"
+                      >
+                        <WhatsAppIcon size={16} />
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>

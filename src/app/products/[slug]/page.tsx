@@ -102,7 +102,7 @@ export default async function ProductDetailPage({ params }: PageProps) {
         "@type": "Product",
         "@id": `https://icondrugs.com/products/${product.slug}#product`,
         "name": product.name,
-        "description": `${product.tagline}. Active generic composition: ${product.genericName}. Indicated for: ${product.indications.join(", ")}.`,
+        "description": `${product.tagline}. Active composition: ${product.genericName}. Indications: ${product.indications.join(", ")}.`,
         "image": product.image ? `https://icondrugs.com${product.image}` : "https://icondrugs.com/icon-brand-mark.png",
         "category": product.category,
         "brand": {
@@ -112,21 +112,38 @@ export default async function ProductDetailPage({ params }: PageProps) {
         "manufacturer": {
           "@id": "https://icondrugs.com/#organization",
         },
-        "offers": {
-          "@type": "Offer",
-          "url": `https://icondrugs.com/products/${product.slug}`,
-          "priceCurrency": "INR",
-          "price": "0.00",
-          "priceSpecification": {
-            "@type": "UnitPriceSpecification",
-            "priceType": "https://schema.org/B2BPrice",
-            "priceCurrency": "INR",
+        "additionalProperty": [
+          {
+            "@type": "PropertyValue",
+            "name": "Active Generic Composition",
+            "value": product.genericName,
           },
-          "availability": "https://schema.org/InStock",
-          "seller": {
-            "@id": "https://icondrugs.com/#organization",
+          {
+            "@type": "PropertyValue",
+            "name": "Dosage Form",
+            "value": product.dosageForm,
           },
-        },
+          {
+            "@type": "PropertyValue",
+            "name": "Packaging",
+            "value": product.packSize,
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Strength",
+            "value": product.strength,
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Prescription Status",
+            "value": product.isRx ? "Prescription Only (Rx)" : "Non-Prescription",
+          },
+          {
+            "@type": "PropertyValue",
+            "name": "Storage",
+            "value": product.storage,
+          },
+        ],
       },
       {
         "@type": "BreadcrumbList",

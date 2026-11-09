@@ -853,9 +853,9 @@ export default function BusinessEnquiryClient() {
                       <MapPin className="w-4 h-4" />
                     </div>
                     <div>
-                      <strong className="block text-slate-900 mb-0.5">Corporate &amp; Manufacturing Headquarters:</strong>
+                      <strong className="block text-slate-900 mb-0.5">Commercial &amp; Operations Office:</strong>
                       <span className="leading-relaxed text-slate-600">
-                        Pharma Industrial Complex, Nagpur, Maharashtra 440001, India
+                        M2, Ved Solitaire, 5th Cross B St., Cement Road, Dharampeth, Nagpur, Maharashtra – 440010
                       </span>
                     </div>
                   </div>
@@ -882,7 +882,7 @@ export default function BusinessEnquiryClient() {
                     <div>
                       <strong className="block text-slate-900 mb-0.5">Priority Procurement Hotline:</strong>
                       <span className="text-slate-800 font-medium">
-                        +91 712 294 0128 / +91 98230 44000
+                        +91 98230 44000
                       </span>
                     </div>
                   </div>

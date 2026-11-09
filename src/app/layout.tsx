@@ -28,29 +28,38 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://icondrugs.com"),
   title: {
-    default: "Icon Drugs | Healthcare, Built on Experience | Nagpur, Maharashtra",
+    default: "Icon Drugs | Pharmaceutical Company in Nagpur, Maharashtra",
     template: "%s | Icon Drugs",
   },
   description:
-    "Icon Drugs Private Limited — 25+ years of trusted pharmaceutical manufacturing, certified WHO-GMP & ISO 9001:2015 standards, and advanced therapeutic formulations across neurology, orthopedics, gastroenterology, respiratory, and anti-infectives in Nagpur, Maharashtra, India.",
+    "Icon Drugs Private Limited is an Indian pharmaceutical manufacturer and distributor based in Nagpur, Maharashtra. Established in 2002, producing DCGI-approved formulations across neurology, orthopedics, gastroenterology, and respiratory care.",
   keywords: [
     "Icon Drugs",
     "Icon Drugs Private Limited",
     "Icon Drugs Nagpur",
+    "Pharma companies in Nagpur",
+    "Pharmaceutical manufacturers in Nagpur",
     "Pharmaceutical company in Nagpur",
-    "Pharmaceutical companies in Maharashtra",
-    "WHO-GMP pharma manufacturer",
-    "PCD pharma franchise Maharashtra",
-    "Prenerve capsules",
+    "Pharmaceutical distributors in Nagpur",
+    "Pharma suppliers in Nagpur",
+    "Pharmaceutical products Nagpur",
+    "Pharmaceutical manufacturing company Maharashtra",
+    "Medicine manufacturing company Nagpur",
+    "Prenerve",
     "Prenerve-NT",
-    "Rabicon DSR",
-    "Healthcare built on experience",
+    "APAR",
+    "APAR-S",
+    "APAR-MR",
+    "PCD pharma franchise Maharashtra",
   ],
   authors: [{ name: "ICON DRUGS PRIVATE LIMITED", url: "https://icondrugs.com" }],
   creator: "ICON DRUGS PRIVATE LIMITED",
   publisher: "ICON DRUGS PRIVATE LIMITED",
   alternates: {
     canonical: "https://icondrugs.com",
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
   },
   robots: {
     index: true,
@@ -77,9 +86,9 @@ export const metadata: Metadata = {
   },
   manifest: "/site.webmanifest",
   openGraph: {
-    title: "Icon Drugs — Healthcare, Built on Experience",
+    title: "Icon Drugs | Pharmaceutical Company in Nagpur, Maharashtra",
     description:
-      "Icon Drugs Private Limited — 25+ years in pharmaceutical formulation excellence, certified WHO-GMP manufacturing, and patient-centered therapies headquartered in Nagpur, Maharashtra, India.",
+      "Icon Drugs Private Limited — Established in 2002 in Nagpur, Maharashtra. Pharmaceutical manufacturing, formulation development, and distribution network across India.",
     url: "https://icondrugs.com",
     siteName: "Icon Drugs",
     images: [
@@ -95,9 +104,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Icon Drugs — Healthcare, Built on Experience",
+    title: "Icon Drugs | Pharmaceutical Company in Nagpur, Maharashtra",
     description:
-      "25+ years of pharmaceutical manufacturing precision, WHO-GMP accredited formulations, and patient care across India.",
+      "Established in 2002 in Nagpur, Maharashtra. Pharmaceutical formulations across neurology, orthopedics, gastroenterology, and respiratory health.",
     images: ["/icon-brand-mark.png"],
   },
 };
@@ -113,36 +122,59 @@ const organizationJsonLd = {
       "url": "https://icondrugs.com",
       "logo": "https://icondrugs.com/icon-brand-mark.png",
       "description":
-        "Icon Drugs Private Limited is an Indian pharmaceutical manufacturing enterprise established in 2002, producing WHO-GMP certified therapeutic formulations in Nagpur, Maharashtra.",
-      "foundingDate": "2002",
+        "Icon Drugs Private Limited is an Indian pharmaceutical company incorporated on 8 January 2002, specializing in pharmaceutical formulations, manufacturing, and distribution in Nagpur, Maharashtra.",
+      "foundingDate": "2002-01-08",
+      "identifier": [
+        {
+          "@type": "PropertyValue",
+          "name": "CIN",
+          "value": "U24231MH2002PTC134479",
+        },
+      ],
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Pharma Industrial Complex",
+        "streetAddress": "M2, Ved Solitaire, 5th Cross B St., Cement Road, Dharampeth",
         "addressLocality": "Nagpur",
         "addressRegion": "Maharashtra",
-        "postalCode": "440001",
+        "postalCode": "440010",
         "addressCountry": "IN",
       },
       "contactPoint": [
         {
           "@type": "ContactPoint",
-          "telephone": "+91-712-294-0128",
+          "telephone": "+91-98230-44000",
           "contactType": "customer service",
           "email": "business@icondrugs.com",
           "areaServed": "IN",
           "availableLanguage": ["English", "Hindi", "Marathi"],
         },
       ],
+      "employee": [
+        {
+          "@type": "Person",
+          "name": "Umesh Dange",
+          "jobTitle": "Director",
+        },
+        {
+          "@type": "Person",
+          "name": "Sushrut Dange",
+          "jobTitle": "Business Owner & Representative",
+        },
+      ],
       "sameAs": [
         "https://www.linkedin.com/company/icon-drugs",
+        "https://www.instagram.com/icondrugs/",
+        "https://www.facebook.com/profile.php?id=61596072134328",
+        "https://x.com/icondrugs",
       ],
       "knowsAbout": [
         "Pharmaceutical Manufacturing",
-        "WHO-GMP Formulations",
+        "Pharmaceutical Formulations",
         "Neurology Formulations",
         "Orthopedics Formulations",
         "Gastroenterology Formulations",
-        "PCD Pharma Franchise",
+        "Respiratory Formulations",
+        "PCD Pharma Franchise Distribution",
       ],
     },
     {
@@ -154,36 +186,11 @@ const organizationJsonLd = {
         "@id": "https://icondrugs.com/#organization",
       },
       "inLanguage": "en-US",
-    },
-    {
-      "@type": "MedicalBusiness",
-      "@id": "https://icondrugs.com/#localbusiness",
-      "name": "Icon Drugs Private Limited",
-      "image": "https://icondrugs.com/icon-brand-mark.png",
-      "url": "https://icondrugs.com",
-      "telephone": "+91-712-294-0128",
-      "priceRange": "$$",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Pharma Industrial Complex",
-        "addressLocality": "Nagpur",
-        "addressRegion": "Maharashtra",
-        "postalCode": "440001",
-        "addressCountry": "IN",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://icondrugs.com/products?q={search_term_string}",
+        "query-input": "required name=search_term_string",
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 21.1458,
-        "longitude": 79.0882,
-      },
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "09:00",
-          "closes": "18:00",
-        },
-      ],
     },
   ],
 };

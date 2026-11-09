@@ -27,7 +27,7 @@ export default function HomePage() {
         "url": "https://icondrugs.com",
         "name": "Icon Drugs — Healthcare, Built on Experience | Nagpur, Maharashtra",
         "description":
-          "Official corporate portal of Icon Drugs Private Limited. 25+ years of pharmaceutical formulation excellence, WHO-GMP certified facilities, and therapeutic leadership in Nagpur, Maharashtra.",
+          "Official corporate portal of Icon Drugs Private Limited (Incorporated 2002, CIN: U24231MH2002PTC134479). Pharmaceutical formulation manufacturing and distribution based in Nagpur, Maharashtra.",
         "isPartOf": {
           "@id": "https://icondrugs.com/#website",
         },

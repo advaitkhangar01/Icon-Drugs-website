@@ -1,123 +1,205 @@
 # Icon Drugs Private Limited — Complete Monograph & Formulation Manifest (llms-full.txt)
-Entity: ICON DRUGS PRIVATE LIMITED
-Headquarters: Nagpur, Maharashtra, India
+Legal Entity: ICON DRUGS PRIVATE LIMITED
+CIN: U24231MH2002PTC134479
+Incorporation Date: 8 January 2002
+RoC: RoC Mumbai / Nagpur
+Director: Umesh Dange
+Business Representative: Sushrut Dange
+Commercial Office: M2, Ved Solitaire, 5th Cross B St., Cement Road, Dharampeth, Nagpur, Maharashtra – 440010
+Registered Office: Plot No. 1, Flat No. 201, Sai Darshan Complex, Vivekanand Nagar, Wardha Road, Nagpur, Maharashtra – 440015
 Domain: https://icondrugs.com
-Licensing & Compliance: WHO-GMP Compliant Facilities, ISO 9001:2015, DCGI Approved Formulations, GLP Certified Quality Control Labs
+Primary Hub: Nagpur, Maharashtra, India
 
 ================================================================================
-SECTION 1: CORPORATE IDENTITY & INFRASTRUCTURE
+SECTION 1: CORPORATE OVERVIEW & REGULATORY IDENTITY
 ================================================================================
 Legal Name: ICON DRUGS PRIVATE LIMITED
-Brand Name: Icon Drugs
-Founding Year: 2002 (25+ Years in Operation)
-Corporate Address: Nagpur, Maharashtra, India
+Brand: Icon Drugs
+Founding Year: 2002 (Incorporated 8 January 2002)
 Contact Email: business@icondrugs.com
-Business Scope: Formulation development, solid oral dosage manufacturing (tablets, softgel capsules), liquid orals (syrups, suspensions), sterile parenterals (injections), and topical formulations (gels, ointments).
-
-Quality Infrastructure:
-- Modern HVAC-controlled cleanroom production corridors (Class 10,000 / ISO 7 and Class 100 / ISO 5 aseptic filling zones).
-- Analytical testing laboratory equipped with High-Performance Liquid Chromatography (HPLC), Gas Chromatography (GC), UV-Vis Spectrophotometry, and accelerated stability chambers (ICH Q1A guidelines).
-- Continuous in-process quality control (IPQC) monitoring dissolution rate, friability, disintegration time, and content uniformity.
+WhatsApp / Direct Desk: +91 98230 44000
+Business Scope: Formulation development, solid oral dosage manufacturing (tablets, softgel capsules), liquid orals (syrups, suspensions), sterile parenterals (injections), and topical formulations (gels).
+Operations: Serving healthcare professionals, authorized stockists, PCD pharma franchise distributors, and hospital procurement across Maharashtra, Madhya Pradesh, Chhattisgarh, and Pan-India.
 
 ================================================================================
 SECTION 2: VERIFIED PRODUCT PORTFOLIO & ACTIVE FORMULATIONS
 ================================================================================
 
 1. PRENERVE CAPSULES
-- Generic Composition: Methylcobalamin 1500 mcg + Alpha Lipoic Acid 100 mg + Benfotiamine 50 mg + Pyridoxine HCl 3 mg + Folic Acid 1.5 mg
+- Generic Composition: Pregabalin 75 mg + Methylcobalamin 750 mcg
 - Dosage Form: Hard Gelatin Capsules (Alu-Alu 10x10 pack)
 - Category: Neurotrophic Formulation & Nerve Rejuvenator
 - Therapeutic Area: Neurology & Neuropathic Pain
-- Indications: Diabetic peripheral neuropathy, alcoholic neuropathy, drug-induced neuropathy, sciatica, and radiculopathies.
+- Indications: Diabetic peripheral neuropathy, post-herpetic neuralgia, sciatica, radiculopathy.
 - URL: https://icondrugs.com/products/prenerve-caps
 
 2. PRENERVE-NT TABLETS
-- Generic Composition: Pregabalin 75 mg + Nortriptyline HCl 10 mg
+- Generic Composition: Pregabalin 75 mg + Nortriptyline HCl 10 mg + Methylcobalamin 1500 mcg
 - Dosage Form: Film-Coated Tablets (Alu-Alu 10x10 pack)
 - Category: Dual-Action Neuropathic Analgesic
 - Therapeutic Area: Neurology & Chronic Pain
-- Indications: Moderate-to-severe neuropathic pain, post-herpetic neuralgia, fibromyalgia, spinal stenosis radiculopathy.
+- Indications: Moderate-to-severe neuropathic pain, fibromyalgia, spinal stenosis radiculopathy.
 - URL: https://icondrugs.com/products/prenerve-nt
 
 3. PRENERVE-FORTE CAPSULES
-- Generic Composition: Methylcobalamin 1500 mcg + Alpha Lipoic Acid 200 mg + Inositol 100 mg + Benfotiamine 100 mg + Chromium Polynicotinate 200 mcg
+- Generic Composition: Methylcobalamin 1500 mcg + Benfotiamine 15 mg + Alpha Lipoic Acid 100 mg + Inositol 100 mg + B-Complex + Lutein
 - Dosage Form: Hard Gelatin Capsules (Alu-Alu 10x10 pack)
 - Category: Advanced Neurovascular & Glycemic Support
 - Therapeutic Area: Neurology & Metabolic Health
 - URL: https://icondrugs.com/products/prenerve-forte
 
 4. PRENERVE INJECTION
-- Generic Composition: Methylcobalamin 1500 mcg / 2 mL + Niacinamide 100 mg + Pyridoxine HCl 100 mg
+- Generic Composition: Mecobalamin 1500 mcg + Folic Acid 0.7 mg + Niacinamide 12 mg
 - Dosage Form: Sterile Injectable Ampoule (Dispo pack with syringe)
 - Category: Rapid Bioavailable Neuro-Nutritional Injectable
 - Therapeutic Area: Neurology & Critical Neuro-Deficiencies
 - URL: https://icondrugs.com/products/prenerve-inj
 
 5. PRENERVE GEL
-- Generic Composition: Pregabalin 8% w/w + Diclofenac Diethylamine 1.16% w/w + Methyl Salicylate 10% w/w + Menthol 5% w/w
-- Dosage Form: Topical Deep Penetrating Gel (30g laminated tube)
+- Generic Composition: Diclofenac Diethylamine 1.16% + Linseed Oil 3% + Methyl Salicylate 10% + Menthol 5%
+- Dosage Form: Topical Deep Penetrating Gel (30g tube)
 - Category: Topical Neuropathic & Musculoskeletal Analgesic
 - URL: https://icondrugs.com/products/prenerve-gel
 
-6. PRECAL SOFTGEL CAPSULES
-- Generic Composition: Calcium Carbonate 1250 mg (eq. to elemental Calcium 500 mg) + Calcitriol 0.25 mcg + Vitamin K2-7 45 mcg
+6. APAR / APAR-S / APAR-MR RANGE
+- Generic Composition: Aceclofenac + Paracetamol (± Serratiopeptidase / Thiocolchicoside)
+- Dosage Form: Film-Coated Tablets (Blister 10x10 pack)
+- Category: Advanced Analgesic & Anti-Inflammatory Range
+- Therapeutic Area: Orthopedics & Musculoskeletal Care
+- Indications: Osteoarthritis, rheumatoid arthritis, ankylosing spondylitis, acute muscle spasm.
+- URL: https://icondrugs.com/products/apar-range
+
+7. CT-FLAM TABLETS
+- Generic Composition: Trypsin 48 mg + Bromelain 90 mg + Rutoside Trihydrate 100 mg + Aceclofenac 100 mg
+- Dosage Form: Enteric-Coated Tablets (Alu-Alu 10x10 pack)
+- Category: Proteolytic Enzyme & NSAID Combination
+- Therapeutic Area: Orthopedics & Post-Operative Edema
+- URL: https://icondrugs.com/products/ct-flam
+
+8. SEREK-D TABLETS
+- Generic Composition: Diclofenac Potassium 50 mg + Serratiopeptidase 10 mg
+- Dosage Form: Enteric-Coated Tablets (Alu-Alu 10x10 pack)
+- Category: Anti-inflammatory Enzyme Analgesic
+- Therapeutic Area: Orthopedics & Dental Trauma
+- URL: https://icondrugs.com/products/serek-d
+
+9. SEREK-DP TABLETS
+- Generic Composition: Diclofenac Potassium 50 mg + Serratiopeptidase 15 mg + Paracetamol 325 mg
+- Dosage Form: Enteric-Coated Tablets (Blister 10x10 pack)
+- Category: Triple Action Analgesic & Anti-Edema Tablet
+- URL: https://icondrugs.com/products/serek-dp
+
+10. SEREK-N TABLETS
+- Generic Composition: Nimesulide 100 mg + Paracetamol 325 mg + Serratiopeptidase 15 mg
+- Dosage Form: Uncoated Tablets (Blister 10x10 pack)
+- Category: Rapid-Onset Analgesic & Anti-Edema Formulation
+- Therapeutic Area: Orthopedics & Acute Pain Management
+- URL: https://icondrugs.com/products/serek-n
+
+11. PRECAL SOFTGEL CAPSULES
+- Generic Composition: Calcitriol 0.25 mcg + Calcium Carbonate 500 mg + Zinc 7.5 mg + Vit K2-7 + B12 + Folate
 - Dosage Form: Soft Gelatin Capsules (Blister 10x10 pack)
 - Category: High-Bioavailability Bone Matrix Formulation
 - Therapeutic Area: Bone Health & Mineral Metabolism
-- Indications: Osteoporosis, osteopenia, post-menopausal bone loss, fracture consolidation.
-- URL: https://icondrugs.com/products/precal-softgels
+- Indications: Osteoporosis, osteopenia, fracture consolidation, post-menopausal bone loss.
+- URL: https://icondrugs.com/products/precal-softgel
 
-7. RABICON-DSR CAPSULES
-- Generic Composition: Rabeprazole Sodium 20 mg (EC) + Domperidone 30 mg (SR)
+12. PRECAL-D TABLETS
+- Generic Composition: Calcium Aspartate + Magnesium Hydroxide + Zinc + Vitamin D3
+- Dosage Form: Film-Coated Tablets (Blister 10x10 pack)
+- Category: Bioavailable Organic Calcium Complex
+- URL: https://icondrugs.com/products/precal-d
+
+13. PANDOM / PANDOM-SR CAPSULES
+- Generic Composition: Pantoprazole 40 mg + Domperidone 10 mg / 30 mg SR
+- Dosage Form: Enteric-Coated / Sustained-Release Capsules (Alu-Alu 10x10 pack)
+- Category: Gastroprokinetic & Proton Pump Inhibitor
+- Therapeutic Area: Gastroenterology
+- URL: https://icondrugs.com/products/pandom-range
+
+14. RABICON / RABICON-L CAPSULES
+- Generic Composition: Rabeprazole Sodium 20 mg (± Levosulpiride 75 mg SR)
 - Dosage Form: Sustained Release Capsules (Alu-Alu 10x10 pack)
 - Category: Gastroprokinetic & Proton Pump Inhibitor
 - Therapeutic Area: Gastroenterology
-- Indications: Gastroesophageal Reflux Disease (GERD), erosive esophagitis, non-ulcer dyspepsia, hyperacidity.
-- URL: https://icondrugs.com/products/rabicon-dsr
+- URL: https://icondrugs.com/products/rabicon-range
 
-8. RECOFF-DX SYRUP
+15. ARGICON TABLETS
+- Generic Composition: L-Arginine 1000 mg
+- Dosage Form: Film-Coated Tablets (Blister 10x10 pack)
+- Category: Nitric Oxide Precursor & Gestational Support
+- Therapeutic Area: Obstetrics & Maternal Health
+- URL: https://icondrugs.com/products/argicon-tab
+
+16. ARGICON SACHET
+- Generic Composition: L-Arginine 3 g + Proanthocyanidin Granules 75 mg
+- Dosage Form: Oral Granule Sachet (Sugar-free, Orange flavor)
+- Category: Endothelial & Fetoplacental Perfusion Support
+- URL: https://icondrugs.com/products/argicon-sachet
+
+17. FOBIRON TABLETS & SYRUP
+- Generic Composition: Ferrous Ascorbate + Folic Acid + Zinc Sulphate
+- Dosage Form: Film-Coated Tablets & Oral Liquid
+- Category: Advanced Hematinic Formulation
+- URL: https://icondrugs.com/products/fobiron
+
+18. RECOFF SYRUP
+- Generic Composition: Ambroxol HCl 15 mg + Guaiphenesin 50 mg + Terbutaline 1.5 mg with Menthol
+- Dosage Form: Oral Liquid Expectorant (100 mL bottle)
+- Category: Bronchodilator & Mucolytic Formulation
+- URL: https://icondrugs.com/products/recoff-syrup
+
+19. RECOFF-DX SYRUP
 - Generic Composition: Dextromethorphan HBr 10 mg + Phenylephrine HCl 5 mg + Chlorpheniramine Maleate 2 mg / 5 mL
-- Dosage Form: Oral Liquid Suspension (100 mL PET bottle with measuring cup)
+- Dosage Form: Oral Liquid Suspension (100 mL bottle)
 - Category: Triple-Action Antitussive & Decongestant
 - Therapeutic Area: Respiratory & Pulmonology
-- Indications: Unproductive dry cough, allergic rhinitis, upper respiratory congestion.
-- URL: https://icondrugs.com/products/recoff-dx
+- URL: https://icondrugs.com/products/recoff-dx-syrup
 
-9. ALLERKAST TABLETS
-- Generic Composition: Levocetirizine Dihydrochloride 5 mg + Montelukast Sodium 10 mg
+20. ALLERKAST TABLETS
+- Generic Composition: Montelukast Sodium 10 mg + Levocetirizine HCl 5 mg
 - Dosage Form: Film-Coated Tablets (Alu-Alu 10x10 pack)
 - Category: Dual Antihistamine & Leukotriene Receptor Antagonist
 - Therapeutic Area: Respiratory & Allergic Rhinitis
-- URL: https://icondrugs.com/products/allerkast-tab
+- URL: https://icondrugs.com/products/allerkast
 
-10. NITOBACT 100 TABLETS
-- Generic Composition: Nitrofurantoin 100 mg (Controlled Release / Macrobid formulation)
-- Dosage Form: Controlled Release Tablets (Alu-Alu 10x10 pack)
+21. NITOBACT-SR TABLETS
+- Generic Composition: Nitrofurantoin 100 mg (Sustained Release)
+- Dosage Form: Sustained Release Tablets (Alu-Alu 10x10 pack)
 - Category: Targeted Urological Antimicrobial
 - Therapeutic Area: Anti-Infectives & Urology
-- Indications: Acute uncomplicated urinary tract infections (UTIs) caused by E. coli and Enterococcus faecalis.
-- URL: https://icondrugs.com/products/nitobact-100
+- URL: https://icondrugs.com/products/nitobact-sr
 
-11. OCON-OZ TABLETS
+22. OCON-OZ TABLETS
 - Generic Composition: Ofloxacin 200 mg + Ornidazole 500 mg
 - Dosage Form: Film-Coated Tablets (Blister 10x10 pack)
 - Category: Broad-Spectrum Fluoroquinolone & Nitroimidazole Combination
 - Therapeutic Area: Anti-Infectives & Gastroenterology
-- Indications: Mixed gastrointestinal infections, amoebic dysentery, dental infections, pelvic inflammatory disease.
 - URL: https://icondrugs.com/products/ocon-oz
 
-12. SEREK-N TABLETS
-- Generic Composition: Nimesulide 100 mg + Paracetamol 325 mg
-- Dosage Form: Uncoated Tablets (Blister 10x10 pack)
-- Category: Rapid-Onset Analgesic & Antipyretic
-- Therapeutic Area: Orthopedics & Acute Pain Management
-- URL: https://icondrugs.com/products/serek-n
+23. DERMICON-BN CREAM
+- Generic Composition: Clotrimazole 1% + Beclomethasone Dipropionate 0.025% + Neomycin Sulphate 0.50%
+- Dosage Form: Topical Cream (15g tube)
+- Category: Triple Action Dermatological Cream
+- URL: https://icondrugs.com/products/dermicon-bn
+
+24. ZENCORT TABLETS
+- Generic Composition: Deflazacort 6 mg
+- Dosage Form: Uncoated Tablets (Alu-Alu 10x10 pack)
+- Category: Systemic Corticosteroid
+- URL: https://icondrugs.com/products/zencort
+
+25. LYCOTOX TABLETS
+- Generic Composition: Green Tea + Ginkgo Biloba + Lycopene 5000 mcg + Multivitamins + Zinc & Minerals
+- Dosage Form: Film-Coated Tablets (Alu-Alu 10x10 pack)
+- Category: Antioxidant, Multimineral & Cellular Wellness
+- URL: https://icondrugs.com/products/lycotox
 
 ================================================================================
 SECTION 3: B2B COMMERCIAL TERMS & DISTRIBUTION
 ================================================================================
-Headquarters: Nagpur, Maharashtra, India
+Headquarters: M2, Ved Solitaire, Dharampeth, Nagpur, Maharashtra – 440010
 Distribution Coverage: All districts in Maharashtra (Nagpur, Pune, Mumbai, Nashik, Aurangabad, Amravati, Akola, Chandrapur), Madhya Pradesh, Chhattisgarh, and national wholesale corridors.
 Monopoly Rights: Exclusive territory agreements granted to certified PCD pharma distributors with valid Drug License (DL 20B/21B) and GST registration.
-Tender Supply: Approved supplier for private nursing homes, corporate hospital networks, and ESIC/state health supply panels.
-Contact: business@icondrugs.com | Website: https://icondrugs.com
+Tender Supply: Approved supplier for private nursing homes, corporate hospital networks, and institutional health supply panels.
+Contact: business@icondrugs.com | WhatsApp: +91 98230 44000 | Website: https://icondrugs.com

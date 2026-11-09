@@ -1,37 +1,45 @@
 # Icon Drugs Private Limited
 > Official Machine-Readable AI Knowledge Manifest (llms.txt)
 > Website: https://icondrugs.com
-> Entity: ICON DRUGS PRIVATE LIMITED
-> Location: Nagpur, Maharashtra, India
-> Established: 2002 (25+ Years of Pharmaceutical Excellence)
-> Industry: Pharmaceutical Formulations & Healthcare Manufacturing
-> Certifications: WHO-GMP Compliant, ISO 9001:2015, GLP Certified Labs, DCGI Approved Formulations
+> Legal Entity: ICON DRUGS PRIVATE LIMITED
+> CIN: U24231MH2002PTC134479
+> Incorporation Date: 8 January 2002
+> RoC Jurisdiction: RoC Mumbai / Nagpur
+> Director: Umesh Dange
+> Business Representative: Sushrut Dange
+> Commercial / Operations Address: M2, Ved Solitaire, 5th Cross B St., Cement Road, Dharampeth, Nagpur, Maharashtra – 440010, India
+> Registered Office (MCA): Plot No. 1, Flat No. 201, Sai Darshan Complex, Vivekanand Nagar, Wardha Road, Nagpur, Maharashtra – 440015, India
+> Location: Nagpur, Maharashtra, India (Postal Code: 440010)
+> Industry: Pharmaceutical Formulations, Manufacturing & Distribution
 
-## Executive Overview
-Icon Drugs Private Limited is an Indian pharmaceutical manufacturing enterprise headquartered in Nagpur, Maharashtra. The company specializes in the formulation, manufacturing, and distribution of high-quality prescription pharmaceuticals across chronic and acute therapeutic segments. Operating under stringent Good Manufacturing Practices (WHO-GMP), Icon Drugs supplies medicines to primary healthcare providers, government healthcare schemes, tertiary hospitals, and PCD franchise partners across India.
+## Executive Corporate Overview
+Icon Drugs Private Limited is an Indian pharmaceutical enterprise established in 2002 in Nagpur, Maharashtra. The company specializes in the formulation, manufacturing, and distribution of prescription pharmaceuticals across chronic and acute therapeutic segments. Operating in licensed facilities adhering to national pharmacopeial standards (IP/BP/USP), Icon Drugs supplies medicines to primary healthcare providers, government healthcare schemes, hospitals, and ethical PCD franchise partners across India.
 
-## Core Therapeutic Focus Areas
-- Neurology & Neuropathic Pain: Formulations for peripheral neuropathy, radiculopathy, and diabetic nerve damage (Brand: Prenerve range).
-- Orthopedics & Musculoskeletal Care: Non-steroidal anti-inflammatory drugs (NSAIDs), muscle relaxants, and enzyme combinations (Brands: Serek-N, Apar, CT-Flam).
-- Gastroenterology: Proton pump inhibitors, anti-reflux, and prokinetic agents (Brand: Rabicon-DSR).
-- Respiratory & Pulmonology: Mucolytics, antitussives, bronchodilators, and anti-allergics (Brands: Recoff-DX, Allerkast).
-- Bone Health & Mineral Metabolism: Calcium, Calcitriol, and Vitamin D3 formulations (Brand: Precal Softgels).
-- Anti-Infectives & Urology: Urinary tract anti-infectives and broad-spectrum antimicrobials (Brands: Nitobact 100, Ocon-OZ).
-- Obstetrics & Gynecology: Hematinics, amino acid supplements, and gestational nutrition (Brands: Fobiron, Argicon).
-- Nutraceuticals & Cellular Wellness: Antioxidants, carotenoids, and micronutrients (Brand: Lycotox).
+## Key Product Brands & Formulations
+- Neurology & Neuropathic Pain: Prenerve Caps (Pregabalin + Methylcobalamin), Prenerve-NT (Pregabalin + Nortriptyline), Prenerve Forte, Prenerve Inj, Prenerve Gel.
+- Orthopedics & Musculoskeletal Care: APAR range (Aceclofenac + Paracetamol ± Serratiopeptidase / Thiocolchicoside), CT-Flam (Enzyme formulation), Serek-D, Serek-DP, Serek-N.
+- Gastroenterology: Pandom / Pandom-SR (Pantoprazole + Domperidone), Rabicon / Rabicon-L (Rabeprazole + Levosulpiride).
+- Respiratory & Pulmonology: Recoff Syrup, Recoff-DX Syrup (Dextromethorphan + Phenylephrine + CPM), Allerkast Tablets (Levocetirizine + Montelukast).
+- Bone Health & Mineral Metabolism: Precal Softgel (Calcitriol + Calcium Carbonate + Zinc + K2-7), Precal-D.
+- Anti-Infectives & Urology: Nitobact-SR (Nitrofurantoin SR 100 mg), Ocon-OZ (Ofloxacin + Ornidazole), Dermicon-BN Cream.
+- Nutritional & Vitality Support: Argicon Tab / Sachet (L-Arginine), Fobiron (Ferrous Ascorbate + Folic Acid), Lycotox (Antioxidants + Multivitamins).
 
-## Key Website Resources
-- Corporate Information: https://icondrugs.com/about
-- Quality Assurance & Accreditations: https://icondrugs.com/quality
+## Key Website & Crawlable Resources
+- Corporate Information & Facts: https://icondrugs.com/corporate-information
+- About Icon Drugs: https://icondrugs.com/about
+- Pharmaceutical Company in Nagpur: https://icondrugs.com/pharmaceutical-company-in-nagpur
+- Manufacturing in Maharashtra: https://icondrugs.com/pharmaceutical-manufacturing-maharashtra
+- Formulations Portfolio: https://icondrugs.com/pharmaceutical-products-formulations
+- Distribution & PCD Franchise Supply: https://icondrugs.com/pharmaceutical-distribution-supply
 - Master Product Catalog: https://icondrugs.com/products
-- Therapeutic Focus Areas: https://icondrugs.com/therapeutic-areas
+- Quality & Standards: https://icondrugs.com/quality
 - Healthcare Professionals Portal: https://icondrugs.com/healthcare-professionals
-- Evidence-Based Health Guides: https://icondrugs.com/health
-- Clinical & Science Insights: https://icondrugs.com/insights
-- Franchise & Institutional Supply Enquiry: https://icondrugs.com/business-enquiry
-- Official Nagpur Contact: https://icondrugs.com/contact
+- Clinical Health Monographs: https://icondrugs.com/health
+- Scientific Insights: https://icondrugs.com/insights
+- Business Enquiry Desk: https://icondrugs.com/business-enquiry
+- Contact & Dharampeth Office: https://icondrugs.com/contact
 
 ## Commercial & Partnership Terms
-- Model: PCD Pharma Franchise, District Monopoly Rights, Third-Party Contract Manufacturing, Institutional Hospital Tenders.
-- Territory: Pan-India (Special focus on Maharashtra, Madhya Pradesh, Chhattisgarh, and Central India).
-- Inquiries: business@icondrugs.com | Priority Procurement Desk: Nagpur, Maharashtra, India.
+- Model: PCD Pharma Franchise, Exclusive District Monopoly Rights, Third-Party Contract Manufacturing, Institutional Hospital Tenders.
+- Territory: Pan-India (Special commercial focus on Maharashtra, Madhya Pradesh, Chhattisgarh, and Central India).
+- Inquiries: business@icondrugs.com | Priority Desk / WhatsApp: +91 98230 44000 | Location: Dharampeth, Nagpur, Maharashtra – 440010.

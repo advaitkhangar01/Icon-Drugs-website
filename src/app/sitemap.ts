@@ -7,6 +7,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const coreRoutes = [
     { route: "", changeFrequency: "weekly" as const, priority: 1.0 },
+    { route: "/pharmaceutical-company-in-nagpur", changeFrequency: "weekly" as const, priority: 0.95 },
+    { route: "/pharmaceutical-manufacturing-maharashtra", changeFrequency: "weekly" as const, priority: 0.9 },
+    { route: "/pharmaceutical-products-formulations", changeFrequency: "weekly" as const, priority: 0.9 },
+    { route: "/pharmaceutical-distribution-supply", changeFrequency: "weekly" as const, priority: 0.9 },
+    { route: "/corporate-information", changeFrequency: "monthly" as const, priority: 0.85 },
     { route: "/about", changeFrequency: "monthly" as const, priority: 0.8 },
     { route: "/quality", changeFrequency: "monthly" as const, priority: 0.8 },
     { route: "/contact", changeFrequency: "monthly" as const, priority: 0.8 },

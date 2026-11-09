@@ -77,19 +77,49 @@ export default function HtmlSitemapPage() {
                 </li>
                 <li>
                   <Link href="/about" className="hover:text-[#005EB1] font-medium flex items-center justify-between">
-                    <span>About Icon Drugs (25+ Years)</span>
+                    <span>About Icon Drugs (Heritage &amp; Leadership)</span>
+                    <ChevronRight className="w-4 h-4 text-slate-300" />
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/corporate-information" className="hover:text-[#005EB1] font-medium flex items-center justify-between">
+                    <span>Corporate Information &amp; Entity Facts</span>
+                    <ChevronRight className="w-4 h-4 text-slate-300" />
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pharmaceutical-company-in-nagpur" className="hover:text-[#005EB1] font-medium flex items-center justify-between">
+                    <span>Pharma Company in Nagpur, Maharashtra</span>
+                    <ChevronRight className="w-4 h-4 text-slate-300" />
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pharmaceutical-manufacturing-maharashtra" className="hover:text-[#005EB1] font-medium flex items-center justify-between">
+                    <span>Manufacturing in Maharashtra</span>
+                    <ChevronRight className="w-4 h-4 text-slate-300" />
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pharmaceutical-products-formulations" className="hover:text-[#005EB1] font-medium flex items-center justify-between">
+                    <span>Formulations &amp; Products Portfolio</span>
+                    <ChevronRight className="w-4 h-4 text-slate-300" />
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pharmaceutical-distribution-supply" className="hover:text-[#005EB1] font-medium flex items-center justify-between">
+                    <span>PCD Franchise &amp; Distribution Supply</span>
                     <ChevronRight className="w-4 h-4 text-slate-300" />
                   </Link>
                 </li>
                 <li>
                   <Link href="/quality" className="hover:text-[#005EB1] font-medium flex items-center justify-between">
-                    <span>Quality Standards &amp; WHO-GMP</span>
+                    <span>Quality Standards &amp; QA</span>
                     <ChevronRight className="w-4 h-4 text-slate-300" />
                   </Link>
                 </li>
                 <li>
                   <Link href="/contact" className="hover:text-[#005EB1] font-medium flex items-center justify-between">
-                    <span>Contact &amp; Headquarters (Nagpur)</span>
+                    <span>Contact &amp; Nagpur Office (Dharampeth)</span>
                     <ChevronRight className="w-4 h-4 text-slate-300" />
                   </Link>
                 </li>
