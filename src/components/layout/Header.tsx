@@ -358,6 +358,18 @@ export default function Header() {
               >
                 Insights
               </Link>
+
+              {/* Blog Link */}
+              <Link
+                href="/blog"
+                className={`px-3.5 py-2 rounded-lg text-[13.5px] font-bold tracking-tight transition-all ${
+                  isTransparent
+                    ? "text-slate-100 hover:text-white hover:bg-white/10"
+                    : "text-slate-800 hover:text-[#005EB1] hover:bg-slate-100"
+                }`}
+              >
+                Blog
+              </Link>
             </nav>
 
             {/* Right Action buttons */}
@@ -532,6 +544,15 @@ export default function Header() {
                     className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
                   >
                     <span>Insights & Articles</span>
+                    <ChevronRight className="w-4 h-4 text-slate-400" />
+                  </Link>
+
+                  <Link
+                    href="/blog"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex items-center justify-between px-3 py-3 rounded-xl text-sm font-bold text-slate-900 hover:bg-slate-50 hover:text-[#005EB1] transition-colors min-h-[44px]"
+                  >
+                    <span>Medical Blog & Monographs</span>
                     <ChevronRight className="w-4 h-4 text-slate-400" />
                   </Link>
                 </div>
