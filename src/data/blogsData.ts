@@ -50,18 +50,17 @@ export interface BlogArticle {
 export const blogsData: BlogArticle[] = blogsJson as BlogArticle[];
 
 /**
- * Checks whether an article is published based on the current system time
+ * Checks whether an article is published based on static flag or current system time
  */
 export function isBlogPublished(blog: BlogArticle): boolean {
-  return new Date(blog.publishDate).getTime() <= Date.now();
+  return blog.isPublished || new Date(blog.publishDate).getTime() <= Date.now();
 }
 
 /**
- * Returns only blogs whose scheduled publish date has arrived
+ * Returns only blogs whose scheduled publish date has arrived or isPublished is true
  */
 export function getPublishedBlogs(): BlogArticle[] {
-  const now = Date.now();
-  return blogsData.filter((b) => new Date(b.publishDate).getTime() <= now);
+  return blogsData.filter((b) => isBlogPublished(b));
 }
 
 /**
@@ -75,8 +74,7 @@ export function getAllBlogs(): BlogArticle[] {
  * Returns the next upcoming scheduled blog
  */
 export function getNextUpcomingBlog(): BlogArticle | undefined {
-  const now = Date.now();
-  return blogsData.find((b) => new Date(b.publishDate).getTime() > now);
+  return blogsData.find((b) => !isBlogPublished(b));
 }
 
 export function getBlogBySlug(slug: string): BlogArticle | undefined {
