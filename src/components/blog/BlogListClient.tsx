@@ -79,12 +79,8 @@ export default function BlogListClient({
             )}
           </div>
 
-          {/* Results count & Frequency Badge */}
+          {/* Results count */}
           <div className="flex items-center gap-3">
-            <span className="hidden sm:inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-amber-50 border border-amber-200 text-amber-800">
-              <Timer className="w-3.5 h-3.5 text-[#F87901]" />
-              Schedule: 2 Monographs / Week (Tue &amp; Fri)
-            </span>
             <div className="text-xs sm:text-sm font-semibold text-slate-500 whitespace-nowrap">
               <span className="text-slate-900 font-bold">{filteredArticles.length}</span> published
             </div>

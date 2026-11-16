@@ -8,7 +8,7 @@ import {
   getNextUpcomingBlog,
   blogCategories,
 } from "@/data/blogsData";
-import { ChevronRight, Sparkles, BookOpen, ShieldCheck, Timer } from "lucide-react";
+import { ChevronRight, Sparkles, BookOpen, ShieldCheck } from "lucide-react";
 import type { Metadata } from "next";
 
 // ISR: Revalidate every hour to automatically release scheduled posts on Tuesdays & Fridays
@@ -123,16 +123,12 @@ export default function BlogListingPage() {
                 <ShieldCheck className="w-3.5 h-3.5 text-[#005EB1]" />
                 Icon Drugs Medical Review Board • Nagpur
               </span>
-              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold bg-[#F87901]/10 text-[#F87901]">
-                <Timer className="w-3.5 h-3.5 text-[#F87901]" />
-                2 Posts / Week (Tue &amp; Fri)
-              </span>
             </div>
             <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 font-heading tracking-tight mb-4 leading-tight">
               Clinical Insights, Patient Health &amp; Pharmaceutical Science
             </h1>
             <p className="text-base sm:text-lg text-slate-600 leading-relaxed">
-              Explore 40 peer-reviewed educational monographs published twice weekly on Tuesdays and Fridays, designed to decode formulation science, answer healthcare queries, and guide safe medicine use.
+              Explore peer-reviewed educational monographs published by Icon Drugs Medical Review Board, designed to decode formulation science, answer healthcare queries, and guide safe medicine use.
             </p>
           </div>
 

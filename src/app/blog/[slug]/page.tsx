@@ -242,13 +242,13 @@ export default async function BlogDetailPage({ params }: PageProps) {
             <span className="text-[#005EB1]">{article.contentCategory}</span>
           </nav>
 
-          {/* Schedule Notice if not yet released in 2-per-week schedule */}
+          {/* Schedule Notice if not yet released */}
           {!published && (
             <div className="mb-8 p-5 rounded-2xl bg-amber-50 border border-amber-200 text-amber-900 flex items-center justify-between gap-4">
               <div className="flex items-center gap-3">
                 <Timer className="w-5 h-5 text-[#F87901] shrink-0" />
                 <div className="text-xs sm:text-sm">
-                  <span className="font-bold">Scheduled Monograph:</span> Part of our 2-per-week editorial rollout. Official public release scheduled for{" "}
+                  <span className="font-bold">Scheduled Monograph:</span> Official public release scheduled for{" "}
                   <span className="font-bold underline">{article.publishDateDisplay}</span>.
                 </div>
               </div>
@@ -265,7 +265,7 @@ export default async function BlogDetailPage({ params }: PageProps) {
               {article.contentCategory}
             </span>
             <span className="text-xs font-semibold text-slate-500">
-              Monograph #{article.serialNumber} • {article.scheduleLabel}
+              Monograph #{article.serialNumber}
             </span>
           </div>
 

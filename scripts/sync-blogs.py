@@ -94,15 +94,13 @@ def main():
             "category": category,
         }
 
-    # 2 POSTS PER WEEK SCHEDULE
-    # Anchor date: Tuesday, Nov 10, 2026 at 09:00 AM IST
-    # Blog #1: Tue, Nov 10, 2026 (Live)
-    # Blog #2: Fri, Nov 13, 2026 (Live)
-    # Blog #3: Tue, Nov 17, 2026 (Scheduled)
-    # Blog #4: Fri, Nov 20, 2026 (Scheduled)
+    # Calibrated so Blogs #1 through #8 are LIVE as of Nov 16, 2026
+    # Blog #1: Tue, Oct 20, 2026 (Live)
+    # Blog #8: Fri, Nov 13, 2026 (Live)
+    # Blog #9: Tue, Nov 17, 2026 (Upcoming next)
     # ... exactly 2 per week every Tuesday & Friday
-    base_tuesday = datetime(2026, 11, 10, 9, 0, 0)
-    current_time = datetime(2026, 11, 14, 19, 30, 0)
+    base_tuesday = datetime(2026, 10, 20, 9, 0, 0)
+    current_time = datetime(2026, 11, 16, 12, 48, 0)
 
     articles = []
     category_counts = {}
